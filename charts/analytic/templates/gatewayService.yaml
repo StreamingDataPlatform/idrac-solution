@@ -1,0 +1,17 @@
+{{- if .Values.gateway.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: gateway
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: http
+  selector:
+    app: idracdemo
+    component: gateway
+    release: {{ .Release.Name }}
+  type: NodePort
+---
+{{- end }}

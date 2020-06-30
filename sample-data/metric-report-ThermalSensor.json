@@ -1,0 +1,120 @@
+{
+    "@odata.type": "#MetricReport.v1_0_2.MetricReport",
+    "Id": "ThermalSensor",
+    "MetricReportDefinition": {
+        "@odata.id": "/redfish/v1/TelemetryService/MetricReportDefinitions/ThermalSensor"
+    },
+    "MetricValues": [
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Thermal.v1_0_2.Thermal",
+                    "ContextId": "iDRAC.Embedded.1#CPU1Temp",
+                    "DisplayName": "CPU1 Temp"
+                }
+            },
+            "Timestamp": "2019-05-28T11:37:09.317000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Thermal.v1_0_2.Thermal",
+                    "ContextId": "iDRAC.Embedded.1#CPU1Temp",
+                    "DisplayName": "CPU1 Temp"
+                }
+            },
+            "Timestamp": "2019-05-28T11:37:09.317000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "65",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Thermal.v1_0_2.Thermal",
+                    "ContextId": "iDRAC.Embedded.1#CPU1Temp",
+                    "DisplayName": "CPU1 Temp"
+                }
+            },
+            "Timestamp": "2019-05-28T11:37:09.317000000Z"
+        },
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Thermal.v1_0_2.Thermal",
+                    "ContextId": "iDRAC.Embedded.1#CPU2Temp",
+                    "DisplayName": "CPU2 Temp"
+                }
+            },
+            "Timestamp": "2019-05-28T11:37:09.317000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Thermal.v1_0_2.Thermal",
+                    "ContextId": "iDRAC.Embedded.1#CPU2Temp",
+                    "DisplayName": "CPU2 Temp"
+                }
+            },
+            "Timestamp": "2019-05-28T11:37:09.317000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "56",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Thermal.v1_0_2.Thermal",
+                    "ContextId": "iDRAC.Embedded.1#CPU2Temp",
+                    "DisplayName": "CPU2 Temp"
+                }
+            },
+            "Timestamp": "2019-05-28T11:37:09.317000000Z"
+        },
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Thermal.v1_0_2.Thermal",
+                    "ContextId": "iDRAC.Embedded.1#SystemBoardInletTemp",
+                    "DisplayName": "System Board Inlet Temp"
+                }
+            },
+            "Timestamp": "2019-05-28T11:37:09.317000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Thermal.v1_0_2.Thermal",
+                    "ContextId": "iDRAC.Embedded.1#SystemBoardInletTemp",
+                    "DisplayName": "System Board Inlet Temp"
+                }
+            },
+            "Timestamp": "2019-05-28T11:37:09.317000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "16",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Thermal.v1_0_2.Thermal",
+                    "ContextId": "iDRAC.Embedded.1#SystemBoardInletTemp",
+                    "DisplayName": "System Board Inlet Temp"
+                }
+            },
+            "Timestamp": "2019-05-28T11:37:09.317000000Z"
+        }
+    ],
+    "Name": "ThermalSensor",
+    "ReportSequence": 110,
+    "remote_addr": "172.17.0.2"
+}

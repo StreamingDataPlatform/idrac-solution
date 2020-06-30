@@ -1,0 +1,40 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx-nautilus
+    kubernetes.io/tls-acme: "true"
+  labels:
+    app.kubernetes.io/name: kibana
+  name: kibana
+  namespace: idracdemo
+spec:
+  rules:
+  - host: kibana.idracdemo.<hostname>
+    http:
+      paths:
+      - backend:
+          serviceName: idracdemo-elastic-stack-kibana
+          servicePort: 443
+        path: /
+
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx-nautilus
+    kubernetes.io/tls-acme: "true"
+  labels:
+    app.kubernetes.io/name: es-client
+  name: es-client
+  namespace: idracdemo
+spec:
+  rules:
+  - host: es-client.idracdemo.<hostname>
+    http:
+      paths:
+      - backend:
+          serviceName: idracdemo-elastic-stack-elasticsearch-client
+          servicePort: 9200
+        path: /

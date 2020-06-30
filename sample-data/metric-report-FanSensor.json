@@ -1,0 +1,372 @@
+{
+    "@odata.type": "#MetricReport.v1_0_2.MetricReport",
+    "Id": "FanSensor",
+    "MetricReportDefinition": {
+        "@odata.id": "/redfish/v1/TelemetryService/MetricReportDefinitions/FanSensor"
+    },
+    "MetricValues": [
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Thermal.v1_0_2.Thermal",
+                    "ContextId": "0x17||Fan.Embedded.1A",
+                    "DisplayName": "Chassis Fan1A"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:55.890000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Thermal.v1_0_2.Thermal",
+                    "ContextId": "0x17||Fan.Embedded.1A",
+                    "DisplayName": "Chassis Fan1A"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:55.890000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "4200",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Thermal.v1_0_2.Thermal",
+                    "ContextId": "0x17||Fan.Embedded.1A",
+                    "DisplayName": "Chassis Fan1A"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:55.890000000Z"
+        },
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Thermal.v1_0_2.Thermal",
+                    "ContextId": "0x17||Fan.Embedded.1B",
+                    "DisplayName": "Chassis Fan1B"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:55.890000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Thermal.v1_0_2.Thermal",
+                    "ContextId": "0x17||Fan.Embedded.1B",
+                    "DisplayName": "Chassis Fan1B"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:55.890000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "3720",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Thermal.v1_0_2.Thermal",
+                    "ContextId": "0x17||Fan.Embedded.1B",
+                    "DisplayName": "Chassis Fan1B"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:55.890000000Z"
+        },
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Thermal.v1_0_2.Thermal",
+                    "ContextId": "0x17||Fan.Embedded.2",
+                    "DisplayName": "Chassis Fan2"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:55.890000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Thermal.v1_0_2.Thermal",
+                    "ContextId": "0x17||Fan.Embedded.2",
+                    "DisplayName": "Chassis Fan2"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:55.890000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "7080",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Thermal.v1_0_2.Thermal",
+                    "ContextId": "0x17||Fan.Embedded.2",
+                    "DisplayName": "Chassis Fan2"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:55.890000000Z"
+        },
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Thermal.v1_0_2.Thermal",
+                    "ContextId": "0x17||Fan.Embedded.3",
+                    "DisplayName": "Chassis Fan3"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:55.890000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Thermal.v1_0_2.Thermal",
+                    "ContextId": "0x17||Fan.Embedded.3",
+                    "DisplayName": "Chassis Fan3"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:55.890000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "7200",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Thermal.v1_0_2.Thermal",
+                    "ContextId": "0x17||Fan.Embedded.3",
+                    "DisplayName": "Chassis Fan3"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:55.890000000Z"
+        },
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Thermal.v1_0_2.Thermal",
+                    "ContextId": "0x17||Fan.Embedded.4",
+                    "DisplayName": "Chassis Fan4"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:55.890000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Thermal.v1_0_2.Thermal",
+                    "ContextId": "0x17||Fan.Embedded.4",
+                    "DisplayName": "Chassis Fan4"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:55.890000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "7080",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Thermal.v1_0_2.Thermal",
+                    "ContextId": "0x17||Fan.Embedded.4",
+                    "DisplayName": "Chassis Fan4"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:55.890000000Z"
+        },
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Thermal.v1_0_2.Thermal",
+                    "ContextId": "0x17||Fan.Embedded.5A",
+                    "DisplayName": "Chassis Fan5A"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:55.890000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Thermal.v1_0_2.Thermal",
+                    "ContextId": "0x17||Fan.Embedded.5A",
+                    "DisplayName": "Chassis Fan5A"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:55.890000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "4200",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Thermal.v1_0_2.Thermal",
+                    "ContextId": "0x17||Fan.Embedded.5A",
+                    "DisplayName": "Chassis Fan5A"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:55.890000000Z"
+        },
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Thermal.v1_0_2.Thermal",
+                    "ContextId": "0x17||Fan.Embedded.5B",
+                    "DisplayName": "Chassis Fan5B"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:55.890000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Thermal.v1_0_2.Thermal",
+                    "ContextId": "0x17||Fan.Embedded.5B",
+                    "DisplayName": "Chassis Fan5B"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:55.890000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "3600",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Thermal.v1_0_2.Thermal",
+                    "ContextId": "0x17||Fan.Embedded.5B",
+                    "DisplayName": "Chassis Fan5B"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:55.890000000Z"
+        },
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Thermal.v1_0_2.Thermal",
+                    "ContextId": "0x17||Fan.Embedded.6",
+                    "DisplayName": "Chassis Fan6"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:55.890000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Thermal.v1_0_2.Thermal",
+                    "ContextId": "0x17||Fan.Embedded.6",
+                    "DisplayName": "Chassis Fan6"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:55.890000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "7080",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Thermal.v1_0_2.Thermal",
+                    "ContextId": "0x17||Fan.Embedded.6",
+                    "DisplayName": "Chassis Fan6"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:55.890000000Z"
+        },
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Thermal.v1_0_2.Thermal",
+                    "ContextId": "0x17||Fan.Embedded.7",
+                    "DisplayName": "Chassis Fan7"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:55.890000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Thermal.v1_0_2.Thermal",
+                    "ContextId": "0x17||Fan.Embedded.7",
+                    "DisplayName": "Chassis Fan7"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:55.890000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "7080",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Thermal.v1_0_2.Thermal",
+                    "ContextId": "0x17||Fan.Embedded.7",
+                    "DisplayName": "Chassis Fan7"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:55.890000000Z"
+        },
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Thermal.v1_0_2.Thermal",
+                    "ContextId": "0x17||Fan.Embedded.8",
+                    "DisplayName": "Chassis Fan8"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:55.890000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Thermal.v1_0_2.Thermal",
+                    "ContextId": "0x17||Fan.Embedded.8",
+                    "DisplayName": "Chassis Fan8"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:55.890000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "7080",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Thermal.v1_0_2.Thermal",
+                    "ContextId": "0x17||Fan.Embedded.8",
+                    "DisplayName": "Chassis Fan8"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:55.890000000Z"
+        }
+    ],
+    "Name": "FanSensor",
+    "ReportSequence": 441,
+    "remote_addr": "172.17.0.2"
+}

@@ -1,0 +1,1056 @@
+{
+    "@odata.type": "#MetricReport.v1_0_2.MetricReport",
+    "Id": "Sensor",
+    "MetricReportDefinition": {
+        "@odata.id": "/redfish/v1/TelemetryService/MetricReportDefinitions/Sensor"
+    },
+    "MetricValues": [
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU1FIVRPG",
+                    "DisplayName": "CPU1 FIVR PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU1FIVRPG",
+                    "DisplayName": "CPU1 FIVR PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "1",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU1FIVRPG",
+                    "DisplayName": "CPU1 FIVR PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU1M01VDDQPG",
+                    "DisplayName": "CPU1 M01 VDDQ PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU1M01VDDQPG",
+                    "DisplayName": "CPU1 M01 VDDQ PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "1",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU1M01VDDQPG",
+                    "DisplayName": "CPU1 M01 VDDQ PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU1M01VPPPG",
+                    "DisplayName": "CPU1 M01 VPP PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU1M01VPPPG",
+                    "DisplayName": "CPU1 M01 VPP PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "1",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU1M01VPPPG",
+                    "DisplayName": "CPU1 M01 VPP PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU1M01VTTPG",
+                    "DisplayName": "CPU1 M01 VTT PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU1M01VTTPG",
+                    "DisplayName": "CPU1 M01 VTT PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "1",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU1M01VTTPG",
+                    "DisplayName": "CPU1 M01 VTT PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU1M23VDDQPG",
+                    "DisplayName": "CPU1 M23 VDDQ PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU1M23VDDQPG",
+                    "DisplayName": "CPU1 M23 VDDQ PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "1",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU1M23VDDQPG",
+                    "DisplayName": "CPU1 M23 VDDQ PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU1M23VPPPG",
+                    "DisplayName": "CPU1 M23 VPP PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU1M23VPPPG",
+                    "DisplayName": "CPU1 M23 VPP PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "1",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU1M23VPPPG",
+                    "DisplayName": "CPU1 M23 VPP PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU1M23VTTPG",
+                    "DisplayName": "CPU1 M23 VTT PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU1M23VTTPG",
+                    "DisplayName": "CPU1 M23 VTT PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "1",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU1M23VTTPG",
+                    "DisplayName": "CPU1 M23 VTT PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU1VCOREPG",
+                    "DisplayName": "CPU1 VCORE PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU1VCOREPG",
+                    "DisplayName": "CPU1 VCORE PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "1",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU1VCOREPG",
+                    "DisplayName": "CPU1 VCORE PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU2FIVRPG",
+                    "DisplayName": "CPU2 FIVR PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU2FIVRPG",
+                    "DisplayName": "CPU2 FIVR PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "1",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU2FIVRPG",
+                    "DisplayName": "CPU2 FIVR PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU2M01VDDQPG",
+                    "DisplayName": "CPU2 M01 VDDQ PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU2M01VDDQPG",
+                    "DisplayName": "CPU2 M01 VDDQ PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "1",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU2M01VDDQPG",
+                    "DisplayName": "CPU2 M01 VDDQ PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU2M01VPPPG",
+                    "DisplayName": "CPU2 M01 VPP PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU2M01VPPPG",
+                    "DisplayName": "CPU2 M01 VPP PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "1",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU2M01VPPPG",
+                    "DisplayName": "CPU2 M01 VPP PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU2M01VTTPG",
+                    "DisplayName": "CPU2 M01 VTT PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU2M01VTTPG",
+                    "DisplayName": "CPU2 M01 VTT PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "1",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU2M01VTTPG",
+                    "DisplayName": "CPU2 M01 VTT PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU2M23VDDQPG",
+                    "DisplayName": "CPU2 M23 VDDQ PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU2M23VDDQPG",
+                    "DisplayName": "CPU2 M23 VDDQ PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "1",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU2M23VDDQPG",
+                    "DisplayName": "CPU2 M23 VDDQ PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU2M23VPPPG",
+                    "DisplayName": "CPU2 M23 VPP PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU2M23VPPPG",
+                    "DisplayName": "CPU2 M23 VPP PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "1",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU2M23VPPPG",
+                    "DisplayName": "CPU2 M23 VPP PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU2M23VTTPG",
+                    "DisplayName": "CPU2 M23 VTT PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU2M23VTTPG",
+                    "DisplayName": "CPU2 M23 VTT PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "1",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU2M23VTTPG",
+                    "DisplayName": "CPU2 M23 VTT PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU2VCOREPG",
+                    "DisplayName": "CPU2 VCORE PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU2VCOREPG",
+                    "DisplayName": "CPU2 VCORE PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "1",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#CPU2VCOREPG",
+                    "DisplayName": "CPU2 VCORE PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#MEZZBPG",
+                    "DisplayName": "MEZZB PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#MEZZBPG",
+                    "DisplayName": "MEZZB PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "1",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#MEZZBPG",
+                    "DisplayName": "MEZZB PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#MEZZCPG",
+                    "DisplayName": "MEZZC PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#MEZZCPG",
+                    "DisplayName": "MEZZC PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "1",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#MEZZCPG",
+                    "DisplayName": "MEZZC PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#NDCPG",
+                    "DisplayName": "NDC PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#NDCPG",
+                    "DisplayName": "NDC PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "1",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#NDCPG",
+                    "DisplayName": "NDC PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#PERC1PG",
+                    "DisplayName": "PERC1 PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#PERC1PG",
+                    "DisplayName": "PERC1 PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "1",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#PERC1PG",
+                    "DisplayName": "PERC1 PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#SystemBoard1.05VPG",
+                    "DisplayName": "System Board 1.05V PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#SystemBoard1.05VPG",
+                    "DisplayName": "System Board 1.05V PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "1",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#SystemBoard1.05VPG",
+                    "DisplayName": "System Board 1.05V PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#SystemBoard1.5VAUXPG",
+                    "DisplayName": "System Board 1.5V AUX PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#SystemBoard1.5VAUXPG",
+                    "DisplayName": "System Board 1.5V AUX PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "1",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#SystemBoard1.5VAUXPG",
+                    "DisplayName": "System Board 1.5V AUX PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#SystemBoard1.5VPG",
+                    "DisplayName": "System Board 1.5V PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#SystemBoard1.5VPG",
+                    "DisplayName": "System Board 1.5V PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "1",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#SystemBoard1.5VPG",
+                    "DisplayName": "System Board 1.5V PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#SystemBoard12VPG",
+                    "DisplayName": "System Board 12V PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#SystemBoard12VPG",
+                    "DisplayName": "System Board 12V PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "1",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#SystemBoard12VPG",
+                    "DisplayName": "System Board 12V PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#SystemBoard2.5VAUXPG",
+                    "DisplayName": "System Board 2.5V AUX PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#SystemBoard2.5VAUXPG",
+                    "DisplayName": "System Board 2.5V AUX PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "1",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#SystemBoard2.5VAUXPG",
+                    "DisplayName": "System Board 2.5V AUX PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#SystemBoard3.3VPG",
+                    "DisplayName": "System Board 3.3V PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#SystemBoard3.3VPG",
+                    "DisplayName": "System Board 3.3V PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "1",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#SystemBoard3.3VPG",
+                    "DisplayName": "System Board 3.3V PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#SystemBoard5VAUXPG",
+                    "DisplayName": "System Board 5V AUX PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#SystemBoard5VAUXPG",
+                    "DisplayName": "System Board 5V AUX PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "1",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#SystemBoard5VAUXPG",
+                    "DisplayName": "System Board 5V AUX PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#SystemBoardDIMMPG",
+                    "DisplayName": "System Board DIMM PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#SystemBoardDIMMPG",
+                    "DisplayName": "System Board DIMM PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "1",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#SystemBoardDIMMPG",
+                    "DisplayName": "System Board DIMM PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "HealthState",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#SystemBoardVCCIOPG",
+                    "DisplayName": "System Board VCCIO PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentState",
+            "MetricValue": "Enabled",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#SystemBoardVCCIOPG",
+                    "DisplayName": "System Board VCCIO PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        },
+        {
+            "MetricId": "CurrentReading",
+            "MetricValue": "1",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "iDRAC.Embedded.1#SystemBoardVCCIOPG",
+                    "DisplayName": "System Board VCCIO PG"
+                }
+            },
+            "Timestamp": "2019-05-28T11:53:56.217000000Z"
+        }
+    ],
+    "Name": "Sensor",
+    "ReportSequence": 439,
+    "remote_addr": "172.17.0.2"
+}

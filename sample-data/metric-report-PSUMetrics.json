@@ -1,0 +1,84 @@
+{
+    "@odata.type": "#MetricReport.v1_0_2.MetricReport",
+    "Id": "PSUMetrics",
+    "MetricReportDefinition": {
+        "@odata.id": "/redfish/v1/TelemetryService/MetricReportDefinitions/PSUMetrics"
+    },
+    "MetricValues": [
+        {
+            "MetricId": "HealthStatus",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "PSU.Slot.1",
+                    "DisplayName": "Chassis PS1 Status"
+                }
+            },
+            "Timestamp": "2019-05-28T11:54:01.442000000Z"
+        },
+        {
+            "MetricId": "PrimaryStatus",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "PSU.Slot.1",
+                    "DisplayName": "Chassis PS1 Status"
+                }
+            },
+            "Timestamp": "2019-05-28T11:54:01.442000000Z"
+        },
+        {
+            "MetricId": "TotalOutputPower",
+            "MetricValue": "2000",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "PSU.Slot.1",
+                    "DisplayName": "Chassis PS1 Status"
+                }
+            },
+            "Timestamp": "2019-05-28T11:54:01.442000000Z"
+        },
+        {
+            "MetricId": "HealthStatus",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "PSU.Slot.2",
+                    "DisplayName": "Chassis PS2 Status"
+                }
+            },
+            "Timestamp": "2019-05-28T11:54:01.442000000Z"
+        },
+        {
+            "MetricId": "PrimaryStatus",
+            "MetricValue": "OK",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "PSU.Slot.2",
+                    "DisplayName": "Chassis PS2 Status"
+                }
+            },
+            "Timestamp": "2019-05-28T11:54:01.442000000Z"
+        },
+        {
+            "MetricId": "TotalOutputPower",
+            "MetricValue": "2000",
+            "Oem": {
+                "Dell": {
+                    "@odata.type": "#Power.v1_0_2.Power",
+                    "ContextId": "PSU.Slot.2",
+                    "DisplayName": "Chassis PS2 Status"
+                }
+            },
+            "Timestamp": "2019-05-28T11:54:01.442000000Z"
+        }
+    ],
+    "Name": "PSUMetrics",
+    "ReportSequence": 443,
+    "remote_addr": "172.17.0.2"
+}
