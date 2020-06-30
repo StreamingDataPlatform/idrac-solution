@@ -1,0 +1,24 @@
+apiVersion: "nautilus.dellemc.com/v1alpha1"
+kind: "Project"
+metadata:
+  name: "idracdemo"
+  namespace: "idracdemo"
+spec:
+  zookeeper:
+    size: 3
+
+  maven:
+    persistentVolumeClaim:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "nfs"
+      resources:
+        requests:
+          storage: 10Gi
+
+  storage:
+    persistentVolumeClaim:
+      accessModes: [ "ReadWriteMany" ]
+      storageClassName: "nfs"
+      resources:
+        requests:
+          storage: 10Gi

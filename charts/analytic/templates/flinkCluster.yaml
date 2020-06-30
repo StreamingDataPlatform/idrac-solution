@@ -1,0 +1,56 @@
+{{- $flink := .Values.flink -}}
+{{- $tm := .Values.flink.cluster.taskManager -}}
+{{- $numClusters := .Values.flink.cluster.replica -}}
+{{- range $clusterNum, $e := until (int $numClusters) }}
+apiVersion: flink.nautilus.dellemc.com/v1beta1
+kind: "FlinkCluster"
+metadata:
+  name: idracdemo-{{ $clusterNum }}
+  labels:
+    name: idracdemo-{{ $clusterNum }}
+spec:
+  imageRef:
+    name: {{ $flink.flinkImage }}
+
+  zookeeperUrl: zookeeper-client:2181
+
+  # Specify Storage Options
+  storage:
+    volumeSource:
+      persistentVolumeClaim:
+        claimName: data-project
+
+  localStorage:
+    replicas: 2
+    volumeClaimTemplate:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "standard"
+      resources:
+        requests:
+          storage: {{ $flink.localStorage }}
+
+  # Specify Manager Resources
+  jobManager:
+    replicas: 1
+    memory: 2048M
+    heap: 1024m
+    cpu: 500m
+
+  taskManager:
+    replicas: {{ $tm.replicas }}
+    memory: {{ $tm.memory }}
+    cpu: {{ $tm.cpu }}
+    heap: {{$tm.heap}}
+    numberOfTaskSlots: {{ $tm.taskSlots }}
+
+  configuration:
+    taskmanager.memory.process.size: 3G
+    taskmanager.memory.jvm-metaspace.size: 512m
+
+  logging:
+    io.pravega: INFO
+    io.pravega.connectors: INFO
+    org.apache: INFO
+  
+---
+{{- end }}

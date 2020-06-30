@@ -1,0 +1,57 @@
+{{- if .Values.flink.applications.switch.metricToES }}
+{{- $flink := .Values.flink -}}
+apiVersion: flink.nautilus.dellemc.com/v1beta1
+kind: "FlinkApplication"
+metadata:
+  name: "pravega-metric-report-to-elasticsearch-job"
+#  namespace: {{ .Release.Name }}
+#  labels:
+#    app: idracdemo
+#    component: PravegaMetricReportToElasticSearchJob
+#    release: {{ .Release.Name }}
+spec:
+  flinkVersion: {{ $flink.flinkVersion }}
+  mavenCoordinate: {{ .Values.flink.applications.coordination.group }}:{{ .Values.flink.applications.coordination.artifact }}:{{ .Values.flink.applications.coordination.version }}
+
+  parallelism: {{ .Values.flink.applications.parallelism }}
+
+  state: started
+
+  parameters:
+    - name: jobClass
+      value: "io.pravega.example.idracdemo.flinkprocessor.jobs.PravegaJsonToElasticSearchJob"
+    - name: scope
+      value: "idracdemo"
+    - name: input-stream
+      value: "idracflatdata"
+
+    # Elastic Search Parameters
+    - name: elastic-sink
+      value: "true"
+    - name: elastic-delete-index
+      value: "true"
+    - name: elastic-host
+      value: "idracdemo-elastic-stack-elasticsearch-client.idracdemo.svc.cluster.local"
+    - name: elasticsearch-client
+      value: "9200"
+    - name: elastic-cluster
+      value: "elasticsearch"
+    - name: elastic-index
+      value: "idracdemo-metrics"
+    - name: elastic-type
+      value: "FlatMetricReport"
+    - name: writer-parallelism
+      value: "3"
+    - name: reader-parallelis
+      value: "5"
+
+    # Flink Job Parameters
+    - name: checkpointInterval
+      value: "60000"
+    - name: enableCheckpoint
+      value: "true"
+    - name: enableOperatorChaining
+      value: "true"
+    - name: rebalance
+      value: "false"
+{{- end }}

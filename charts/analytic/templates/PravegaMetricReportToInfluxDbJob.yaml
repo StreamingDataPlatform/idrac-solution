@@ -1,0 +1,49 @@
+{{- if .Values.flink.applications.switch.metricToInflux }}
+{{- $flink := .Values.flink -}}
+apiVersion: flink.nautilus.dellemc.com/v1beta1
+kind: "FlinkApplication"
+metadata:
+  name: "pravega-metric-report-to-influxdb-job"
+spec:
+  flinkVersion: {{ $flink.flinkVersion }}
+  mavenCoordinate: {{ .Values.flink.applications.coordination.group }}:{{ .Values.flink.applications.coordination.artifact }}:{{ .Values.flink.applications.coordination.version }}
+
+  parallelism: {{ .Values.flink.applications.parallelism }}
+
+  state: started
+
+  parameters:
+    - name: jobClass
+      value: "io.pravega.example.idracdemo.flinkprocessor.jobs.PravegaMetricReportToInfluxDbJob"
+    - name: scope
+      value: "idracdemo"
+    - name: input-stream
+      value: "idracflatdata"
+    - name: writer-parallelism
+      value: "3"
+    - name: reader-parallelis
+      value: "5"
+
+    # InfluxDB Parameters
+    - name: metricsSink
+      value: "InfluxDB"
+    - name: influxDB.host
+      value: "http://idracdemo-influxdb.default.svc.cluster.local:8086"
+    - name: influxDB.username
+      value: "admin"
+    - name: influxDB.password
+      value: "password"
+    - name: influxDB.database
+      value: "idracdemo"
+
+
+    # Flink Job Parameters
+    - name: checkpointInterval
+      value: "60000"
+    - name: enableCheckpoint
+      value: "true"
+    - name: enableOperatorChaining
+      value: "true"
+    - name: rebalance
+      value: "false"
+{{- end }}

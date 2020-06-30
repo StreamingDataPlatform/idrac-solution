@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: nautilus
+    component: maven
+  name: repo-nodeport
+  namespace: idracdemo
+spec:
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 9090
+      nodePort: 31011
+  selector:
+    app: nautilus
+    component: maven
+  type: NodePort
