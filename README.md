@@ -225,3 +225,6 @@ FlatMetricReport
 --elastic-delete-index
 true
 ```
+
+# Contributing
+If you would like to contribute to this repository, please follow the [Contribution Guidelines](https://github.com/StreamingDataPlatform/idrac-demo/wiki/Contributing).
