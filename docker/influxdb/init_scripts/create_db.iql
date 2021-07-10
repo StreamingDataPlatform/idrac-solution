@@ -1,3 +1,0 @@
-CREATE DATABASE idracdemo WITH DURATION 2w NAME autogen
-;
-USE idracdemo

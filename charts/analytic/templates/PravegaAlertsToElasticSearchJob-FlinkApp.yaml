@@ -5,7 +5,7 @@ kind: "FlinkApplication"
 metadata:
   name: "pravega-alerts-to-elasticsearch-job"
   labels:
-    app: idracdemo
+    app: idracsolution
     component: PravegaMetricReportToElasticSearchJob
     release: {{ .Release.Name }}
 spec:
@@ -18,9 +18,9 @@ spec:
 
   parameters:
     - name: jobClass
-      value: "io.pravega.example.idracdemo.flinkprocessor.jobs.PravegaJsonToElasticSearchJob"
+      value: "io.pravega.example.idracsolution.flinkprocessor.jobs.PravegaJsonToElasticSearchJob"
     - name: scope
-      value: "idracdemo"
+      value: "idracsolution"
     - name: input-stream
       value: "alerts"
 
@@ -30,13 +30,13 @@ spec:
     - name: elastic-delete-index
       value: "true"
     - name: elastic-host
-      value: "idracdemo-elastic-stack-elasticsearch-client.idracdemo.svc.cluster.local"
+      value: "idracsolution-elastic-stack-elasticsearch-client.idracsolution.svc.cluster.local"
     - name: elasticsearch-client
       value: "9200"
     - name: elastic-cluster
       value: "elasticsearch"
     - name: elastic-index
-      value: "idracdemo-alerts"
+      value: "idracsolution-alerts"
     - name: elastic-type
       value: "Alert"
 

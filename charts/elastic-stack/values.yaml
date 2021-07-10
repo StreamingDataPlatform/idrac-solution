@@ -1,7 +1,7 @@
 elastic-stack:
   kibana:
     env:
-      ELASTICSEARCH_URL: http://idracdemo-elastic-stack-elasticsearch-client:9200
+      ELASTICSEARCH_URL: http://idracsolution-elastic-stack-elasticsearch-client:9200
 
   elasticsearch:
     client:

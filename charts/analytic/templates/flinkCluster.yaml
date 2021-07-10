@@ -5,9 +5,9 @@
 apiVersion: flink.nautilus.dellemc.com/v1beta1
 kind: "FlinkCluster"
 metadata:
-  name: idracdemo-{{ $clusterNum }}
+  name: idracsolution-{{ $clusterNum }}
   labels:
-    name: idracdemo-{{ $clusterNum }}
+    name: idracsolution-{{ $clusterNum }}
 spec:
   imageRef:
     name: {{ $flink.flinkImage }}

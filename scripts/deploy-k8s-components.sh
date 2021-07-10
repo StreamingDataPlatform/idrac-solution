@@ -5,7 +5,7 @@ set -ex
 : ${IMAGE_TAG?"You must export IMAGE_TAG"}
 
 ROOT_DIR=$(dirname $0)/..
-NAMESPACE=idracdemo
+NAMESPACE=idracsolution
 ELK_ENABLED=false
 
 if [ $ELK_ENABLED == "true" ] ; then

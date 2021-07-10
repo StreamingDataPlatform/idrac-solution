@@ -46,7 +46,7 @@ uncomment the compile tag in  ~/flinkprocessor/build.gradle
 ```
 export MAVEN_USER=desdp
 export MAVEN_PASSWORD=$(kubectl get secret keycloak-desdp -n nautilus-system -o jsonpath='{.data.password}' | base64 -d)
-kubectl port-forward svc/repo 9091:80 -n idracdemo
+kubectl port-forward svc/repo 9091:80 -n idracsolution
 ./gradlew :flinkprocessor:publish
 ```
 ### Deploy Components
@@ -88,12 +88,12 @@ Grafana Dashboard UI URL
 
 use admin/passwod to access grafana dashboard
 ```
-grafana-idracdemo.<hostname>
+grafana-idracsolution.<hostname>
 ```
 
 Kibana Dashboard:
 ```
-kubectl port-forward svc/idracdemo-elastic-stack-kibana 9092:443 -n idracdemo &
+kubectl port-forward svc/idracsolution-elastic-stack-kibana 9092:443 -n idracsolution &
 ```
 Kibana will be available at http://localhost:9092/
 
@@ -111,7 +111,7 @@ kubectl apply -f scripts/gateway-ingress.yaml
 ```
 
 
-After the ingress resource is ready, we can get ES client at <http://es-client.idracdemo.<hostname>>,  Kibana at <http://kibana.idracdemo.<hostname>>
+After the ingress resource is ready, we can get ES client at <http://es-client.idracsolution.<hostname>>,  Kibana at <http://kibana.idracsolution.<hostname>>
 
 ## Building and Running the Demo
 
@@ -183,7 +183,7 @@ export PRAVEGA_CONTROLLER=tcp://<nautilus pravega controller DN>:9090
 
 Run the Pravega Gateway.
 ```
-export PRAVEGA_SCOPE=idracdemo
+export PRAVEGA_SCOPE=idracsolution
 export PRAVEGA_STREAM=idracdata
 ./gradlew gateway:run
 ```
@@ -195,11 +195,11 @@ This will run a streaming Flink job.
 Run the Flink app in `flinkprocessor` with the following parameters:
 ```
 --jobClass
-io.pravega.example.idracdemo.flinkprocessor.jobs.PravegaStringToConsoleJob
+io.pravega.example.idracsolution.flinkprocessor.jobs.PravegaStringToConsoleJob
 --controller
 tcp://127.0.0.1:9090
 --scope
-idracdemo
+idracsolution
 --input-stream
 idracdata
 ```
@@ -207,11 +207,11 @@ idracdata
 Run the Flink app in `flinkprocessor` with the following parameters:
 ```
 --jobClass
-io.pravega.example.idracdemo.flinkprocessor.jobs.PravegaMetricReportToElasticSearchJob
+io.pravega.example.idracsolution.flinkprocessor.jobs.PravegaMetricReportToElasticSearchJob
 --controller
 tcp://127.0.0.1:9090
 --scope
-idracdemo
+idracsolution
 --input-stream
 idracdata
 --elastic-host
@@ -219,7 +219,7 @@ hop-claudio-minikube-1.solarch.lab.emc.com
 --elasticsearch-client
 31718
 --elastic-index
-idracdemo-metrics
+idracsolution-metrics
 --elastic-type
 FlatMetricReport
 --elastic-delete-index

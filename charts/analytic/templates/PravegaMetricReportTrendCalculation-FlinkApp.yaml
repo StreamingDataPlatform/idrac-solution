@@ -6,7 +6,7 @@ metadata:
   name: "pravega-metric-report-trend-calculation"
 #  namespace: {{ .Release.Name }}
 #  labels:
-#    app: idracdemo
+#    app: idracsolution
 #    component: PravegaMetricReportToElasticSearchJob
 #    release: {{ .Release.Name }}
 spec:
@@ -19,19 +19,19 @@ spec:
 
   parameters:
     - name: jobClass
-      value: "io.pravega.example.idracdemo.flinkprocessor.jobs.PravegaMetricReportTrendCalculationJob"
+      value: "io.pravega.example.idracsolution.flinkprocessor.jobs.PravegaMetricReportTrendCalculationJob"
     - name: scope
-      value: "idracdemo"
+      value: "idracsolution"
     - name: input-stream
       value: "idracflatdata"
 
     # Elastic Search Parameters
     - name: elastic-host
-      value: "idracdemo-elastic-stack-elasticsearch-client.idracdemo.svc.cluster.local"
+      value: "idracsolution-elastic-stack-elasticsearch-client.idracsolution.svc.cluster.local"
     - name: elasticsearch-client
       value: "9200"
     - name: elastic-index
-      value: "idracdemo-trend"
+      value: "idracsolution-trend"
     # Flink Job Parameters
     - name: job.checkpointInterval
       value: "60000"

@@ -20,7 +20,7 @@ flink:
       taskSlots: 5
   applications:
     coordination:
-      group: io.pravega.example.idracdemo
+      group: io.pravega.example.idracsolution
       artifact: flinkprocessor
       version: 0.0.1-localdev
     parallelism: 1

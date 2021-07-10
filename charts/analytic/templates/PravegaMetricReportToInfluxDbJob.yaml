@@ -14,9 +14,9 @@ spec:
 
   parameters:
     - name: jobClass
-      value: "io.pravega.example.idracdemo.flinkprocessor.jobs.PravegaMetricReportToInfluxDbJob"
+      value: "io.pravega.example.idracsolution.flinkprocessor.jobs.PravegaMetricReportToInfluxDbJob"
     - name: scope
-      value: "idracdemo"
+      value: "idracsolution"
     - name: input-stream
       value: "idracflatdata"
     - name: writer-parallelism
@@ -28,13 +28,13 @@ spec:
     - name: metricsSink
       value: "InfluxDB"
     - name: influxDB.host
-      value: "http://idracdemo-influxdb.default.svc.cluster.local:8086"
+      value: "http://idracsolution-influxdb.default.svc.cluster.local:8086"
     - name: influxDB.username
       value: "admin"
     - name: influxDB.password
       value: "password"
     - name: influxDB.database
-      value: "idracdemo"
+      value: "idracsolution"
 
 
     # Flink Job Parameters

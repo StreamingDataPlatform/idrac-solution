@@ -7,14 +7,14 @@ metadata:
   labels:
     app.kubernetes.io/name: kibana
   name: kibana
-  namespace: idracdemo
+  namespace: idracsolution
 spec:
   rules:
-  - host: kibana.idracdemo.<hostname>
+  - host: kibana.idracsolution.<hostname>
     http:
       paths:
       - backend:
-          serviceName: idracdemo-elastic-stack-kibana
+          serviceName: idracsolution-elastic-stack-kibana
           servicePort: 443
         path: /
 
@@ -28,13 +28,13 @@ metadata:
   labels:
     app.kubernetes.io/name: es-client
   name: es-client
-  namespace: idracdemo
+  namespace: idracsolution
 spec:
   rules:
-  - host: es-client.idracdemo.<hostname>
+  - host: es-client.idracsolution.<hostname>
     http:
       paths:
       - backend:
-          serviceName: idracdemo-elastic-stack-elasticsearch-client
+          serviceName: idracsolution-elastic-stack-elasticsearch-client
           servicePort: 9200
         path: /

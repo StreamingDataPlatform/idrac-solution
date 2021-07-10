@@ -4,19 +4,19 @@ kind: Deployment
 metadata:
   name: gateway
   labels:
-    app: idracdemo
+    app: idracsolution
     component: gateway
     release: {{ .Release.Name }}
 spec:
   selector:
     matchLabels:
-      app: idracdemo
+      app: idracsolution
       component: gateway
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: idracdemo
+        app: idracsolution
         component: gateway
         release: {{ .Release.Name }}
     spec:

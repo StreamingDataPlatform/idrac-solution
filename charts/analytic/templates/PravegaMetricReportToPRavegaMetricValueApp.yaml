@@ -5,7 +5,7 @@ kind: "FlinkApplication"
 metadata:
   name: "pravega-metric-report-to-metric-value-job"
   labels:
-    app: idracdemo
+    app: idracsolution
     component: PravegaMetricReportToPRavegaMetricValue
     release: {{ .Release.Name }}
 spec:
@@ -18,9 +18,9 @@ spec:
 
   parameters:
     - name: jobClass
-      value: "io.pravega.example.idracdemo.flinkprocessor.jobs.PravegaMetricReportToPRavegaMetricValue"
+      value: "io.pravega.example.idracsolution.flinkprocessor.jobs.PravegaMetricReportToPRavegaMetricValue"
     - name: scope
-      value: "idracdemo"
+      value: "idracsolution"
     - name: input-stream
       value: "idracdata"
     - name: output-stream

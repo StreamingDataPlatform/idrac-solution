@@ -50,11 +50,11 @@ printc "--- Components built successfully!             ---"
 function checkProjectMavenRepo() {
     READINESS="false"
     
-    POD=`kubectl get pods --namespace idracdemo | grep repo | awk '{print $1}'`
+    POD=`kubectl get pods --namespace idracsolution | grep repo | awk '{print $1}'`
     printc "---    Maven Repo Pod: $POD                    ---"
 
     while [ "$READINESS" != "true" ]; do
-      READINESS=`kubectl get pod $POD --namespace idracdemo --output jsonpath="{.status.containerStatuses[0].ready}"`
+      READINESS=`kubectl get pod $POD --namespace idracsolution --output jsonpath="{.status.containerStatuses[0].ready}"`
       
       if [ "$READINESS" != "true" ]; then
         printc "       Waiting for Analytics Project Maven Repo pod readiness..." 
@@ -68,11 +68,11 @@ function checkProjectMavenRepo() {
 
 echo
 echo
-printc "--- Publish idracdemo Jar...                    ---"
+printc "--- Publish idracsolution Jar...                    ---"
 checkProjectMavenRepo
 
 printc "---     Starting port-forward to Maven repo... ---"
-kubectl port-forward service/repo 9090:80 --namespace idracdemo &
+kubectl port-forward service/repo 9090:80 --namespace idracsolution &
 sleep 5
 
 printc "---     Building Flink Artifact...              ---"

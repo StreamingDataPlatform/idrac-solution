@@ -7,10 +7,10 @@ metadata:
   labels:
     app.kubernetes.io/name: gateway
   name: gateway
-  namespace: idracdemo
+  namespace: idracsolution
 spec:
   rules:
-  - host: gateway.idracdemo.<hostname>
+  - host: gateway.idracsolution.<hostname>
     http:
       paths:
       - backend:
@@ -19,5 +19,5 @@ spec:
         path: /
   tls:
   - hosts:
-    - gateway.idracdemo.<hostname>
-    secretName: idracdemo-tls
+    - gateway.idracsolution.<hostname>
+    secretName: idracsolution-tls

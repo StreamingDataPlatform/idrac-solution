@@ -5,7 +5,7 @@ kind: "FlinkApplication"
 metadata:
   name: "anomaly-detection-job"
   labels:
-    app: idracdemo
+    app: idracsolution
     component: AnomalyDetectionJob
     release: {{ .Release.Name }}
 spec:
@@ -18,9 +18,9 @@ spec:
 
   parameters:
     - name: jobClass
-      value: "io.pravega.example.idracdemo.flinkprocessor.jobs.AnomalyDetectionJob"
+      value: "io.pravega.example.idracsolution.flinkprocessor.jobs.AnomalyDetectionJob"
     - name: scope
-      value: "idracdemo"
+      value: "idracsolution"
     - name: input-stream
       value: "idracflatdata"
     - name: output-stream

@@ -1,7 +1,7 @@
 #! /bin/bash
 set -ex
 
-NAMESPACE=idracdemo
+NAMESPACE=idracsolution
 
 helm uninstall \
 ${NAMESPACE}-elastic-stack \

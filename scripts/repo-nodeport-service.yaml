@@ -5,7 +5,7 @@ metadata:
     app: nautilus
     component: maven
   name: repo-nodeport
-  namespace: idracdemo
+  namespace: idracsolution
 spec:
   ports:
     - name: http
