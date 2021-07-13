@@ -45,7 +45,10 @@ dependencies {
 
     flinkShadowJar "io.pravega:pravega-connectors-flink-${flinkShortVersion}_${flinkScalaVersion}:${pravegaFlinkConnectorVersion}"
     flinkShadowJar "com.fasterxml.jackson.core:jackson-databind:${jacksonDatabindVersion}"
-
+    // enable Once copied jar file to libs folder.
+    flinkShadowJar files("./libs/flink-connector-influxdb_2.11-1.1-SNAPSHOT.jar")
+    flinkShadowJar group: 'org.influxdb', name: 'influxdb-java', version: '2.7'
+    
     if (includePravegaCredentials.toBoolean()) {
         flinkShadowJar "io.pravega:pravega-keycloak-client:${pravegaCredentialsVersion}"
     }

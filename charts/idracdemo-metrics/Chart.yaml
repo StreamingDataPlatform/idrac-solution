@@ -1,5 +1,0 @@
-apiVersion: v1
-appVersion: "0.1.0"
-description: idracsolution Metrics
-name: idracsolution-metrics
-version: "0.1.0"
