@@ -1,0 +1,117 @@
+---
+apiVersion: search.nautilus.dellemc.com/v1alpha1
+kind: PravegaSearch
+metadata:
+  name: psearch
+  namespace: idracsolution
+spec:
+  source: manual
+  imageRef: psearch-image
+  indexWorker:
+    jvmOpts:
+      - "-Xmx2g"
+      - "-XX:+PrintGC"
+      - "-XX:+PrintGCDetails"
+      - "-Xloggc:log/gc.log"
+    replicas: 4
+    resources:
+      requests:
+        cpu: 500m
+        memory: 1Gi
+    storage:
+      VolumeClaimTemplate:
+        accessModes:
+          - ReadWriteOnce
+        dataSource:
+        resources:
+          requests:
+            storage: 10Gi
+        storageClassName: standard
+  kibana:
+    replicas: 1
+  options:
+    psearch.metricsEnableStatistics: 'true'
+    psearch.metricsEnableStatsDReporter: 'false'
+    psearch.metricsInfluxDBUri: http://psearch-influxdb:8086
+    psearch.metricsInfluxDBUserName: admin
+  pSearchController:
+    jvmOpts:
+      - "-Xmx2g"
+      - "-XX:+PrintGC"
+      - "-XX:+PrintGCDetails"
+      - "-Xloggc:log/gc.log"
+    replicas: 3
+    resources:
+      requests:
+        cpu: 100m
+        memory: 500Mi
+    storage:
+      VolumeClaimTemplate:
+        accessModes:
+          - ReadWriteOnce
+        dataSource:
+        resources:
+          requests:
+            storage: 10Gi
+        storageClassName: standard
+  queryWorker:
+    jvmOpts:
+      - "-Xmx2g"
+      - "-XX:+PrintGC"
+      - "-XX:+PrintGCDetails"
+      - "-Xloggc:log/gc.log"
+    replicas: 2
+    resources:
+      requests:
+        cpu: 100m
+        memory: 500Mi
+    storage:
+      VolumeClaimTemplate:
+        accessModes:
+          - ReadWriteOnce
+        dataSource:
+        resources:
+          requests:
+            storage: 10Gi
+        storageClassName: standard
+  resthead:
+    jvmOpts:
+      - "-Xmx2g"
+      - "-XX:+PrintGC"
+      - "-XX:+PrintGCDetails"
+      - "-Xloggc:log/gc.log"
+    replicas: 2
+    resources:
+      requests:
+        cpu: 100m
+        memory: 500Mi
+    storage:
+      VolumeClaimTemplate:
+        accessModes:
+          - ReadWriteOnce
+        dataSource:
+        resources:
+          requests:
+            storage: 10Gi
+        storageClassName: standard
+  shardWorker:
+    jvmOpts:
+      - "-Xmx3g"
+      - "-XX:MaxDirectMemorySize=3g"
+      - "-XX:+PrintGC"
+      - "-XX:+PrintGCDetails"
+      - "-Xloggc:log/gc.log"
+    replicas: 2
+    resources:
+      requests:
+        cpu: '1'
+        memory: 3Gi
+    storage:
+      VolumeClaimTemplate:
+        accessModes:
+          - ReadWriteOnce
+        dataSource:
+        resources:
+          requests:
+            storage: 10Gi
+        storageClassName: standard

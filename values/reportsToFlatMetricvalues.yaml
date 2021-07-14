@@ -1,0 +1,29 @@
+# Copyright (c) Dell Inc., or its subsidiaries. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+appParameters:
+  # Events are written in a transaction and committed with this period.
+  checkpointIntervalMs: "10000"
+
+  # Set to false to allowing viewing metrics in Flink UI (may reduce performance).
+  enableOperatorChaining: "false"
+
+  # Read events from this stream.
+  input-stream: "idracsolution/idracdata"
+  input-startAtTail: "true"
+  input-endAtTail: "false"
+  input-minNumSegments: 1
+  # Below settings only required if input stream is on a remote Pravega installation.
+  #scope: "idracsolution"
+  #input-controller: ""
+  #input-username: ""
+  #input-password: ""
+
+  # Write events to this stream.
+  output-stream: "idracflatdata"
+  output-minNumSegments: 1
+mainClass: io.pravega.idracsolution.flinkprocessor.MetricReportToSingleMetricValue

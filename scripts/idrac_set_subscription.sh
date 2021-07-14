@@ -1,21 +1,22 @@
 #!/usr/bin/env bash
 
 usage() {
-	echo "Usage: $0 [ -u <idrac_user> -p <idrac_password> -h <idrac_host> -g <pravega_gateway>]";
+	echo "Usage: $0 [ -u <idrac_user> -p <idrac_password> -h <idrac_host> -g <pravega_gateway> -r <rack_label> ]";
 	exit 1;
 }
 
-while getopts u:p:h:g:: option
+while getopts u:p:h:g:r:: option
 do
 	case "${option}" in
 		u) idrac_user=${OPTARG};;
 		p) idrac_pass=${OPTARG};;
 		h) idrac_host=${OPTARG};;
 		g) gateway=${OPTARG};;
+    r) racklabel=${OPTARG};;
 	esac
 done
 
-if [ -z ${idrac_user} ] || [ -z ${idrac_pass} ] || [ -z ${idrac_host} ] || [ -z ${gateway} ];
+if [ -z ${idrac_user} ] || [ -z ${idrac_pass} ] || [ -z ${idrac_host} ] || [ -z ${gateway} ] || [ -z ${racklabel} ] ;
 then
 	usage
 fi
