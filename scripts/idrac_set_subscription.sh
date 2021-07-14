@@ -31,7 +31,7 @@ curl -o /tmp/idrac_resp -k -w "%{http_code}\n" \
 \"Protocol\": \"Redfish\",
 \"EventFormatType\": \"MetricReport\",
 \"EventTypes\": [\"MetricReport\"],
-\"Destination\": \"https://${gateway}/data/${idrac_host}\"
+\"Destination\": \"https://${gateway}/v1/scope/idracdemo/stream/idracdata/event?routingKeyType=none&addField.RemoteAddr=${idrac_host}&addTimestamp=Timestamp&addField.RackLabel=${racklabel}\"
 }
 " \
 https://${idrac_host}/redfish/v1/EventService/Subscriptions
