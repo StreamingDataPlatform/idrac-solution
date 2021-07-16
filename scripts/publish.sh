@@ -11,7 +11,7 @@
 
 set -ex
 ROOT_DIR=$(readlink -f $(dirname $0)/..)
-source ${ROOT_DIR}/installer/env.sh
+source ${ROOT_DIR}/scripts/env.sh
 
 # If not specified, get Maven repo parameters using kubectl.
 if [[ $(kubectl get ing -n ${NAMESPACE} repo -o jsonpath="{.spec.tls}") == "" ]]; then
@@ -19,10 +19,12 @@ if [[ $(kubectl get ing -n ${NAMESPACE} repo -o jsonpath="{.spec.tls}") == "" ]]
 else
     export MAVEN_PROTOCOL=https
 fi
+REPO_ING=$(kubectl get ing -n ${NAMESPACE?"You must export NAMESPACE"} repo -o jsonpath='{.spec.rules[0].host}')
+REPO_IP=$(kubectl get svc   nginx-ingress-controller -n nautilus-system -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+sudo sed -i "5i$REPO_IP $REPO_ING" /etc/hosts
 export MAVEN_URL="${MAVEN_URL:-${MAVEN_PROTOCOL}://$(kubectl get ing -n ${NAMESPACE?"You must export NAMESPACE"} repo -o jsonpath='{.spec.rules[0].host}')/maven2}"
 export MAVEN_USERNAME="${MAVEN_USERNAME:-desdp}"
 export MAVEN_PASSWORD="${MAVEN_PASSWORD:-$(kubectl get secret keycloak-${MAVEN_USERNAME} -n nautilus-system -o jsonpath='{.data.password}' | base64 -d)}"
-
 export APP_ARTIFACT=${ROOT_DIR}/flinkprocessor/build/libs/idracsolution-flinkprocessor-${APP_VERSION}.jar
 export APP_GROUP_ID
 export APP_ARTIFACT_ID

@@ -103,10 +103,10 @@ publishing {
     repositories {
         maven {
             credentials {
-                username "desdp"
-                password "password"
+                username "$System.env.MAVEN_USERNAME"
+                password "$System.env.MAVEN_PASSWORD"
             }
-            url "http://repo-idracdemo.anchorsteam1.nautilus-lab-uranium.com/maven2"
+            url "$System.env.MAVEN_URL"
         }
     }
     publications {

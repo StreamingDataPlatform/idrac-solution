@@ -25,7 +25,7 @@ pushd ${ROOT_DIR}/
 popd
 # Download and extract Gradle.
 # Gradle will be included in the installer archive.
-GRADLE_VERSION=4.8
+GRADLE_VERSION=6.3
 GRADLE_FILE=${ROOT_DIR}/build/installer/gradle-${GRADLE_VERSION}-bin.zip
 [ -f ${GRADLE_FILE} ] || wget --no-verbose -O ${GRADLE_FILE} https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip
 unzip -q -d ${INSTALLER_BUILD_DIR} ${GRADLE_FILE}
@@ -34,8 +34,8 @@ mv -v ${INSTALLER_BUILD_DIR}/gradle-${GRADLE_VERSION} ${INSTALLER_BUILD_DIR}/gra
 # Copy Flink application JAR.
 mkdir -p ${INSTALLER_BUILD_DIR}/flinkprocessor/build/libs
 cp -v \
+ ${ROOT_DIR}/flinkprocessor/build/libs/idracsolution-flinkprocessor-${APP_VERSION}.jar\
  ${INSTALLER_BUILD_DIR}/flinkprocessor/build/libs/
-
 # Copy other files required for an offline install.
 cp -rv \
   ${ROOT_DIR}/charts \

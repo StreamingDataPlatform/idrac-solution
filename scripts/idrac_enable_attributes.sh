@@ -38,7 +38,7 @@ MY_ATTRIBUTES=( \
 	"CPUMemMetrics" \
 	"PSUMetrics" "AggregationMetrics" \
 	"NICStatistics" "NICSensor" "FCSensor" "FPGASensor" \
-        "ThermalSensor" "PowerStatistics" "CUPS" "StorageDiskSMARTData" \
+        "ThermalSensor" "PowerStatistics" "SystemUsage" "StorageDiskSMARTData" \
         "GPUStatistics" "NVMeSMARTData" "CPURegisters" "SerialLog" "GPUMetrics" \
         "Sensor" "StorageSensor" "MemorySensor" "CPUSensor")
 

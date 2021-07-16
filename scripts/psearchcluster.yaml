@@ -1,0 +1,73 @@
+---
+apiVersion: search.nautilus.dellemc.com/v1alpha1
+kind: PravegaSearch
+metadata:
+  annotations:
+    description: ""
+  name: psearch
+  namespace: idracsolution
+spec:
+  imageRef: psearch-image
+  indexWorker:
+    jvmOpts:
+    - -Xmx3g
+    - -XX:+PrintGC
+    - -XX:+PrintGCDetails
+    - -Xloggc:log/gc.log
+    replicas: 3
+    resources:
+      requests:
+        cpu: 500m
+        memory: 2Gi
+  kibana:
+    replicas: 1
+  pSearchController:
+    jvmOpts:
+    - -Xmx2g
+    - -XX:+PrintGC
+    - -XX:+PrintGCDetails
+    - -Xloggc:log/gc.log
+    replicas: 2
+    resources:
+      requests:
+        cpu: 100m
+        memory: 500Mi
+  pravegaControllerAddress: tls://pravega-controller.sdp.sdp-demo.org:443
+  queryWorker:
+    jvmOpts:
+    - -Xmx2g
+    - -XX:+PrintGC
+    - -XX:+PrintGCDetails
+    - -Xloggc:log/gc.log
+    replicas: 1
+    resources:
+      requests:
+        cpu: 100m
+        memory: 500Mi
+  resthead:
+    jvmOpts:
+    - -Xmx2g
+    - -XX:+PrintGC
+    - -XX:+PrintGCDetails
+    - -Xloggc:log/gc.log
+    replicas: 2
+    resources:
+      requests:
+        cpu: 100m
+        memory: 500Mi
+  scaler:
+    enabled: "true"
+    schedule: '*/5 * * * *'
+  schemaRegistryAddress: https://schema-registry.sdp.sdp-demo.org:443
+  securityEnabled: "true"
+  shardWorker:
+    jvmOpts:
+    - -Xmx3g
+    - -XX:+PrintGC
+    - -XX:+PrintGCDetails
+    - -Xloggc:log/gc.log
+    replicas: 3
+    resources:
+      requests:
+        cpu: "1"
+        memory: 4Gi
