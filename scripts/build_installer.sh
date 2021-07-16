@@ -40,6 +40,7 @@ cp -v \
 cp -rv \
   ${ROOT_DIR}/charts \
   ${ROOT_DIR}/installer \
+  ${ROOT_DIR}/dashboards \
   ${ROOT_DIR}/scripts \
   ${ROOT_DIR}/values \
   ${ROOT_DIR}/LICENSE \
