@@ -26,7 +26,7 @@ public class MetricReportFlattener implements FlatMapFunction<MetricReport, Flat
                 rpt.Oem = metricValue.Oem;
                 rpt.Label = metricValue.Oem.Dell.Label;
                 rpt.ContextID = metricValue.Oem.Dell.ContextID;
-                rpt.Timestamp = metricValue.Timestamp;
+                rpt.Timestamp = in.Timestamp;
                 rpt.MetricId = metricValue.MetricId;
                 try {
                     rpt.MetricValue = Double.parseDouble(metricValue.MetricValue);

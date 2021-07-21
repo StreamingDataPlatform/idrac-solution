@@ -71,7 +71,7 @@ fi
 REST_ENCODED_URL=${HTTP_PROTOCOL}://$(kubectl get ing -n ${NAMESPACE} psearch-resthead-headless -o jsonpath='{.spec.rules[0].host}')
 echo $REST_ENCODED_URL
 echo $REST_ENCODED_AUTH
-curl -k -X POST -H "Content-Type: application/json" -H "Authorization: Basic $REST_ENCODED_AUTH" -d'{"streamName": "idracflatdata","indexConfig": {"name": "idracflatdata-index"}}' ${REST_ENCODED_URL}/_searchable_streams
+curl -k -X POST -H "Content-Type: application/json" -H "Authorization: Basic $REST_ENCODED_AUTH" -d@${ROOT_DIR}/scripts/searcheable_stream.json ${REST_ENCODED_URL}/_searchable_streams
 
 # Deploy grafana dashboard
 sed "s/<base64generatedbasiccreds>/${REST_ENCODED_AUTH}/" ${ROOT_DIR}/dashboards/grafanaDashboard.yaml | kubectl apply  -n ${NAMESPACE} -f -
