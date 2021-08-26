@@ -21,7 +21,11 @@ else
 fi
 REPO_ING=$(kubectl get ing -n ${NAMESPACE?"You must export NAMESPACE"} repo -o jsonpath='{.spec.rules[0].host}')
 REPO_IP=$(kubectl get svc   nginx-ingress-controller -n nautilus-system -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
-sudo sed -i "5i$REPO_IP $REPO_ING" /etc/hosts
+if grep -q $REPO_ING /etc/hosts; then
+    sudo sed -i "s/*${REPO_ING}/5i$REPO_IP $REPO_ING/g" /etc/hosts
+else
+    sudo sed -i "5i$REPO_IP $REPO_ING" /etc/hosts
+fi
 export MAVEN_URL="${MAVEN_URL:-${MAVEN_PROTOCOL}://$(kubectl get ing -n ${NAMESPACE?"You must export NAMESPACE"} repo -o jsonpath='{.spec.rules[0].host}')/maven2}"
 export MAVEN_USERNAME="${MAVEN_USERNAME:-desdp}"
 export MAVEN_PASSWORD="${MAVEN_PASSWORD:-$(kubectl get secret keycloak-${MAVEN_USERNAME} -n nautilus-system -o jsonpath='{.data.password}' | base64 -d)}"

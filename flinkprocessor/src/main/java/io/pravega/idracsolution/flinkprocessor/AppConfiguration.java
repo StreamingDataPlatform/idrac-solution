@@ -1,6 +1,5 @@
 package io.pravega.idracsolution.flinkprocessor;
 
-
 import io.pravega.client.stream.ScalingPolicy;
 import io.pravega.client.stream.Stream;
 import io.pravega.client.stream.StreamCut;
@@ -40,14 +39,6 @@ public class AppConfiguration {
     private final long maxOutOfOrdernessMs;
     private final String jobName;
     private final String avroSchema;
-    // InfluxDB
-    private String metricsSink;
-    private String influxDbUrl;
-    private String influxdb_username;
-    private String influxdb_password;
-    private String influxdb_database;
-    private int influxdb_batchSize;
-    private int influxdb_flushDuration;
 
     public AppConfiguration(String[] args) throws IOException {
         params = ParameterTool.fromArgs(args);
@@ -61,14 +52,6 @@ public class AppConfiguration {
         enableRebalance = getParams().getBoolean("rebalance", true);
         maxOutOfOrdernessMs = getParams().getLong("maxOutOfOrdernessMs", 1000);
         jobName = getParams().get("jobName");
-        // InfluxDb
-        metricsSink  = params.get("metricsSink", "InfluxDB");
-        influxDbUrl  = params.get("influxDB.host", "http://idracdemo-influxdb.default.svc.cluster.local:8086");
-        influxdb_username = params.get("influxDB.username", "admin");
-        influxdb_password = params.get("influxDB.password", "password");
-        influxdb_database = params.get("influxDB.database", "idracdemo");
-        influxdb_batchSize = params.getInt("influxDB.batchsize", 5000);
-        influxdb_flushDuration = params.getInt("influxDB.flushDuration", 500);
         // Get Avro schema from base-64 encoded string parameter or from a file.
         final String avroSchemaBase64 = getParams().get("avroSchema", "");
         if (avroSchemaBase64.isEmpty()) {
@@ -145,34 +128,6 @@ public class AppConfiguration {
 
     public String getAvroSchema() {
         return avroSchema;
-    }
-
-    public enum MetricsSink {
-        InfluxDB
-    }
-
-    public MetricsSink getMetricsSink() {   return MetricsSink.valueOf(metricsSink);    }
-
-    public String getInfluxdbUrl() { return influxDbUrl; }
-
-    public String getInfluxdbUsername() {
-        return influxdb_username;
-    }
-
-    public String getInfluxdbPassword() {
-        return influxdb_password;
-    }
-
-    public String getInfluxdbDatabase() {
-        return influxdb_database;
-    }
-
-    public int getInfluxdbFlushDuration() {
-        return influxdb_flushDuration;
-    }
-
-    public int getInfluxdbBatchSize() {
-        return influxdb_batchSize;
     }
 
     public static class StreamConfig {

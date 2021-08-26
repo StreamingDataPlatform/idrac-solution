@@ -17,9 +17,6 @@ import org.apache.flink.streaming.api.environment.LocalStreamEnvironment;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.apache.flink.streaming.connectors.influxdb.InfluxDBConfig;
-import org.apache.flink.streaming.connectors.influxdb.InfluxDBSink;
-
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -150,28 +147,5 @@ public abstract class AbstractJob implements Runnable {
             FileSystem.initialize(getConfig().getParams().getConfiguration());
         }
         return env;
-    }
-    protected void addMetricsSink(DataStream datastream, String uidSuffix) {
-        switch (config.getMetricsSink()) {
-            case InfluxDB:
-                datastream.addSink(createInfluxDBSink())
-                        .name("influxdb-sink_" + uidSuffix)
-                        .uid("influxdb-sink_" + uidSuffix)
-                        .setParallelism(config.getParallelism());
-                break;
-
-            default:
-                throw new RuntimeException("Metric Sink type not supported");
-        }
-    }
-
-    protected InfluxDBSink createInfluxDBSink() {
-        InfluxDBConfig influxDBConfig = InfluxDBConfig.builder(config.getInfluxdbUrl(),
-                config.getInfluxdbUsername(), config.getInfluxdbPassword(), config.getInfluxdbDatabase())
-                .batchActions(config.getInfluxdbBatchSize())
-                .flushDuration(config.getInfluxdbFlushDuration(), TimeUnit.MILLISECONDS)
-                .enableGzip(true)
-                .build();
-        return new InfluxDBSink(influxDBConfig);
     }
 }

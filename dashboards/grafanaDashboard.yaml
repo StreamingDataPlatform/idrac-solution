@@ -93,7 +93,7 @@ spec:
         "editable": true,
         "gnetId": null,
         "graphTooltip": 0,
-        "iteration": 1626840903190,
+        "iteration": 1629938212167,
         "links": [],
         "panels": [
           {
@@ -452,15 +452,14 @@ spec:
                 "bucketAggs": [
                   {
                     "$$hashKey": "object:110",
-                    "field": "RackLabel.keyword",
+                    "field": "Timestamp",
                     "id": "2",
                     "settings": {
-                      "min_doc_count": 1,
-                      "order": "desc",
-                      "orderBy": "_term",
-                      "size": "0"
+                      "interval": "5m",
+                      "min_doc_count": 0,
+                      "trimEdges": 0
                     },
-                    "type": "terms"
+                    "type": "date_histogram"
                   }
                 ],
                 "metrics": [
@@ -473,7 +472,7 @@ spec:
                     "type": "cardinality"
                   }
                 ],
-                "query": "RackLabel:$Rack",
+                "query": "RackLabel.keyword:$Rack",
                 "refId": "A",
                 "timeField": "Timestamp"
               }
@@ -1174,8 +1173,8 @@ spec:
                 "scopedVars": {
                   "IdracServer": {
                     "selected": false,
-                    "text": "10.204.13.16",
-                    "value": "10.204.13.16"
+                    "text": "10.243.19.186",
+                    "value": "10.243.19.186"
                   }
                 },
                 "sparkline": {
@@ -1299,8 +1298,8 @@ spec:
                 "scopedVars": {
                   "IdracServer": {
                     "selected": false,
-                    "text": "10.204.13.16",
-                    "value": "10.204.13.16"
+                    "text": "10.243.19.186",
+                    "value": "10.243.19.186"
                   }
                 },
                 "sparkline": {
@@ -1426,8 +1425,8 @@ spec:
                 "scopedVars": {
                   "IdracServer": {
                     "selected": false,
-                    "text": "10.204.13.16",
-                    "value": "10.204.13.16"
+                    "text": "10.243.19.186",
+                    "value": "10.243.19.186"
                   }
                 },
                 "seriesOverrides": [],
@@ -1597,8 +1596,8 @@ spec:
                 "scopedVars": {
                   "IdracServer": {
                     "selected": false,
-                    "text": "10.204.13.16",
-                    "value": "10.204.13.16"
+                    "text": "10.243.19.186",
+                    "value": "10.243.19.186"
                   }
                 },
                 "seriesOverrides": [],
@@ -1759,8 +1758,8 @@ spec:
                 "scopedVars": {
                   "IdracServer": {
                     "selected": false,
-                    "text": "10.204.13.16",
-                    "value": "10.204.13.16"
+                    "text": "10.243.19.186",
+                    "value": "10.243.19.186"
                   }
                 },
                 "sparkline": {
@@ -1893,8 +1892,8 @@ spec:
                 "scopedVars": {
                   "IdracServer": {
                     "selected": false,
-                    "text": "10.204.13.16",
-                    "value": "10.204.13.16"
+                    "text": "10.243.19.186",
+                    "value": "10.243.19.186"
                   }
                 },
                 "seriesOverrides": [],
@@ -2029,7 +2028,7 @@ spec:
                 "lines": true,
                 "linewidth": 1,
                 "maxPerRow": 2,
-                "nullPointMode": "connected",
+                "nullPointMode": "null",
                 "options": {
                   "alertThreshold": true
                 },
@@ -2042,8 +2041,8 @@ spec:
                 "scopedVars": {
                   "IdracServer": {
                     "selected": false,
-                    "text": "10.204.13.16",
-                    "value": "10.204.13.16"
+                    "text": "10.243.19.186",
+                    "value": "10.243.19.186"
                   }
                 },
                 "seriesOverrides": [],
@@ -2072,7 +2071,7 @@ spec:
                         "field": "Timestamp",
                         "id": "2",
                         "settings": {
-                          "interval": "1m",
+                          "interval": "5m",
                           "min_doc_count": 0,
                           "trimEdges": 0
                         },
@@ -2089,7 +2088,7 @@ spec:
                         "meta": {},
                         "pipelineAgg": "select metric",
                         "settings": {},
-                        "type": "max"
+                        "type": "avg"
                       },
                       {
                         "$$hashKey": "object:168",
@@ -2128,7 +2127,7 @@ spec:
                         "field": "Timestamp",
                         "id": "2",
                         "settings": {
-                          "interval": "1m",
+                          "interval": "5m",
                           "min_doc_count": 0,
                           "trimEdges": 0
                         },
@@ -2146,7 +2145,7 @@ spec:
                         "meta": {},
                         "pipelineAgg": "select metric",
                         "settings": {},
-                        "type": "max"
+                        "type": "avg"
                       },
                       {
                         "$$hashKey": "object:168",
@@ -2298,31 +2297,50 @@ spec:
                           "value": 117
                         }
                       ]
+                    },
+                    {
+                      "matcher": {
+                        "id": "byName",
+                        "options": "MetricId"
+                      },
+                      "properties": [
+                        {
+                          "id": "custom.width",
+                          "value": null
+                        }
+                      ]
+                    },
+                    {
+                      "matcher": {
+                        "id": "byName",
+                        "options": "Name"
+                      },
+                      "properties": [
+                        {
+                          "id": "custom.width",
+                          "value": 400
+                        }
+                      ]
                     }
                   ]
                 },
                 "gridPos": {
                   "h": 7,
-                  "w": 24,
+                  "w": 12,
                   "x": 0,
                   "y": 27
                 },
                 "id": 1251,
                 "options": {
                   "showHeader": true,
-                  "sortBy": [
-                    {
-                      "desc": false,
-                      "displayName": "ContextID"
-                    }
-                  ]
+                  "sortBy": []
                 },
                 "pluginVersion": "7.3.4",
                 "scopedVars": {
                   "IdracServer": {
                     "selected": false,
-                    "text": "10.204.13.16",
-                    "value": "10.204.13.16"
+                    "text": "10.243.19.186",
+                    "value": "10.243.19.186"
                   }
                 },
                 "targets": [
@@ -2358,8 +2376,126 @@ spec:
                 "timeFrom": "1m",
                 "timeShift": null,
                 "title": "NIC LinkStatus",
-                "transformations": [],
+                "transformations": [
+                  {
+                    "id": "organize",
+                    "options": {
+                      "excludeByName": {
+                        "ContextID": true,
+                        "Id": true,
+                        "MetricValue": true,
+                        "Name": true,
+                        "Oem.Dell.ContextID": true,
+                        "Oem.Dell.Label": true,
+                        "RackLabel": true,
+                        "RemoteAddr": true,
+                        "Timestamp": true,
+                        "_id": true,
+                        "_index": true,
+                        "_source": true,
+                        "_type": true
+                      },
+                      "indexByName": {},
+                      "renameByName": {}
+                    }
+                  }
+                ],
                 "transparent": true,
+                "type": "table"
+              },
+              {
+                "datasource": "Elasticsearch-PSearch",
+                "fieldConfig": {
+                  "defaults": {
+                    "custom": {
+                      "align": null,
+                      "filterable": false
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "green",
+                          "value": null
+                        }
+                      ]
+                    },
+                    "unit": "none"
+                  },
+                  "overrides": []
+                },
+                "gridPos": {
+                  "h": 7,
+                  "w": 12,
+                  "x": 12,
+                  "y": 27
+                },
+                "id": 1368,
+                "options": {
+                  "showHeader": true,
+                  "sortBy": [
+                    {
+                      "desc": true,
+                      "displayName": "MetricValue"
+                    }
+                  ]
+                },
+                "pluginVersion": "7.3.4",
+                "scopedVars": {
+                  "IdracServer": {
+                    "selected": false,
+                    "text": "10.243.19.186",
+                    "value": "10.243.19.186"
+                  }
+                },
+                "targets": [
+                  {
+                    "bucketAggs": [],
+                    "metrics": [
+                      {
+                        "$$hashKey": "object:152",
+                        "field": "MetricValue",
+                        "id": "1",
+                        "meta": {},
+                        "settings": {
+                          "size": 15
+                        },
+                        "type": "raw_data"
+                      }
+                    ],
+                    "query": "Id: FanSensor AND  RackLabel:$Rack AND RemoteAddr:$IdracServer  AND MetricId: RPMReading",
+                    "refId": "A",
+                    "timeField": "Timestamp"
+                  }
+                ],
+                "timeFrom": null,
+                "timeShift": null,
+                "title": "Fan Speed",
+                "transformations": [
+                  {
+                    "id": "filterFieldsByName",
+                    "options": {
+                      "include": {
+                        "names": [
+                          "ContextID",
+                          "MetricId",
+                          "MetricValue"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "id": "organize",
+                    "options": {
+                      "excludeByName": {},
+                      "indexByName": {},
+                      "renameByName": {
+                        "MetricValue": "Fan Speed(RPM)"
+                      }
+                    }
+                  }
+                ],
                 "type": "table"
               }
             ],
@@ -2436,7 +2572,7 @@ spec:
           ]
         },
         "time": {
-          "from": "now-30m",
+          "from": "now-6h",
           "to": "now"
         },
         "timepicker": {
@@ -2455,5 +2591,5 @@ spec:
         },
         "timezone": "",
         "title": "IDRAC Overview",
-        "version": 20
+        "version": 26
       }
