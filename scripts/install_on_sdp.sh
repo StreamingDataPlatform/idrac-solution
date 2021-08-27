@@ -10,7 +10,7 @@ set -e
 ROOT_DIR=$(readlink -f $(dirname $0)/..)
 source ${ROOT_DIR}/scripts/env.sh
 : ${NAMESPACE?"You must export NAMESPACE"}
-
+: ${DOCKER_REGISTRY?"You must export DOCKER_REGISTRY"}
 
 # Create project
 kubectl apply -f ${ROOT_DIR}/scripts/project.yaml
@@ -40,7 +40,7 @@ helm upgrade --install --timeout 600s  --wait \
 # Deploy ingest gateway
 helm upgrade --install --timeout 600s  --wait \
     ingest-gateway \
-    ${ROOT_DIR}/charts/ingest-gateway \
+    ${ROOT_DIR}/charts/ingest-gateway${ING_EXT} \
     --namespace ${NAMESPACE} \
     --set "gateway.image=${DOCKER_REGISTRY}/ingest-gateway:1.0.0" \
     --set "haproxy.image=${DOCKER_REGISTRY}/haproxy:2.2.3" \

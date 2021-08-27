@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    release: {{ .Release.Name }}
+spec:
+  serviceName: {{ .Release.Name }}-backend
+  replicas: {{ .Values.gateway.replicas }}
+  selector:
+    matchLabels:
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      annotations:
+        nautilus.dellemc.com/pravega-environment: "{{ .Release.Namespace }}-pravega"
+      labels:
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+      - name: {{ .Release.Namespace }}-{{ .Release.Name }}
+        image: {{ .Values.gateway.image }}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          name: http
+        env:
+        - name: GATEWAY_AUTH_TYPE
+          value: "{{ .Values.gateway.authType }}"
+        - name: AUTHORIZATION_ENDPOINT
+          value: "{{ .Values.gateway.authEndpoint }}"
+        - name: JAVA_HOME
+          value: "/usr/local/openjdk-8"

@@ -22,3 +22,6 @@ GRADLE_OPTIONS="${GRADLE_OPTIONS:-"-Pversion=${APP_VERSION}"}"
 SDP_INSTALL_PATH={HOME}$/desdp
 SDP_INSTALL_EXECUTABLE=/desdp/decks-installer/decks-install-linux-amd64
 CERTS_PATH=${SDP_INSTALL_PATH}/certs
+if [[ -f ${SDP_INSTALL_EXECUTABLE} ]]; then
+    DOCKER_REGISTRY=$(${SDP_INSTALL_EXECUTABLE} config list | grep registry |  awk '{ print $2 }')
+fi
