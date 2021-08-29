@@ -1,11 +1,18 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: "idracsolution"
+---
 apiVersion: "nautilus.dellemc.com/v1alpha1"
 kind: "Project"
 metadata:
-  name: "idracdemo"
-  namespace: "idracdemo"
+  name: "idracsolution"
+  namespace: "idracsolution"
 spec:
   zookeeper:
     size: 3
+    persistentVolumeClaim:
+      storageClassName: "nfs"
 
   maven:
     persistentVolumeClaim:

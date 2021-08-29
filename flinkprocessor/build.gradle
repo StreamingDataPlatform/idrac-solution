@@ -1,88 +1,87 @@
-plugins {
-    id 'com.github.johnrengelman.shadow' version '2.0.3'
-}
-
 apply plugin: "java"
 apply plugin: "maven"
 apply plugin: "application"
 apply plugin: "maven-publish"
+apply plugin: "com.github.johnrengelman.shadow"
 
-group = "io.pravega.example.idracdemo"
-version = samplesVersion
-archivesBaseName = "idracdemo-flinkprocessor"
+group = "io.pravega.idracsolution"
+archivesBaseName = "idracsolution-flinkprocessor"
 description = "flinkprocessor"
-mainClassName = "io.pravega.example.idracdemo.flinkprocessor.ApplicationMain"
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+version = version
+
+mainClassName = "io.pravega.idracsolution.flinkprocessor.MetricReportToSingleMetricValue"
+
+
+// NOTE: We cannot use "compileOnly" or "shadow" configurations since then we could not run code
+// in the IDE or with "gradle run". We also cannot exclude transitive dependencies from the
+// shadowJar yet (see https://github.com/johnrengelman/shadow/issues/159).
+// Explicitly define the libraries we want to be included in the "flinkShadowJar" configuration!
+configurations {
+    flinkShadowJar // dependencies which go into the shadowJar
+
+    // always exclude these (also from transitive dependencies) since they are provided by Flink
+    flinkShadowJar.exclude group: 'org.apache.flink', module: 'force-shading'
+    flinkShadowJar.exclude group: 'com.google.code.findbugs', module: 'jsr305'
+    flinkShadowJar.exclude group: 'org.slf4j'
+    flinkShadowJar.exclude group: 'log4j'
+}
 
 dependencies {
-    // change to 2.7.9 due to Flink shaded library version
-    compile ("com.fasterxml.jackson.core:jackson-databind:2.7.9") {
-        force = true
-    }
-    compile ("com.fasterxml.jackson.core:jackson-core:2.7.9") {
-        force = true
-    }
-    compile ("com.fasterxml.jackson.dataformat:jackson-dataformat-smile:2.7.9") {
-        force = true
-    }
-    compile ("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.7.9") {
-        force = true
-    }
-    compile ("com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:2.7.9") {
-        force = true
-    }
-    // Note that we must include the Elasticsearch client early in the classpath to avoid Netty version conflicts.
-    // org.apache.flink:flink-runtime_2.11:1.3.1 includes io.netty:netty-all:4.0.27.Final which is too old.
-    compile "org.elasticsearch.client:elasticsearch-rest-high-level-client:6.5.4"
-    compile "org.slf4j:slf4j-api:1.6.6"
-    compile "ch.qos.logback:logback-classic:1.2.3"
-    compile "ch.qos.logback:logback-core:1.2.3"
-    compile "net.logstash.logback:logstash-logback-encoder:4.11"
-    compile "io.pravega:pravega-connectors-flink-${flinkShortVersion}_${flinkScalaVersion}:${pravegaFlinkConnectorVersion}"
+    // --------------------------------------------------------------
+    // Compile-time dependencies that should NOT be part of the
+    // shadow jar and are provided in the lib folder of Flink
+    // --------------------------------------------------------------
+    compile "org.apache.flink:flink-java:${flinkVersion}"
     compile "org.apache.flink:flink-streaming-java_${flinkScalaVersion}:${flinkVersion}"
-    compile "org.apache.flink:flink-streaming-scala_${flinkScalaVersion}:${flinkVersion}"
-    compile "org.apache.flink:flink-ml_${flinkScalaVersion}:1.8.3"
-    compile "org.apache.flink:flink-table_${flinkScalaVersion}:1.7.2"
-    compile "org.apache.flink:flink-connector-elasticsearch6_${flinkScalaVersion}:${flinkVersion}"
+    compile "org.apache.flink:flink-table-api-java-bridge_${flinkScalaVersion}:${flinkVersion}"
+    compile "org.apache.flink:flink-table-planner_${flinkScalaVersion}:${flinkVersion}"
 
-    // https://mvnrepository.com/artifact/org.json/json
-    compile group: 'org.json', name: 'json', version: '20090211'
-    // https://mvnrepository.com/artifact/org.apache.httpcomponents/fluent-hc
-    compile group: 'org.apache.httpcomponents', name: 'fluent-hc', version: '4.5.12'
+    // --------------------------------------------------------------
+    // Dependencies that should be part of the shadow jar, e.g.
+    // connectors. These must be in the flinkShadowJar configuration!
+    // --------------------------------------------------------------
 
-    // enable Once copied jar file to libs folder.
-    //compile files("./libs/flink-connector-influxdb_2.11-1.1-SNAPSHOT.jar")
-
-    // https://mvnrepository.com/artifact/org.influxdb/influxdb-java
-    compile group: 'org.influxdb', name: 'influxdb-java', version: '2.7'
-
+    flinkShadowJar "io.pravega:pravega-connectors-flink-${flinkShortVersion}_${flinkScalaVersion}:${pravegaFlinkConnectorVersion}"
+    flinkShadowJar "com.fasterxml.jackson.core:jackson-databind:${jacksonDatabindVersion}"
     
     if (includePravegaCredentials.toBoolean()) {
-        compile "io.pravega:pravega-keycloak-client:${pravegaCredentialsVersion}"
+        flinkShadowJar "io.pravega:pravega-keycloak-client:${pravegaCredentialsVersion}"
     }
-    // common-library dependencies
-    compile "com.google.guava:guava:20.0"
-    compile "org.xerial:sqlite-jdbc:3.20.0"
 
+    compile "org.slf4j:slf4j-api:${slf4jApiVersion}"
+    compile "ch.qos.logback:logback-classic:${logbackVersion}"
+    compile "ch.qos.logback:logback-core:${logbackVersion}"
+    compile "org.scala-lang:scala-compiler:${scalaCompilerVersion}"
 
-    testCompile group: "junit", name: "junit", version: "4.11"
+    testCompile "org.apache.flink:flink-test-utils_${flinkScalaVersion}:${flinkVersion}"
+    testCompile "junit:junit:${junitVersion}"
+}
+
+// make compileOnly dependencies available for tests:
+sourceSets {
+    main.compileClasspath += configurations.flinkShadowJar
+    main.runtimeClasspath += configurations.flinkShadowJar
+
+    test.compileClasspath += configurations.flinkShadowJar
+    test.runtimeClasspath += configurations.flinkShadowJar
+
+    javadoc.classpath += configurations.flinkShadowJar
+}
+
+run.classpath = sourceSets.main.runtimeClasspath
+
+jar {
+    manifest {
+        attributes 'Built-By': System.getProperty('user.name'),
+                'Build-Jdk': System.getProperty('java.version')
+    }
 }
 
 shadowJar {
-    dependencies {
-        exclude(dependency("org.scala-lang:scala-library"))
-        exclude(dependency("org.scala-lang:scala-reflect"))
-        exclude(dependency("org.scala-lang:scala-compiler"))
-    }
-
-    relocate "com.fasterxml", "com.dell.nautilus.analytics.shaded.com.fasterxml"
-    relocate "com.google", "com.dell.nautilus.analytics.shaded.com.google"
-    relocate "io.netty", "com.dell.nautilus.analytics.shaded.io.netty"
-
+    configurations = [project.configurations.flinkShadowJar]
     classifier = ""
-
-    zip64 true
 }
 
 distributions {
@@ -101,13 +100,12 @@ publishing {
     repositories {
         maven {
             credentials {
-                username System.getenv("MAVEN_USER")
-                password System.getenv("MAVEN_PASSWORD")
+                username "$System.env.MAVEN_USERNAME"
+                password "$System.env.MAVEN_PASSWORD"
             }
-            url = "http://localhost:9091/maven2"
+            url "$System.env.MAVEN_URL"
         }
     }
-
     publications {
         shadow(MavenPublication) { publication ->
             project.shadow.component(publication)

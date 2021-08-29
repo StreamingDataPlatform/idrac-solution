@@ -8,7 +8,6 @@
  * in the user guide at https://docs.gradle.org/3.4.1/userguide/multi_project_builds.html
  */
 
-rootProject.name = "idrac-demo"
+rootProject.name = "idracsolution"
 
 include "flinkprocessor"
-include "gateway"

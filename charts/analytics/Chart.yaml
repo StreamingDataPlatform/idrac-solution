@@ -1,0 +1,5 @@
+apiVersion: v2
+appVersion: 0.0.2
+description: Analytics for iDRAC solution
+name: analytic
+version: 0.0.2
