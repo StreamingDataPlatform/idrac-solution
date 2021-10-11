@@ -37,14 +37,6 @@ helm upgrade --install --timeout 600s  --wait \
     --set "mavenCoordinate.version=${APP_VERSION}" \
     $@
 
-# Deploy ingest gateway
-helm upgrade --install --timeout 600s  --wait \
-    ingest-gateway \
-    ${ROOT_DIR}/charts/ingest-gateway${ING_EXT} \
-    --namespace ${NAMESPACE} \
-    --set "gateway.image=${DOCKER_REGISTRY}/ingest-gateway:1.0.0" \
-    --set "haproxy.image=${DOCKER_REGISTRY}/haproxy:2.2.3" \
-    $@
 # Create a psearch cluster
 kubectl apply -f ${ROOT_DIR}/scripts/psearchcluster.yaml -n ${NAMESPACE}
 sleep 5

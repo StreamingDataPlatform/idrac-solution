@@ -15,9 +15,9 @@ clusterConfiguration:
   restart-strategy.fixed-delay.delay: "30 s"
   taskmanager.memory.jvm-metaspace.size: "268435456"
   taskmanager.memory.task.off-heap.size: "0"
-flinkVersion: "1.10.2"
+flinkVersion: "1.13.2"
 imageRef: 
-  name: 1.10.2-2.12
+  name: flink-1.13.2
 jobManager: 
   cpu: 1000m
   memory: 2048M

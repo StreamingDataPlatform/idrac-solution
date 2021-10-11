@@ -9,6 +9,8 @@ metadata:
   name: "idracsolution"
   namespace: "idracsolution"
 spec:
+  features:
+  - name: ingestgateway
   zookeeper:
     size: 3
     persistentVolumeClaim:
