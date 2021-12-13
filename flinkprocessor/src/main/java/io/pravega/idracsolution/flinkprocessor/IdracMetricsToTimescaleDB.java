@@ -67,7 +67,7 @@ public class IdracMetricsToTimescaleDB extends AbstractJob {
                                 statement.setTimestamp(1, Timestamp.valueOf(LocalDateTime.ofEpochSecond(metricValue.Timestamp/1000, 0 , ZoneOffset.UTC)));
                                 statement.setString(2, metricValue.RemoteAddr);
                                 statement.setDouble(3, metricValue.MetricValue);
-                                statement.setString(4, metricValue.NonNumericValue);
+                                statement.setString(4, metricValue.NonNumericValue);  
                                 statement.setString(5, metricValue.ContextID);
                                 statement.setString(6, metricValue.MetricId);
                                 statement.setString(7, metricValue.RackLabel);
