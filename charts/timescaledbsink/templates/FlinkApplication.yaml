@@ -21,14 +21,18 @@ spec:
   parameters:
     - name: scope
       value: "{{ .Release.Namespace }}"
+    - name: timescaleDBUrl
+      value: "postgresql://{{ $.Release.Name }}-timescaledb.{{ .Release.Namespace }}.svc.cluster.local:5432"
+    - name: timescaleDB_username
+      value: {{ .Values.timescaledb.patroni.postgresql.authentication.superuser.username | quote }}
+    - name: timescaleDB_password
+      value: {{ .Values.timescaledb.patroni.postgresql.authentication.superuser.password  | quote }}
+    - name: timescaleDB_database
+      value: {{ .Values.timescaledb.database  | quote }}
     - name: jobName
       value: {{ $.Release.Name | quote }}
     {{- range $key, $value := .Values.appParameters }}
     - name: {{ $key | quote }}
       value: {{ $value | quote }}
-    {{- end }}
-    {{- range $key, $value := .Values.appParametersJson }}
-    - name: {{ $key | quote }}
-      value: {{ $value | toJson | b64enc | quote }}
     {{- end }}
   state: started

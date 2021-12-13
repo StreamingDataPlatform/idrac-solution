@@ -2,12 +2,13 @@ package io.pravega.idracsolution.flinkprocessor;
 
 
 import io.pravega.client.stream.StreamCut;
-import io.pravega.connectors.flink.FlinkPravegaWriter;
 import io.pravega.connectors.flink.FlinkPravegaReader;
+import io.pravega.connectors.flink.FlinkPravegaWriter;
 import io.pravega.connectors.flink.PravegaEventRouter;
+import io.pravega.idracsolution.flinkprocessor.datatypes.FlatMetricReport;
+import io.pravega.idracsolution.flinkprocessor.datatypes.MetricReport;
 import io.pravega.idracsolution.flinkprocessor.util.JsonDeserializationSchema;
 import io.pravega.idracsolution.flinkprocessor.util.JsonSerializationSchema;
-import io.pravega.idracsolution.flinkprocessor.datatypes.*;
 import io.pravega.idracsolution.flinkprocessor.util.MetricReportFlattener;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;

@@ -1,5 +1,9 @@
 apiVersion: v2
 appVersion: 0.0.2
-description: Analytics for iDRAC solution
-name: analytic
+description: SDP Analytics for iDRAC solution
+icon: http://local-helm-repo.kubeapps.svc.cluster.local/images/flink_squirrel_100_color.png
+name: iDRAC-To-SDP
 version: 0.0.2
+dependencies:
+  - name: ingest-gateway
+    version: 1.0.x

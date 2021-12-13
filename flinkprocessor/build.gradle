@@ -45,6 +45,8 @@ dependencies {
 
     flinkShadowJar "io.pravega:pravega-connectors-flink-${flinkShortVersion}_${flinkScalaVersion}:${pravegaFlinkConnectorVersion}"
     flinkShadowJar "com.fasterxml.jackson.core:jackson-databind:${jacksonDatabindVersion}"
+    flinkShadowJar files("./libs/postgresql-42.2.23.jar")
+    flinkShadowJar "org.apache.flink:flink-connector-jdbc_${flinkScalaVersion}:1.12.3"
     
     if (includePravegaCredentials.toBoolean()) {
         flinkShadowJar "io.pravega:pravega-keycloak-client:${pravegaCredentialsVersion}"

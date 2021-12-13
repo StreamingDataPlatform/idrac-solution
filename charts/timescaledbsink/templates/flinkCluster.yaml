@@ -23,7 +23,7 @@ spec:
           storage: {{ .Values.localStorage.size | quote }}
       storageClassName: standard
   volumes:
-  {{ toYaml .Values.volumes | indent 4 }}
+{{ toYaml .Values.volumes | indent 4 }}
   storage:
     volumeSource:
       persistentVolumeClaim:
@@ -40,4 +40,4 @@ spec:
     taskmanager.memory.jvm-metaspace.size: "268435456"  # 256 Mi
     taskmanager.memory.task.off-heap.size: "100m"
   logging:
-  {{ toYaml .Values.logging | indent 4 }}
+{{ toYaml .Values.logging | indent 4 }}

@@ -1,0 +1,9 @@
+apiVersion: v2
+appVersion: 0.0.2
+icon: http://local-helm-repo.kubeapps.svc.cluster.local/images/timescaledb.png
+description: sink iDRAC Data to TimescaleDB
+name: iDRAC-to-TimescaleDB
+version: 0.0.3
+dependencies:
+  - name: timescaledb
+    version: 0.8.x

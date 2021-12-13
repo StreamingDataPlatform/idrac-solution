@@ -11,12 +11,14 @@ import org.apache.flink.core.fs.FileSystem;
 import org.apache.flink.runtime.state.filesystem.FsStateBackend;
 import org.apache.flink.runtime.state.memory.MemoryStateBackend;
 import org.apache.flink.streaming.api.CheckpointingMode;
-import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.CheckpointConfig;
 import org.apache.flink.streaming.api.environment.LocalStreamEnvironment;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -43,6 +45,7 @@ public abstract class AbstractJob implements Runnable {
         try (StreamManager streamManager = StreamManager.create(streamConfig.getPravegaConfig().getClientConfig())) {
             StreamConfiguration streamConfiguration = StreamConfiguration.builder()
                     .scalingPolicy(streamConfig.getScalingPolicy())
+                    .retentionPolicy(streamConfig.getRetentionPolicy())
                     .build();
             streamManager.createStream(
                     streamConfig.getStream().getScope(),
@@ -127,8 +130,6 @@ public abstract class AbstractJob implements Runnable {
         return env;
     }
 
-
-
     public ExecutionEnvironment initializeFlinkBatch() {
         ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
 
@@ -147,5 +148,54 @@ public abstract class AbstractJob implements Runnable {
             FileSystem.initialize(getConfig().getParams().getConfiguration());
         }
         return env;
+    }
+
+    protected void createTimescaleDBTable(String tableSchema, String tableName) {
+        final String  connUrl = String.format("jdbc:%s/%s?user=%s&password=%s",
+                config.getTimescaledbUrl(), config.getTimescaledbDatabase(),
+                config.getTimescaledbUsername(), config.getTimescaledbPassword()
+        );
+        try (Connection conn = DriverManager.getConnection(connUrl)) {
+            createSchema(conn, tableName, tableSchema);
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
+
+    protected  void createTimescaleDB(){
+        try (Connection conn = DriverManager.getConnection(String.format("jdbc:%s/", config.getTimescaledbUrl()),
+                config.getTimescaledbUsername(),config.getTimescaledbPassword())) {
+            final Statement stmt = conn.createStatement();
+            String sql = String.format("CREATE DATABASE %s;", config.getTimescaledbDatabase());
+            stmt.executeUpdate(sql);
+        } catch (SQLException ex) {
+            log.warn(ex.getMessage());
+        }
+    }
+    private void createSchema(final Connection conn, String tableName, String tableSchema) {
+        try (Statement stmt = conn.createStatement()) {
+            stmt.execute(String.format("CREATE TABLE IF NOT EXISTS %s;", tableSchema));
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        }
+        //CREATE EXTENSION IF NOT EXISTS timescaledb CASCADE;
+        try (Statement stmt = conn.createStatement()) {
+            stmt.execute("CREATE EXTENSION IF NOT EXISTS timescaledb CASCADE;");
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex.getMessage());
+        }
+        try (Statement stmt = conn.createStatement()) {
+            stmt.execute(String.format("SELECT create_hypertable('%s', 'time')", tableName));
+
+        } catch (SQLException ex) {
+            log.warn(ex.getMessage());
+        }
+        //set retention policy
+        //SELECT add_retention_policy('conditions', INTERVAL '24 hours');
+        try (Statement stmt = conn.createStatement()) {
+            stmt.execute(String.format("SELECT add_retention_policy('conditions', INTERVAL '%s hours')",config.getTimescaledbRetentionPolicy()/60));
+        } catch (SQLException ex) {
+            log.warn(ex.getMessage());
+        }
     }
 }

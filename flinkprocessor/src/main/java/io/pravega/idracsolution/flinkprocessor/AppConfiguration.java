@@ -1,5 +1,6 @@
 package io.pravega.idracsolution.flinkprocessor;
 
+import io.pravega.client.stream.RetentionPolicy;
 import io.pravega.client.stream.ScalingPolicy;
 import io.pravega.client.stream.Stream;
 import io.pravega.client.stream.StreamCut;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.Duration;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
@@ -40,6 +42,16 @@ public class AppConfiguration {
     private final String jobName;
     private final String avroSchema;
 
+    //timescaleDB
+    private String timescaleDBUrl;
+    private String timescaleDBUsername;
+    private String timescaleDBPassword;
+    private String timescaleDBDatabase;
+    private String timescaleDBTable;
+    private int timescaleDBBatchSize;
+    private int timescaleDBFlushDuration;
+    private int timescaleDBRetention;
+
     public AppConfiguration(String[] args) throws IOException {
         params = ParameterTool.fromArgs(args);
         log.info("Parameter Tool: {}", getParams().toMap());
@@ -52,6 +64,17 @@ public class AppConfiguration {
         enableRebalance = getParams().getBoolean("rebalance", true);
         maxOutOfOrdernessMs = getParams().getLong("maxOutOfOrdernessMs", 1000);
         jobName = getParams().get("jobName");
+
+        // timscaleDB
+        timescaleDBUrl = params.get("timescaleDBUrl", "postgresql://localhost:5432");
+        timescaleDBUsername = params.get("timescaleDB_username", "postgres");
+        timescaleDBPassword = params.get("timescaleDB_password", "password");
+        timescaleDBDatabase = params.get("timescaleDB_database", "tsdata");
+        timescaleDBTable = params.get("timescaleDB_table", "litmus");
+        timescaleDBBatchSize = params.getInt("timescaleDB_batchSize", 5000);
+        timescaleDBFlushDuration = params.getInt("timescaleDB_flushDuration", 1000);
+        timescaleDBRetention = params.getInt("timescaleDB_retention", 525600);
+
         // Get Avro schema from base-64 encoded string parameter or from a file.
         final String avroSchemaBase64 = getParams().get("avroSchema", "");
         if (avroSchemaBase64.isEmpty()) {
@@ -130,6 +153,36 @@ public class AppConfiguration {
         return avroSchema;
     }
 
+    public String getTimescaledbUrl() { return timescaleDBUrl; }
+
+    public String getTimescaledbUsername() {
+        return timescaleDBUsername;
+    }
+
+    public String getTimescaledbPassword() {
+        return timescaleDBPassword;
+    }
+
+    public String getTimescaledbDatabase() {
+        return timescaleDBDatabase;
+    }
+
+    public String getTimescaledbTable() {
+        return timescaleDBTable;
+    }
+
+    public int getTimescaledbBatchSize() {
+        return timescaleDBBatchSize;
+    }
+
+    public int getTimescaledbFlushDuration() {
+        return timescaleDBFlushDuration;
+    }
+
+    public int getTimescaledbRetentionPolicy() {
+        return timescaleDBRetention;
+    }
+
     public static class StreamConfig {
         private final Stream stream;
         private final PravegaConfig pravegaConfig;
@@ -140,7 +193,7 @@ public class AppConfiguration {
         private final StreamCut endStreamCut;
         private final boolean startAtTail;
         private final boolean endAtTail;
-
+        private final int retentionPolicy;
 
         public StreamConfig(final String argName, final ParameterTool globalParams) {
             final String argPrefix = argName.isEmpty() ? argName : argName + "-";
@@ -185,6 +238,7 @@ public class AppConfiguration {
             endStreamCut = StreamCut.from(params.get("endStreamCut", StreamCut.UNBOUNDED.asText()));
             startAtTail = params.getBoolean( "startAtTail", true);
             endAtTail = params.getBoolean("endAtTail", false);
+            retentionPolicy = params.getInt("retentionPolicy", 525600); // duration per minute default to one year
         }
 
         @Override
@@ -208,6 +262,10 @@ public class AppConfiguration {
 
         public PravegaConfig getPravegaConfig() {
             return pravegaConfig;
+        }
+
+        public RetentionPolicy getRetentionPolicy() {
+            return RetentionPolicy.byTime(Duration.ofMinutes(retentionPolicy));
         }
 
         public ScalingPolicy getScalingPolicy() {

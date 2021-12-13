@@ -4,18 +4,13 @@ appParameters:
 
   # Set to false to allowing viewing metrics in Flink UI (may reduce performance).
   enableOperatorChaining: "false"
-
   # Read events from this stream.
-  input-stream: "idracdata"
+  input-stream: "idracflatdata"
   input-startAtTail: "false"
   input-endAtTail: "false"
   input-minNumSegments: 1
-  # Write events to this stream.
-  output-stream: "idracflatdata"
-  output-minNumSegments: 1
 
-# Job Name
-jobName: MetricReportToSingleMetricValue
+jobName: IdracMetricsToTimescaleDB
 
 # Flink app coordinates
 mavenCoordinate:
@@ -54,15 +49,32 @@ taskManager:
 logging: {}
   #io.pravega: DEBUG
   #io.pravega.connectors: DEBUG
-#org.apache.flink: DEBUG
-
-ingest-gateway:
-  gateway:
-    # docker image, required
-    image: sdp-registry:31001/desdp/ingest-gateway:1.3-3-3fdaba2
-    # required
-    replicas: 1
-
-  haproxy:
-    image: sdp-registry:31001/desdp/haproxy:2.2.14
-  
+  #org.apache.flink: DEBUG
+timescaledb:
+  externalHost: sdp.sdp-demo.org
+  imageRegistry: sdp-registry:31001/desdp
+  hooks:
+    image:
+      repository: nautilus-kubectl
+  # timescalDB HA image
+  image:
+    repository: timescaledb-ha
+    tag: pg13.4-ts2.4.2-p0
+  persistentVolumes:
+    data:
+      enabled: true
+      size: 200Gi
+      # sdp-local-path
+      storageClass: "nfs"
+    wal:
+      enabled: true
+      size: 5Gi
+      # sdp-local-path
+      storageClass: "nfs"
+  database: tsdata
+  patroni:
+    postgresql:
+      authentication:
+        superuser:
+          username: postgres
+          password: password

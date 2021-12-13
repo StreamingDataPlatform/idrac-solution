@@ -10,7 +10,7 @@ public class FlatMetricReport implements Serializable {
     public String Id;
     public String Name;
     public String RemoteAddr;
-    public String Timestamp;
+    public long Timestamp;
     public String MetricId;
     public Double MetricValue;
     public String NonNumericValue;

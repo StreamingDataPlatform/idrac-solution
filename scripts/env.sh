@@ -17,7 +17,7 @@ APP_NAME=idracsolution
 APP_GROUP_ID=${APP_GROUP_ID:-io.pravega.idracsolution}
 APP_ARTIFACT_ID=${APP_ARTIFACT_ID:-flinkprocessor}
 # Change line below to bump the application version.
-APP_VERSION=${APP_VERSION:-0.0.4}
+APP_VERSION=${APP_VERSION:-0.1.1}
 GRADLE_OPTIONS="${GRADLE_OPTIONS:-"-Pversion=${APP_VERSION}"}"
 SDP_INSTALL_PATH={HOME}$/desdp
 SDP_INSTALL_EXECUTABLE=/desdp/decks-installer/decks-install-linux-amd64

@@ -30,4 +30,4 @@ spec:
         - name: AUTHORIZATION_ENDPOINT
           value: "{{ .Values.gateway.authEndpoint }}"
         - name: JAVA_HOME
-          value: "/usr/local/openjdk-8"
+          value: "/usr/local/openjdk-11"

@@ -14,7 +14,7 @@ public class MetricReport implements Serializable {
     public String Name;
     public String RemoteAddr;
     public String RackLabel;
-    public String Timestamp;
+    public long Timestamp;
     @JsonProperty("@odata.type")
     public String dataType;
     @JsonProperty("@odata.context")

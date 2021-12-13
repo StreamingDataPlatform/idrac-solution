@@ -1,0 +1,272 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "{{.Release.Name}}-subscribe"
+  annotations: {}
+
+data:
+  idrac_enable_attributes.sh: |
+    #!/bin/bash
+    usage() {
+    	echo "Usage: $0 [ -u <idrac_user> -p <idrac_password> -h <idrac_host> ]";
+    	exit 1;
+    }
+
+    while getopts u:p:h:: option
+    do
+    	case "${option}" in
+    		u) USER=${OPTARG};;
+    		p) PASS=${OPTARG};;
+    		h) IP=${OPTARG};;
+    	esac
+    done
+
+    if [ -z ${USER} ] || [ -z ${PASS} ] || [ -z ${IP} ];
+    then
+    	usage
+    fi
+
+    # Disable list
+
+    DISABLE_ATTRIBUTES=()
+
+    MY_JSON="/tmp/myjson.json"
+    jq -n  '{}' > ${MY_JSON}
+
+    for ATTRIBUTE in "${DISABLE_ATTRIBUTES[@]}"
+    do
+       echo $(jq --arg key "Telemetry${ATTRIBUTE}.1.EnableTelemetry" --arg value "Disabled" '.Attributes[$key] = $value' ${MY_JSON}) > ${MY_JSON}
+    done
+
+
+    MY_ATTRIBUTES=( \
+    	"FanSensor" \
+            "PowerMetrics" "ThermalSensor" "ThermalMetrics" "MemorySensor" \
+    	"CPUMemMetrics" \
+    	"PSUMetrics" "AggregationMetrics" \
+    	"NICStatistics" "NICSensor" "FCSensor" "FPGASensor" \
+            "ThermalSensor" "PowerStatistics" "SystemUsage" "StorageDiskSMARTData" \
+            "GPUStatistics" "NVMeSMARTData" "CPURegisters" "SerialLog" "GPUMetrics" \
+            "Sensor" "StorageSensor" "MemorySensor" "CPUSensor")
+
+
+    for ATTRIBUTE in "${MY_ATTRIBUTES[@]}"
+    do
+      echo $(jq --arg key "Telemetry${ATTRIBUTE}.1.EnableTelemetry" --arg value "Enabled" '.Attributes[$key] = $value' ${MY_JSON}) > ${MY_JSON}
+    done
+
+    curl -k -u ${USER}:${PASS} --header "Content-Type: application/json" --request PATCH --data "@${MY_JSON}" "https://${IP}/redfish/v1/Managers/iDRAC.Embedded.1/Attributes"
+  idrac_set_subscription.sh: |
+    #!/usr/bin/env bash
+
+    usage() {
+    	echo "Usage: $0 [ -u <idrac_user> -p <idrac_password> -h <idrac_host> -g <pravega_gateway> -r <rack_label> ]";
+    	exit 1;
+    }
+
+    while getopts u:p:h:g:r:: option
+    do
+    	case "${option}" in
+    		u) idrac_user=${OPTARG};;
+    		p) idrac_pass=${OPTARG};;
+    		h) idrac_host=${OPTARG};;
+    		g) gateway=${OPTARG};;
+        r) racklabel=${OPTARG};;
+    	esac
+    done
+
+    if [ -z ${idrac_user} ] || [ -z ${idrac_pass} ] || [ -z ${idrac_host} ] || [ -z ${gateway} ] || [ -z ${racklabel} ] ;
+    then
+    	usage
+    fi
+
+    curl -o /tmp/idrac_resp -k -w "%{http_code}\n" \
+    -u ${idrac_user}:${idrac_pass} \
+    --header "Content-Type: application/json" \
+    --request POST \
+    --data "
+    {
+    \"Context\": \"Public\",
+    \"Protocol\": \"Redfish\",
+    \"EventFormatType\": \"MetricReport\",
+    \"EventTypes\": [\"MetricReport\"],
+    \"Destination\": \"https://${gateway}/v1/scope/idracsolution/stream/idracdata/event?routingKeyType=none&addField.RemoteAddr=${idrac_host}&addTimestamp=Timestamp&addField.RackLabel=${racklabel}\"
+    }
+    " \
+    https://${idrac_host}/redfish/v1/EventService/Subscriptions
+  idrac_get_subscription.sh: |
+    #!/usr/bin/env bash
+
+    usage() {
+    	echo "Usage: $0 [ -u <idrac_user> -p <idrac_password> -h <idrac_host> ]";
+    	exit 1;
+    }
+
+    while getopts u:p:h:: option
+    do
+    	case "${option}" in
+    		u) idrac_user=${OPTARG};;
+    		p) idrac_pass=${OPTARG};;
+    		h) idrac_host=${OPTARG};;
+    	esac
+    done
+
+    if [ -z ${idrac_user} ] || [ -z ${idrac_pass} ] || [ -z ${idrac_host} ];
+    then
+    	usage
+    fi
+
+    GET_SUBS="curl -s -k \
+    -u ${idrac_user}:${idrac_pass} \
+    --header \"Content-Type: application/json\" \
+    --request GET \
+    https://${idrac_host}/redfish/v1/EventService/Subscriptions"
+
+    status=$(eval ${GET_SUBS} | jq '.Members')
+
+    echo $status
+  idrac_delete_subscription.sh: |
+    #!/usr/bin/env bash
+
+    usage() {
+    	echo "Usage: $0 [ -u <idrac_user> -p <idrac_password> -h <idrac_host> -s <subscription_id>]";
+    	exit 1;
+    }
+
+    while getopts u:p:h:s:: option
+    do
+    	case "${option}" in
+    		u) idrac_user=${OPTARG};;
+    		p) idrac_pass=${OPTARG};;
+    		h) idrac_host=${OPTARG};;
+    		s) sub_id=${OPTARG};;
+    	esac
+    done
+
+    if [ -z ${idrac_user} ] || [ -z ${idrac_pass} ] || [ -z ${idrac_host} ] || [ -z ${sub_id} ];
+    then
+    	usage
+    fi
+
+    curl -v -k \
+    -u ${idrac_user}:${idrac_pass} \
+    --header "Content-Type: application/json" \
+    --request DELETE \
+    https://${idrac_host}/redfish/v1/EventService/Subscriptions/${sub_id}
+  idrac_delete_telemetrics.sh: |
+    #!/bin/bash
+
+    ROOT_DIR=$(dirname $0)
+
+
+    get_sub_detatils() {
+    	curl  -s -k \
+    	-u ${1}:${2} \
+    	--header "Content-Type: application/json" \
+    	--request GET \
+    	https://${3}${4}
+    }
+
+    while IFS= read -r LINE; do
+            # Skip commented lines
+    	case "$LINE" in \#*) continue ;; esac
+    	ARRAY=(${LINE})
+            # Data is in the following form
+    	# IDRAC_IP  USER  PASSWD CALLBACK_URL
+    	IP="$(echo -e  ${ARRAY[0]} | tr -d '[:space:]')"
+    	USER="$(echo -e  ${ARRAY[1]} | tr -d '[:space:]')"
+    	PASS="$(echo -e  ${ARRAY[2]} | tr -d '[:space:]')"
+    	GATEWAY="$(echo -e  ${ARRAY[3]} | tr -d '[:space:]')"
+    	# Get subscriptions using redifish API
+    	status=$(${ROOT_DIR}/idrac_get_subscription.sh -u ${USER} -p ${PASS} -h ${IP})
+    	for row in $(echo "${status}" | jq -r '.[] | @base64'); do
+    	    _jq() {
+    	     echo ${row} | base64 -d | jq -r '.[]'
+    	    }
+    	    id=$(_jq)
+    	    echo $id
+    	    GET_SUB_BY_ID=$(get_sub_detatils ${USER} ${PASS} ${IP} ${id})
+    	    data=$(echo $GET_SUB_BY_ID)
+    	    callback=$(echo $data | jq  -r '.Destination')
+    	    sub_id=$(echo $data | jq  -r '.Id')
+    	    if [[ ${callback} =~ ${GATEWAY} ]]
+                then
+    		    echo ${callback} ${sub_id}
+    		    # scripts/idrac_delete_subscription.sh
+    		    ${ROOT_DIR}/idrac_delete_subscription.sh -u ${USER} -p ${PASS} -h ${IP} -s ${sub_id}
+    	    fi
+
+    	done
+    	# Search subscriptions that match callback
+    	# ${ROOT_DIR}/idrac_delete_subscription.sh -u $USER -p $PASS -h $IP_id
+    done < ${1}
+  idrac_setup_telemetrics.sh: |
+    #!/bin/bash
+
+    ROOT_DIR=$(dirname $0)
+
+    while IFS= read -r LINE; do
+            # Skip commented lines
+    	case "$LINE" in \#*) continue ;; esac
+    	ARRAY=(${LINE})
+            # Data is in the following form
+    	# IDRAC_IP  USER  PASSWD CALLBACK_URL
+    	IP="$(echo -e  ${ARRAY[0]} | tr -d '[:space:]')"
+    	USER="$(echo -e  ${ARRAY[1]} | tr -d '[:space:]')"
+    	PASS="$(echo -e  ${ARRAY[2]} | tr -d '[:space:]')"
+    	GATEWAY="$(echo -e  ${ARRAY[3]} | tr -d '[:space:]')"
+    	RACKLABEL="$(echo -e  ${ARRAY[4]} | tr -d '[:space:]')"
+    	# Set subscription using redifish API
+    	echo "####################################################################"
+      echo $IP $USER $PASS $GATEWAY $RACKLABEL
+      echo "####################################################################"
+    	status=$(${ROOT_DIR}/idrac_set_subscription.sh -u ${USER} -p ${PASS} -h ${IP} -g ${GATEWAY}  -r ${RACKLABEL})
+            # Enable telemetrics reports
+    	if [ $status != "201" ] ; then
+               echo "{\"message\": [ $(cat /tmp/idrac_resp) ], \"status\": \"failed to set subscription\", \"http_status_code\": \"${status}\"}"
+    	   continue
+    	fi
+    	${ROOT_DIR}/idrac_enable_attributes.sh -u $USER -p $PASS -h $IP
+    done < ${1}
+  idrac-sample.config: |+
+    {{- range $v := .Values.idracConfig }}
+    {{ $v }}
+    {{- end }}
+---
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: "{{.Release.Name}}-subscribe"
+  labels:
+    app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+    app.kubernetes.io/instance: {{ .Release.Name | quote }}
+    app.kubernetes.io/version: {{ .Chart.AppVersion }}
+    helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+  annotations:
+    "helm.sh/hook": post-install,post-upgrade
+    "helm.sh/hook-weight": "1"
+    #"helm.sh/hook-delete-policy": hook-succeeded
+spec:
+  backoffLimit: 1
+  activeDeadlineSeconds: 300
+  template:
+    metadata:
+      name: "{{.Release.Name}}-subscribe"
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: subscribe-job
+          image: "{{ .Values.imageRegistry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          command:
+            - "/scripts/idrac_{{ .Values.method }}_telemetrics.sh"
+            - "/scripts/idrac-sample.config"
+          volumeMounts:
+            - name: sh
+              mountPath: /scripts
+              readOnly: true
+      volumes:
+        - name: sh
+          configMap:
+            name: "{{.Release.Name}}-subscribe"
+            defaultMode: 0555

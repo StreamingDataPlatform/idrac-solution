@@ -1,0 +1,2692 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ .Release.Namespace }}
+  namespace: {{ .Release.Namespace }}
+type: Opaque
+stringData:
+  username: admin
+  password: password
+---
+apiVersion: servicecatalog.k8s.io/v1beta1
+kind: ServiceInstance
+metadata:
+  name: {{ .Release.Namespace }}-grafana
+  namespace: {{ .Release.Namespace }}
+spec:
+  clusterServiceClassExternalName: keycloak-client
+  clusterServicePlanExternalName: confidential-client
+  parameters:
+    client-id: {{ .Release.Namespace }}-grafana
+    standard-flow-enabled: true
+    redirect-uris: "*"
+    web-origins: "+"
+---
+apiVersion: servicecatalog.k8s.io/v1beta1
+kind: ServiceBinding
+metadata:
+  name: {{ .Release.Namespace }}-grafana
+  namespace: {{ .Release.Namespace }}
+spec:
+  instanceRef:
+    name: "{{ .Release.Namespace }}-grafana"
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    nautilus.dellemc.com/serviceaccount-secret-name: "{{ .Release.Namespace }}-grafana"
+  name: {{ .Release.Namespace }}-grafana
+  namespace: {{ .Release.Namespace }}
+---
+apiVersion: metrics.dellemc.com/v1alpha1
+kind: Grafana
+metadata:
+  name: {{ .Release.Namespace }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  ingress:
+    fullname: {{ $.Release.Name }}-grafana.{{ .Release.Namespace }}
+    serviceAccountName: {{ .Release.Namespace }}-grafana
+  adminSecretName: {{ .Release.Namespace }}
+  datasources: |
+    apiVersion: 1
+    datasources:
+    - isDefault: true
+      name: timescaleDB
+      type: postgres
+      database: {{ .Values.timescaledb.database  | quote }}
+      url: "{{ $.Release.Name }}-timescaledb.{{ .Release.Namespace }}.svc.cluster.local:5432"
+      user: {{ .Values.timescaledb.patroni.postgresql.authentication.superuser.username | quote }}
+      password: {{ .Values.timescaledb.patroni.postgresql.authentication.superuser.password  | quote }}
+      jsonData:
+         timescaledb: true
+         sslmode: verify-ca
+         postgresVersion: 1000
+      editable: true
+---
+apiVersion: metrics.dellemc.com/v1alpha1
+kind: GrafanaDashboard
+metadata:
+  name: idrac-dashboard-1.1.4
+  namespace: {{ .Release.Namespace }}
+spec:
+  grafanaRef:
+    name: {{ .Release.Namespace }}
+  dashboard: |
+   {
+      "annotations": {
+        "list": [
+          {
+            "builtIn": 1,
+            "datasource": "-- Grafana --",
+            "enable": true,
+            "hide": true,
+            "iconColor": "rgba(0, 211, 255, 1)",
+            "name": "Annotations & Alerts",
+            "type": "dashboard"
+          }
+        ]
+      },
+      "editable": true,
+      "gnetId": null,
+      "graphTooltip": 0,
+      "iteration": 1638250794498,
+      "links": [],
+      "panels": [
+        {
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {},
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 0
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 5,
+            "x": 0,
+            "y": 0
+          },
+          "hideTimeOverride": false,
+          "id": 2,
+          "interval": null,
+          "maxDataPoints": 1,
+          "options": {
+            "colorMode": "background",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "mean"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "text": {},
+            "textMode": "auto"
+          },
+          "pluginVersion": "7.4.5",
+          "targets": [
+            {
+              "format": "table",
+              "group": [
+                {
+                  "params": [
+                    "15m",
+                    "none"
+                  ],
+                  "type": "time"
+                }
+              ],
+              "metricColumn": "none",
+              "rawQuery": true,
+              "rawSql": "SELECT\n  distinct on (remoteaddr) remoteaddr, time, \n  avg(value) AS \"value\"\nFROM idrac\nWHERE\n  metricid ~* 'CPUUsage' AND\n  racklabel IN ($Rack) AND\n  \"time\" >= NOW() - INTERVAL '15 minutes'\ngroup by remoteaddr, time\nORDER BY  remoteaddr, time desc",
+              "refId": "A",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "column"
+                  },
+                  {
+                    "params": [
+                      "avg"
+                    ],
+                    "type": "aggregate"
+                  },
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "alias"
+                  }
+                ]
+              ],
+              "table": "idrac",
+              "timeColumn": "\"time\"",
+              "timeColumnType": "timestamp",
+              "where": [
+                {
+                  "name": "$__timeFilter",
+                  "params": [],
+                  "type": "macro"
+                },
+                {
+                  "datatype": "text",
+                  "name": "",
+                  "params": [
+                    "metricid",
+                    "~*",
+                    "'CPUUsage'"
+                  ],
+                  "type": "expression"
+                },
+                {
+                  "datatype": "text",
+                  "name": "",
+                  "params": [
+                    "racklabel",
+                    "IN",
+                    "($Rack)"
+                  ],
+                  "type": "expression"
+                }
+              ]
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Current Rack CPU Usage",
+          "transparent": true,
+          "type": "stat"
+        },
+        {
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {},
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 0
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 5,
+            "x": 5,
+            "y": 0
+          },
+          "id": 4,
+          "maxDataPoints": 1,
+          "options": {
+            "colorMode": "background",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "mean"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "text": {},
+            "textMode": "auto"
+          },
+          "pluginVersion": "7.4.5",
+          "targets": [
+            {
+              "format": "table",
+              "group": [
+                {
+                  "params": [
+                    "$__interval",
+                    "none"
+                  ],
+                  "type": "time"
+                }
+              ],
+              "metricColumn": "none",
+              "rawQuery": true,
+              "rawSql": "SELECT\n  distinct on (remoteaddr) remoteaddr, time, \n  avg(value) AS \"value\"\nFROM idrac\nWHERE\n  metricid ~* 'MemoryUsage' AND\n  \"time\" >= NOW() - INTERVAL '15 minutes' AND\n  racklabel IN ($Rack)\ngroup by remoteaddr, time\nORDER BY  remoteaddr, time desc",
+              "refId": "A",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "column"
+                  },
+                  {
+                    "params": [
+                      "avg"
+                    ],
+                    "type": "aggregate"
+                  },
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "alias"
+                  }
+                ]
+              ],
+              "table": "idrac",
+              "timeColumn": "\"time\"",
+              "timeColumnType": "timestamp",
+              "where": [
+                {
+                  "name": "$__timeFilter",
+                  "params": [],
+                  "type": "macro"
+                },
+                {
+                  "datatype": "text",
+                  "name": "",
+                  "params": [
+                    "metricid",
+                    "~*",
+                    "'MemoryUsage'"
+                  ],
+                  "type": "expression"
+                },
+                {
+                  "datatype": "text",
+                  "name": "",
+                  "params": [
+                    "racklabel",
+                    "IN",
+                    "($Rack)"
+                  ],
+                  "type": "expression"
+                }
+              ]
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Current Rack Memory  Bandwidth ",
+          "transparent": true,
+          "type": "stat"
+        },
+        {
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {},
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 0
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 5,
+            "x": 10,
+            "y": 0
+          },
+          "id": 7,
+          "maxDataPoints": 1,
+          "options": {
+            "colorMode": "background",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "mean"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "text": {},
+            "textMode": "auto"
+          },
+          "pluginVersion": "7.4.5",
+          "targets": [
+            {
+              "format": "table",
+              "group": [
+                {
+                  "params": [
+                    "$__interval",
+                    "none"
+                  ],
+                  "type": "time"
+                }
+              ],
+              "metricColumn": "none",
+              "rawQuery": true,
+              "rawSql": "SELECT\n  distinct on (remoteaddr) remoteaddr, time, \n  avg(value) AS \"value\"\nFROM idrac\nWHERE\n  metricid ~* 'IOUsage' AND\n  \"time\" >= NOW() - INTERVAL '15 minutes' AND\n  racklabel IN ($Rack)\ngroup by remoteaddr, time\nORDER BY  remoteaddr, time desc",
+              "refId": "A",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "column"
+                  },
+                  {
+                    "params": [
+                      "avg"
+                    ],
+                    "type": "aggregate"
+                  },
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "alias"
+                  }
+                ]
+              ],
+              "table": "idrac",
+              "timeColumn": "\"time\"",
+              "timeColumnType": "timestamp",
+              "where": [
+                {
+                  "name": "$__timeFilter",
+                  "params": [],
+                  "type": "macro"
+                },
+                {
+                  "datatype": "text",
+                  "name": "",
+                  "params": [
+                    "metricid",
+                    "~*",
+                    "'IOUsage'"
+                  ],
+                  "type": "expression"
+                },
+                {
+                  "datatype": "text",
+                  "name": "",
+                  "params": [
+                    "racklabel",
+                    "IN",
+                    "($Rack)"
+                  ],
+                  "type": "expression"
+                }
+              ]
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Rack IO Usage",
+          "transparent": true,
+          "type": "stat"
+        },
+        {
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {},
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 0
+                  }
+                ]
+              },
+              "unit": "watt"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 5,
+            "x": 15,
+            "y": 0
+          },
+          "hideTimeOverride": true,
+          "id": 9,
+          "maxDataPoints": 1,
+          "options": {
+            "colorMode": "background",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "sum"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "text": {},
+            "textMode": "auto"
+          },
+          "pluginVersion": "7.4.5",
+          "targets": [
+            {
+              "format": "table",
+              "group": [
+                {
+                  "params": [
+                    "$__interval",
+                    "none"
+                  ],
+                  "type": "time"
+                }
+              ],
+              "metricColumn": "none",
+              "rawQuery": true,
+              "rawSql": "\nSELECT\n  distinct on (remoteaddr) remoteaddr, time, \n  avg(value) AS \"value\"\nFROM idrac\nWHERE\n  metricid ~* 'LastWeekAvgPower' AND\n  \"time\" >= NOW() - INTERVAL '15 minutes' AND\n  racklabel IN ($Rack)\ngroup by remoteaddr, time\nORDER BY  remoteaddr, time desc",
+              "refId": "A",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "column"
+                  },
+                  {
+                    "params": [
+                      "sum"
+                    ],
+                    "type": "aggregate"
+                  },
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "alias"
+                  }
+                ]
+              ],
+              "table": "idrac",
+              "timeColumn": "\"time\"",
+              "timeColumnType": "timestamp",
+              "where": [
+                {
+                  "name": "$__timeFilter",
+                  "params": [],
+                  "type": "macro"
+                },
+                {
+                  "datatype": "text",
+                  "name": "",
+                  "params": [
+                    "metricid",
+                    "~*",
+                    "'LastWeekAvgPower'"
+                  ],
+                  "type": "expression"
+                },
+                {
+                  "datatype": "text",
+                  "name": "",
+                  "params": [
+                    "racklabel",
+                    "IN",
+                    "($Rack)"
+                  ],
+                  "type": "expression"
+                }
+              ]
+            }
+          ],
+          "timeFrom": "15m",
+          "timeShift": "1m",
+          "title": "Total Rack Last Week Avg Power",
+          "transparent": true,
+          "type": "stat"
+        },
+        {
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {},
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 0
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 4,
+            "x": 20,
+            "y": 0
+          },
+          "id": 11,
+          "maxDataPoints": 1,
+          "options": {
+            "colorMode": "background",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "mean"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "text": {},
+            "textMode": "auto"
+          },
+          "pluginVersion": "7.4.5",
+          "targets": [
+            {
+              "format": "table",
+              "group": [
+                {
+                  "params": [
+                    "$__interval",
+                    "none"
+                  ],
+                  "type": "time"
+                }
+              ],
+              "metricColumn": "none",
+              "rawQuery": true,
+              "rawSql": "SELECT\n  distinct on (remoteaddr) remoteaddr, time, \n  avg(value) AS \"value\"\nFROM idrac\nWHERE\n  metricid ~* 'SystemUsage' AND\n  \"time\" >= NOW() - INTERVAL '15 minutes' AND\n  racklabel IN ($Rack)\ngroup by remoteaddr, time\nORDER BY  remoteaddr, time desc",
+              "refId": "A",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "column"
+                  },
+                  {
+                    "params": [
+                      "avg"
+                    ],
+                    "type": "aggregate"
+                  },
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "alias"
+                  }
+                ]
+              ],
+              "table": "idrac",
+              "timeColumn": "\"time\"",
+              "timeColumnType": "timestamp",
+              "where": [
+                {
+                  "name": "$__timeFilter",
+                  "params": [],
+                  "type": "macro"
+                },
+                {
+                  "datatype": "text",
+                  "name": "",
+                  "params": [
+                    "metricid",
+                    "~*",
+                    "'SystemUsage'"
+                  ],
+                  "type": "expression"
+                },
+                {
+                  "datatype": "text",
+                  "name": "",
+                  "params": [
+                    "racklabel",
+                    "IN",
+                    "($Rack)"
+                  ],
+                  "type": "expression"
+                }
+              ]
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Rack System Usage",
+          "transparent": true,
+          "type": "stat"
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "color": {},
+              "custom": {},
+              "thresholds": {
+                "mode": "absolute",
+                "steps": []
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 5,
+            "x": 0,
+            "y": 6
+          },
+          "hiddenSeries": false,
+          "id": 5,
+          "interval": "2m",
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.4.5",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "format": "time_series",
+              "group": [
+                {
+                  "params": [
+                    "$__interval",
+                    "none"
+                  ],
+                  "type": "time"
+                }
+              ],
+              "metricColumn": "remoteaddr",
+              "rawQuery": true,
+              "rawSql": "SELECT\n  $__timeGroupAlias(\"time\",$__interval),\n  remoteaddr AS metric,\n  avg(value) AS \"value\"\nFROM idrac\nWHERE\n  $__timeFilter(\"time\") AND\n  metricid = 'CPUUsagePctReading' AND\n  remoteaddr IN ($remoteAddr)\nGROUP BY 1,2\nORDER BY 1,2",
+              "refId": "A",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "column"
+                  },
+                  {
+                    "params": [
+                      "avg"
+                    ],
+                    "type": "aggregate"
+                  },
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "alias"
+                  }
+                ]
+              ],
+              "table": "idrac",
+              "timeColumn": "\"time\"",
+              "timeColumnType": "timestamp",
+              "where": [
+                {
+                  "name": "$__timeFilter",
+                  "params": [],
+                  "type": "macro"
+                },
+                {
+                  "datatype": "text",
+                  "name": "",
+                  "params": [
+                    "metricid",
+                    "=",
+                    "'CPUUsagePctReading'"
+                  ],
+                  "type": "expression"
+                },
+                {
+                  "datatype": "text",
+                  "name": "",
+                  "params": [
+                    "remoteaddr",
+                    "IN",
+                    "($remoteAddr)"
+                  ],
+                  "type": "expression"
+                }
+              ]
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "CPU Usage",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "transparent": true,
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "percent",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "color": {},
+              "custom": {},
+              "thresholds": {
+                "mode": "absolute",
+                "steps": []
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 5,
+            "x": 5,
+            "y": 6
+          },
+          "hiddenSeries": false,
+          "id": 6,
+          "interval": "2m",
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.4.5",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "format": "time_series",
+              "group": [
+                {
+                  "params": [
+                    "$__interval",
+                    "none"
+                  ],
+                  "type": "time"
+                }
+              ],
+              "metricColumn": "remoteaddr",
+              "rawQuery": false,
+              "rawSql": "SELECT\n  $__timeGroupAlias(\"time\",$__interval),\n  remoteaddr AS metric,\n  avg(value) AS \"value\"\nFROM idrac\nWHERE\n  $__timeFilter(\"time\") AND\n  metricid = 'MemoryUsagePctReading' AND\n  remoteaddr IN ($remoteAddr)\nGROUP BY 1,2\nORDER BY 1,2",
+              "refId": "A",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "column"
+                  },
+                  {
+                    "params": [
+                      "avg"
+                    ],
+                    "type": "aggregate"
+                  },
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "alias"
+                  }
+                ]
+              ],
+              "table": "idrac",
+              "timeColumn": "\"time\"",
+              "timeColumnType": "timestamp",
+              "where": [
+                {
+                  "name": "$__timeFilter",
+                  "params": [],
+                  "type": "macro"
+                },
+                {
+                  "datatype": "text",
+                  "name": "",
+                  "params": [
+                    "metricid",
+                    "=",
+                    "'MemoryUsagePctReading'"
+                  ],
+                  "type": "expression"
+                },
+                {
+                  "datatype": "text",
+                  "name": "",
+                  "params": [
+                    "remoteaddr",
+                    "IN",
+                    "($remoteAddr)"
+                  ],
+                  "type": "expression"
+                }
+              ]
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Memory  Bandwidth ",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "transparent": true,
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "percent",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "color": {},
+              "custom": {},
+              "thresholds": {
+                "mode": "absolute",
+                "steps": []
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 5,
+            "x": 10,
+            "y": 6
+          },
+          "hiddenSeries": false,
+          "id": 8,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.4.5",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "format": "time_series",
+              "group": [
+                {
+                  "params": [
+                    "$__interval",
+                    "none"
+                  ],
+                  "type": "time"
+                }
+              ],
+              "metricColumn": "remoteaddr",
+              "rawQuery": false,
+              "rawSql": "SELECT\n  $__timeGroupAlias(\"time\",$__interval),\n  remoteaddr AS metric,\n  avg(value) AS \"value\"\nFROM idrac\nWHERE\n  $__timeFilter(\"time\") AND\n  metricid = 'IOUsagePctReading' AND\n  remoteaddr IN ($remoteAddr)\nGROUP BY 1,2\nORDER BY 1,2",
+              "refId": "A",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "column"
+                  },
+                  {
+                    "params": [
+                      "avg"
+                    ],
+                    "type": "aggregate"
+                  },
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "alias"
+                  }
+                ]
+              ],
+              "table": "idrac",
+              "timeColumn": "\"time\"",
+              "timeColumnType": "timestamp",
+              "where": [
+                {
+                  "name": "$__timeFilter",
+                  "params": [],
+                  "type": "macro"
+                },
+                {
+                  "datatype": "text",
+                  "name": "",
+                  "params": [
+                    "metricid",
+                    "=",
+                    "'IOUsagePctReading'"
+                  ],
+                  "type": "expression"
+                },
+                {
+                  "datatype": "text",
+                  "name": "",
+                  "params": [
+                    "remoteaddr",
+                    "IN",
+                    "($remoteAddr)"
+                  ],
+                  "type": "expression"
+                }
+              ]
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "IO Usage",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "transparent": true,
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "percent",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "color": {},
+              "custom": {},
+              "thresholds": {
+                "mode": "absolute",
+                "steps": []
+              },
+              "unit": "watt"
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 5,
+            "x": 15,
+            "y": 6
+          },
+          "hiddenSeries": false,
+          "id": 10,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.4.5",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "format": "time_series",
+              "group": [
+                {
+                  "params": [
+                    "$__interval",
+                    "none"
+                  ],
+                  "type": "time"
+                }
+              ],
+              "metricColumn": "remoteaddr",
+              "rawQuery": true,
+              "rawSql": "SELECT\n  $__timeGroupAlias(\"time\",$__interval),\n  remoteaddr AS metric,\n  avg(value) AS \"value\"\nFROM idrac\nWHERE\n  $__timeFilter(\"time\") AND\n  metricid = 'SystemPowerConsumption' AND\n  remoteaddr IN ($remoteAddr)\nGROUP BY 1,2\nORDER BY 1,2",
+              "refId": "A",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "column"
+                  },
+                  {
+                    "params": [
+                      "avg"
+                    ],
+                    "type": "aggregate"
+                  },
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "alias"
+                  }
+                ]
+              ],
+              "table": "idrac",
+              "timeColumn": "\"time\"",
+              "timeColumnType": "timestamp",
+              "where": [
+                {
+                  "name": "$__timeFilter",
+                  "params": [],
+                  "type": "macro"
+                },
+                {
+                  "datatype": "text",
+                  "name": "",
+                  "params": [
+                    "metricid",
+                    "~*",
+                    "'SystemPowerConsumption'"
+                  ],
+                  "type": "expression"
+                },
+                {
+                  "datatype": "text",
+                  "name": "",
+                  "params": [
+                    "remoteaddr",
+                    "IN",
+                    "($remoteAddr)"
+                  ],
+                  "type": "expression"
+                }
+              ]
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "System Power Consumption",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "transparent": true,
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "watt",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "color": {},
+              "custom": {},
+              "thresholds": {
+                "mode": "absolute",
+                "steps": []
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 4,
+            "x": 20,
+            "y": 6
+          },
+          "hiddenSeries": false,
+          "id": 12,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.4.5",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "format": "time_series",
+              "group": [
+                {
+                  "params": [
+                    "$__interval",
+                    "none"
+                  ],
+                  "type": "time"
+                }
+              ],
+              "metricColumn": "remoteaddr",
+              "rawQuery": false,
+              "rawSql": "SELECT\n  $__timeGroupAlias(\"time\",$__interval),\n  remoteaddr AS metric,\n  avg(value) AS \"value\"\nFROM idrac\nWHERE\n  $__timeFilter(\"time\") AND\n  metricid = 'SystemUsagePctReading' AND\n  remoteaddr IN ($remoteAddr)\nGROUP BY 1,2\nORDER BY 1,2",
+              "refId": "A",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "column"
+                  },
+                  {
+                    "params": [
+                      "avg"
+                    ],
+                    "type": "aggregate"
+                  },
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "alias"
+                  }
+                ]
+              ],
+              "table": "idrac",
+              "timeColumn": "\"time\"",
+              "timeColumnType": "timestamp",
+              "where": [
+                {
+                  "name": "$__timeFilter",
+                  "params": [],
+                  "type": "macro"
+                },
+                {
+                  "datatype": "text",
+                  "name": "",
+                  "params": [
+                    "metricid",
+                    "=",
+                    "'SystemUsagePctReading'"
+                  ],
+                  "type": "expression"
+                },
+                {
+                  "datatype": "text",
+                  "name": "",
+                  "params": [
+                    "remoteaddr",
+                    "IN",
+                    "($remoteAddr)"
+                  ],
+                  "type": "expression"
+                }
+              ]
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "System Usage",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "transparent": true,
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "percent",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": null,
+                "filterable": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 15,
+            "x": 0,
+            "y": 13
+          },
+          "id": 43,
+          "options": {
+            "showHeader": true
+          },
+          "pluginVersion": "7.4.5",
+          "targets": [
+            {
+              "format": "table",
+              "group": [],
+              "metricColumn": "none",
+              "rawQuery": true,
+              "rawSql": "SELECT\n  distinct on (remoteaddr, metricid, contextid) metricid, contextid, remoteaddr,\n  avg(value) as metric \nFROM idrac\nwhere racklabel IN ($Rack) AND $__timeFilter(\"time\")\ngroup by metricid, value, contextid, remoteaddr \nORDER BY metricid, contextid, remoteaddr",
+              "refId": "A",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "column"
+                  }
+                ]
+              ],
+              "timeColumn": "time",
+              "where": [
+                {
+                  "name": "$__timeFilter",
+                  "params": [],
+                  "type": "macro"
+                }
+              ]
+            }
+          ],
+          "title": "Metrics Available on iDRAC",
+          "transformations": [
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "value": false
+                },
+                "indexByName": {
+                  "contextid": 2,
+                  "metricid": 1,
+                  "remoteaddr": 0,
+                  "value": 3
+                },
+                "renameByName": {}
+              }
+            }
+          ],
+          "transparent": true,
+          "type": "table"
+        },
+        {
+          "collapsed": true,
+          "datasource": null,
+          "gridPos": {
+            "h": 1,
+            "w": 24,
+            "x": 0,
+            "y": 20
+          },
+          "id": 18,
+          "panels": [
+            {
+              "datasource": null,
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "custom": {
+                    "align": null,
+                    "filterable": false
+                  },
+                  "mappings": [],
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": null
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  }
+                },
+                "overrides": []
+              },
+              "gridPos": {
+                "h": 6,
+                "w": 10,
+                "x": 0,
+                "y": 21
+              },
+              "id": 16,
+              "maxDataPoints": null,
+              "options": {
+                "showHeader": true
+              },
+              "pluginVersion": "7.4.5",
+              "targets": [
+                {
+                  "format": "table",
+                  "group": [
+                    {
+                      "params": [
+                        "$__interval",
+                        "none"
+                      ],
+                      "type": "time"
+                    }
+                  ],
+                  "metricColumn": "remoteaddr",
+                  "rawQuery": true,
+                  "rawSql": "\nSELECT\n  distinct on (remoteaddr,contextid) remoteaddr, time, nonnumericvalue, contextid,\n  avg(value) AS \"value\"\nFROM idrac\nWHERE\n  metricid = 'LinkStatus' AND\n  \"time\" >= NOW() - INTERVAL '15 minutes' AND\n  remoteaddr IN ($remoteAddr)\ngroup by remoteaddr, nonnumericvalue, contextid, time\nORDER BY  remoteaddr, contextid, time desc",
+                  "refId": "A",
+                  "select": [
+                    [
+                      {
+                        "params": [
+                          "value"
+                        ],
+                        "type": "column"
+                      },
+                      {
+                        "params": [
+                          "avg"
+                        ],
+                        "type": "aggregate"
+                      },
+                      {
+                        "params": [
+                          "value"
+                        ],
+                        "type": "alias"
+                      }
+                    ]
+                  ],
+                  "table": "idrac",
+                  "timeColumn": "\"time\"",
+                  "timeColumnType": "timestamp",
+                  "where": [
+                    {
+                      "name": "$__timeFilter",
+                      "params": [],
+                      "type": "macro"
+                    },
+                    {
+                      "datatype": "text",
+                      "name": "",
+                      "params": [
+                        "remoteaddr",
+                        "IN",
+                        "($remoteAddr)"
+                      ],
+                      "type": "expression"
+                    },
+                    {
+                      "datatype": "text",
+                      "name": "",
+                      "params": [
+                        "metricid",
+                        "=",
+                        "'LinkStatus'"
+                      ],
+                      "type": "expression"
+                    }
+                  ]
+                }
+              ],
+              "title": "Network Link Status",
+              "transformations": [
+                {
+                  "id": "organize",
+                  "options": {
+                    "excludeByName": {
+                      "value": true
+                    },
+                    "indexByName": {
+                      "nonnumericvalue": 2,
+                      "remoteaddr": 0,
+                      "time": 1,
+                      "value": 3
+                    },
+                    "renameByName": {}
+                  }
+                }
+              ],
+              "type": "table"
+            },
+            {
+              "aliasColors": {},
+              "bars": false,
+              "dashLength": 10,
+              "dashes": false,
+              "datasource": null,
+              "fieldConfig": {
+                "defaults": {
+                  "color": {},
+                  "custom": {},
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": []
+                  },
+                  "unit": "binBps"
+                },
+                "overrides": []
+              },
+              "fill": 1,
+              "fillGradient": 0,
+              "gridPos": {
+                "h": 8,
+                "w": 14,
+                "x": 10,
+                "y": 21
+              },
+              "hiddenSeries": false,
+              "id": 3,
+              "interval": null,
+              "legend": {
+                "alignAsTable": true,
+                "avg": true,
+                "current": true,
+                "max": false,
+                "min": false,
+                "show": true,
+                "total": false,
+                "values": true
+              },
+              "lines": true,
+              "linewidth": 1,
+              "maxDataPoints": null,
+              "nullPointMode": "null",
+              "options": {
+                "alertThreshold": true
+              },
+              "percentage": false,
+              "pluginVersion": "7.4.5",
+              "pointradius": 2,
+              "points": false,
+              "renderer": "flot",
+              "seriesOverrides": [],
+              "spaceLength": 10,
+              "stack": false,
+              "steppedLine": false,
+              "targets": [
+                {
+                  "format": "time_series",
+                  "group": [
+                    {
+                      "params": [
+                        "$__interval",
+                        "none"
+                      ],
+                      "type": "time"
+                    }
+                  ],
+                  "hide": false,
+                  "metricColumn": "contextid",
+                  "rawQuery": true,
+                  "rawSql": "SELECT\n  $__timeGroupAlias(\"time\",5m),\n  concat_ws('-', contextid::text, metricid::text) as metric,\n  (CASE WHEN avg(value) >= lag(avg(value)) OVER (PARTITION BY contextid ORDER BY $__timeGroup(\"time\",$__interval)) THEN avg(value) - lag(avg(value)) OVER (PARTITION BY contextid ORDER BY $__timeGroup(\"time\",$__interval)) WHEN lag(avg(value)) OVER (PARTITION BY contextid ORDER BY $__timeGroup(\"time\",$__interval)) IS NULL THEN NULL ELSE avg(value) END)/extract(epoch from min(\"time\") - lag(min(\"time\")) OVER (PARTITION BY contextid ORDER BY $__timeGroup(\"time\",$__interval))) AS \"value\"\nFROM idrac\nWHERE\n  $__timeFilter(\"time\") AND\n  metricid = 'RxBytes' AND remoteaddr IN ($remoteAddr)\nGROUP BY 1,2, contextid, metricid, time\nORDER BY 1,2",
+                  "refId": "A",
+                  "select": [
+                    [
+                      {
+                        "params": [
+                          "value"
+                        ],
+                        "type": "column"
+                      },
+                      {
+                        "params": [
+                          "avg"
+                        ],
+                        "type": "aggregate"
+                      },
+                      {
+                        "params": [
+                          "rate"
+                        ],
+                        "type": "window"
+                      },
+                      {
+                        "params": [
+                          "RxBytes"
+                        ],
+                        "type": "alias"
+                      }
+                    ]
+                  ],
+                  "table": "idrac",
+                  "timeColumn": "\"time\"",
+                  "timeColumnType": "timestamp",
+                  "where": [
+                    {
+                      "name": "$__timeFilter",
+                      "params": [],
+                      "type": "macro"
+                    },
+                    {
+                      "datatype": "text",
+                      "name": "",
+                      "params": [
+                        "metricid",
+                        "~*",
+                        "'RxBytes'"
+                      ],
+                      "type": "expression"
+                    },
+                    {
+                      "datatype": "text",
+                      "name": "",
+                      "params": [
+                        "remoteaddr",
+                        "IN",
+                        "($remoteAddr)"
+                      ],
+                      "type": "expression"
+                    }
+                  ]
+                },
+                {
+                  "format": "time_series",
+                  "group": [
+                    {
+                      "params": [
+                        "$__interval",
+                        "none"
+                      ],
+                      "type": "time"
+                    }
+                  ],
+                  "hide": false,
+                  "metricColumn": "contextid",
+                  "rawQuery": true,
+                  "rawSql": "SELECT\n  $__timeGroupAlias(\"time\",5m),\n  concat_ws('-', contextid::text, metricid::text) as metric,\n  - (CASE WHEN avg(value) >= lag(avg(value)) OVER (PARTITION BY contextid ORDER BY $__timeGroup(\"time\",$__interval)) THEN avg(value) - lag(avg(value)) OVER (PARTITION BY contextid ORDER BY $__timeGroup(\"time\",$__interval)) WHEN lag(avg(value)) OVER (PARTITION BY contextid ORDER BY $__timeGroup(\"time\",$__interval)) IS NULL THEN NULL ELSE avg(value) END)/extract(epoch from min(\"time\") - lag(min(\"time\")) OVER (PARTITION BY contextid ORDER BY $__timeGroup(\"time\",$__interval))) AS \"value\"\nFROM idrac\nWHERE\n  $__timeFilter(\"time\") AND\n  metricid = 'TxBytes' AND remoteaddr IN ($remoteAddr)\nGROUP BY 1,2, contextid, metricid, time\nORDER BY 1,2",
+                  "refId": "C",
+                  "select": [
+                    [
+                      {
+                        "params": [
+                          "value"
+                        ],
+                        "type": "column"
+                      },
+                      {
+                        "params": [
+                          "avg"
+                        ],
+                        "type": "aggregate"
+                      },
+                      {
+                        "params": [
+                          "rate"
+                        ],
+                        "type": "window"
+                      },
+                      {
+                        "params": [
+                          "value"
+                        ],
+                        "type": "alias"
+                      }
+                    ]
+                  ],
+                  "table": "idrac",
+                  "timeColumn": "\"time\"",
+                  "timeColumnType": "timestamp",
+                  "where": [
+                    {
+                      "name": "$__timeFilter",
+                      "params": [],
+                      "type": "macro"
+                    },
+                    {
+                      "datatype": "text",
+                      "name": "",
+                      "params": [
+                        "metricid",
+                        "=",
+                        "'TxBytes'"
+                      ],
+                      "type": "expression"
+                    }
+                  ]
+                }
+              ],
+              "thresholds": [],
+              "timeFrom": null,
+              "timeRegions": [],
+              "timeShift": null,
+              "title": "Network Usage",
+              "tooltip": {
+                "shared": true,
+                "sort": 0,
+                "value_type": "individual"
+              },
+              "type": "graph",
+              "xaxis": {
+                "buckets": null,
+                "mode": "time",
+                "name": null,
+                "show": true,
+                "values": []
+              },
+              "yaxes": [
+                {
+                  "format": "binBps",
+                  "label": null,
+                  "logBase": 1,
+                  "max": null,
+                  "min": null,
+                  "show": true
+                },
+                {
+                  "format": "short",
+                  "label": null,
+                  "logBase": 1,
+                  "max": null,
+                  "min": null,
+                  "show": true
+                }
+              ],
+              "yaxis": {
+                "align": false,
+                "alignLevel": null
+              }
+            },
+            {
+              "aliasColors": {},
+              "bars": true,
+              "dashLength": 10,
+              "dashes": false,
+              "datasource": null,
+              "fieldConfig": {
+                "defaults": {
+                  "color": {},
+                  "custom": {},
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": []
+                  },
+                  "unit": "celsius"
+                },
+                "overrides": []
+              },
+              "fill": 0,
+              "fillGradient": 0,
+              "gridPos": {
+                "h": 10,
+                "w": 10,
+                "x": 0,
+                "y": 27
+              },
+              "hiddenSeries": false,
+              "id": 14,
+              "legend": {
+                "alignAsTable": true,
+                "avg": false,
+                "current": true,
+                "max": true,
+                "min": false,
+                "rightSide": true,
+                "show": true,
+                "total": false,
+                "values": true
+              },
+              "lines": false,
+              "linewidth": 0,
+              "nullPointMode": "null",
+              "options": {
+                "alertThreshold": true
+              },
+              "percentage": false,
+              "pluginVersion": "7.4.5",
+              "pointradius": 2,
+              "points": false,
+              "renderer": "flot",
+              "seriesOverrides": [],
+              "spaceLength": 10,
+              "stack": false,
+              "steppedLine": false,
+              "targets": [
+                {
+                  "format": "time_series",
+                  "group": [
+                    {
+                      "params": [
+                        "$__interval",
+                        "none"
+                      ],
+                      "type": "time"
+                    }
+                  ],
+                  "metricColumn": "contextid",
+                  "rawQuery": false,
+                  "rawSql": "SELECT\n  $__timeGroupAlias(\"time\",$__interval),\n  contextid AS metric,\n  avg(value) AS \"value\"\nFROM idrac\nWHERE\n  $__timeFilter(\"time\") AND\n  metricid = 'TemperatureReading' AND\n  remoteaddr IN ($remoteAddr)\nGROUP BY 1,2\nORDER BY 1,2",
+                  "refId": "A",
+                  "select": [
+                    [
+                      {
+                        "params": [
+                          "value"
+                        ],
+                        "type": "column"
+                      },
+                      {
+                        "params": [
+                          "avg"
+                        ],
+                        "type": "aggregate"
+                      },
+                      {
+                        "params": [
+                          "value"
+                        ],
+                        "type": "alias"
+                      }
+                    ]
+                  ],
+                  "table": "idrac",
+                  "timeColumn": "\"time\"",
+                  "timeColumnType": "timestamp",
+                  "where": [
+                    {
+                      "name": "$__timeFilter",
+                      "params": [],
+                      "type": "macro"
+                    },
+                    {
+                      "datatype": "text",
+                      "name": "",
+                      "params": [
+                        "metricid",
+                        "=",
+                        "'TemperatureReading'"
+                      ],
+                      "type": "expression"
+                    },
+                    {
+                      "datatype": "text",
+                      "name": "",
+                      "params": [
+                        "remoteaddr",
+                        "IN",
+                        "($remoteAddr)"
+                      ],
+                      "type": "expression"
+                    }
+                  ]
+                }
+              ],
+              "thresholds": [],
+              "timeFrom": null,
+              "timeRegions": [],
+              "timeShift": null,
+              "title": "Temparature readings",
+              "tooltip": {
+                "shared": true,
+                "sort": 0,
+                "value_type": "individual"
+              },
+              "type": "graph",
+              "xaxis": {
+                "buckets": null,
+                "mode": "time",
+                "name": null,
+                "show": true,
+                "values": []
+              },
+              "yaxes": [
+                {
+                  "format": "celsius",
+                  "label": null,
+                  "logBase": 1,
+                  "max": null,
+                  "min": null,
+                  "show": true
+                },
+                {
+                  "format": "short",
+                  "label": null,
+                  "logBase": 1,
+                  "max": null,
+                  "min": null,
+                  "show": true
+                }
+              ],
+              "yaxis": {
+                "align": false,
+                "alignLevel": null
+              }
+            },
+            {
+              "aliasColors": {},
+              "bars": false,
+              "dashLength": 10,
+              "dashes": false,
+              "datasource": null,
+              "fieldConfig": {
+                "defaults": {
+                  "color": {},
+                  "custom": {},
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": []
+                  },
+                  "unit": "none"
+                },
+                "overrides": []
+              },
+              "fill": 0,
+              "fillGradient": 0,
+              "gridPos": {
+                "h": 8,
+                "w": 14,
+                "x": 10,
+                "y": 29
+              },
+              "hiddenSeries": false,
+              "id": 39,
+              "legend": {
+                "alignAsTable": true,
+                "avg": true,
+                "current": false,
+                "max": true,
+                "min": true,
+                "rightSide": true,
+                "show": true,
+                "total": false,
+                "values": true
+              },
+              "lines": true,
+              "linewidth": 1,
+              "maxDataPoints": null,
+              "nullPointMode": "null",
+              "options": {
+                "alertThreshold": true
+              },
+              "percentage": false,
+              "pluginVersion": "7.4.5",
+              "pointradius": 2,
+              "points": false,
+              "renderer": "flot",
+              "seriesOverrides": [],
+              "spaceLength": 10,
+              "stack": false,
+              "steppedLine": false,
+              "targets": [
+                {
+                  "format": "time_series",
+                  "group": [
+                    {
+                      "params": [
+                        "$__interval",
+                        "none"
+                      ],
+                      "type": "time"
+                    }
+                  ],
+                  "hide": false,
+                  "metricColumn": "contextid",
+                  "rawQuery": false,
+                  "rawSql": "SELECT\n  $__timeGroupAlias(\"time\",$__interval),\n  contextid AS metric,\n  avg(value) AS \"value\"\nFROM idrac\nWHERE\n  $__timeFilter(\"time\") AND\n  metricid = 'RPMReading' AND\n  remoteaddr IN ($remoteAddr)\nGROUP BY 1,2\nORDER BY 1,2",
+                  "refId": "B",
+                  "select": [
+                    [
+                      {
+                        "params": [
+                          "value"
+                        ],
+                        "type": "column"
+                      },
+                      {
+                        "params": [
+                          "avg"
+                        ],
+                        "type": "aggregate"
+                      },
+                      {
+                        "params": [
+                          "value"
+                        ],
+                        "type": "alias"
+                      }
+                    ]
+                  ],
+                  "table": "idrac",
+                  "timeColumn": "\"time\"",
+                  "timeColumnType": "timestamp",
+                  "where": [
+                    {
+                      "name": "$__timeFilter",
+                      "params": [],
+                      "type": "macro"
+                    },
+                    {
+                      "datatype": "text",
+                      "name": "",
+                      "params": [
+                        "metricid",
+                        "=",
+                        "'RPMReading'"
+                      ],
+                      "type": "expression"
+                    },
+                    {
+                      "datatype": "text",
+                      "name": "",
+                      "params": [
+                        "remoteaddr",
+                        "IN",
+                        "($remoteAddr)"
+                      ],
+                      "type": "expression"
+                    }
+                  ]
+                }
+              ],
+              "thresholds": [],
+              "timeFrom": null,
+              "timeRegions": [],
+              "timeShift": null,
+              "title": "Fan Speed",
+              "tooltip": {
+                "shared": true,
+                "sort": 0,
+                "value_type": "individual"
+              },
+              "transformations": [],
+              "type": "graph",
+              "xaxis": {
+                "buckets": null,
+                "mode": "time",
+                "name": null,
+                "show": true,
+                "values": []
+              },
+              "yaxes": [
+                {
+                  "format": "none",
+                  "label": "RPM",
+                  "logBase": 1,
+                  "max": null,
+                  "min": null,
+                  "show": true
+                },
+                {
+                  "format": "short",
+                  "label": null,
+                  "logBase": 1,
+                  "max": null,
+                  "min": null,
+                  "show": true
+                }
+              ],
+              "yaxis": {
+                "align": false,
+                "alignLevel": null
+              }
+            },
+            {
+              "aliasColors": {},
+              "bars": false,
+              "dashLength": 10,
+              "dashes": false,
+              "datasource": null,
+              "fieldConfig": {
+                "defaults": {
+                  "color": {},
+                  "custom": {},
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": []
+                  },
+                  "unit": "volt"
+                },
+                "overrides": []
+              },
+              "fill": 0,
+              "fillGradient": 0,
+              "gridPos": {
+                "h": 5,
+                "w": 14,
+                "x": 0,
+                "y": 37
+              },
+              "hiddenSeries": false,
+              "id": 40,
+              "legend": {
+                "alignAsTable": true,
+                "avg": true,
+                "current": false,
+                "max": true,
+                "min": true,
+                "rightSide": true,
+                "show": true,
+                "total": false,
+                "values": true
+              },
+              "lines": true,
+              "linewidth": 1,
+              "maxDataPoints": null,
+              "nullPointMode": "null",
+              "options": {
+                "alertThreshold": true
+              },
+              "percentage": false,
+              "pluginVersion": "7.4.5",
+              "pointradius": 2,
+              "points": false,
+              "renderer": "flot",
+              "seriesOverrides": [],
+              "spaceLength": 10,
+              "stack": false,
+              "steppedLine": false,
+              "targets": [
+                {
+                  "format": "time_series",
+                  "group": [],
+                  "hide": false,
+                  "metricColumn": "contextid",
+                  "rawQuery": false,
+                  "rawSql": "SELECT\n  \"time\" AS \"time\",\n  contextid AS metric,\n  value\nFROM idrac\nWHERE\n  $__timeFilter(\"time\") AND\n  metricid = 'VoltageReading' AND\n  remoteaddr IN ($remoteAddr)\nORDER BY 1,2",
+                  "refId": "B",
+                  "select": [
+                    [
+                      {
+                        "params": [
+                          "value"
+                        ],
+                        "type": "column"
+                      }
+                    ]
+                  ],
+                  "table": "idrac",
+                  "timeColumn": "\"time\"",
+                  "timeColumnType": "timestamp",
+                  "where": [
+                    {
+                      "name": "$__timeFilter",
+                      "params": [],
+                      "type": "macro"
+                    },
+                    {
+                      "datatype": "text",
+                      "name": "",
+                      "params": [
+                        "metricid",
+                        "=",
+                        "'VoltageReading'"
+                      ],
+                      "type": "expression"
+                    },
+                    {
+                      "datatype": "text",
+                      "name": "",
+                      "params": [
+                        "remoteaddr",
+                        "IN",
+                        "($remoteAddr)"
+                      ],
+                      "type": "expression"
+                    }
+                  ]
+                }
+              ],
+              "thresholds": [],
+              "timeFrom": null,
+              "timeRegions": [],
+              "timeShift": null,
+              "title": "Voltage Reading",
+              "tooltip": {
+                "shared": true,
+                "sort": 0,
+                "value_type": "individual"
+              },
+              "transformations": [],
+              "type": "graph",
+              "xaxis": {
+                "buckets": null,
+                "mode": "time",
+                "name": null,
+                "show": true,
+                "values": []
+              },
+              "yaxes": [
+                {
+                  "format": "volt",
+                  "label": "Voltage",
+                  "logBase": 1,
+                  "max": null,
+                  "min": null,
+                  "show": true
+                },
+                {
+                  "format": "short",
+                  "label": null,
+                  "logBase": 1,
+                  "max": null,
+                  "min": null,
+                  "show": true
+                }
+              ],
+              "yaxis": {
+                "align": false,
+                "alignLevel": null
+              }
+            },
+            {
+              "datasource": null,
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "custom": {
+                    "align": null,
+                    "filterable": false
+                  },
+                  "mappings": [],
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": null
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "hertz"
+                },
+                "overrides": []
+              },
+              "gridPos": {
+                "h": 5,
+                "w": 10,
+                "x": 14,
+                "y": 37
+              },
+              "id": 41,
+              "maxDataPoints": null,
+              "options": {
+                "frameIndex": 0,
+                "showHeader": true,
+                "sortBy": [
+                  {
+                    "desc": false,
+                    "displayName": "contextid"
+                  }
+                ]
+              },
+              "pluginVersion": "7.4.5",
+              "targets": [
+                {
+                  "format": "table",
+                  "group": [
+                    {
+                      "params": [
+                        "$__interval",
+                        "none"
+                      ],
+                      "type": "time"
+                    }
+                  ],
+                  "hide": false,
+                  "metricColumn": "none",
+                  "rawQuery": true,
+                  "rawSql": "SELECT\n  distinct on (remoteaddr, contextid) remoteaddr, time, contextid,\n  avg(value) AS \"AvgFrequencyAcrossCores\"\nFROM idrac\nWHERE\n  $__timeFilter(\"time\") AND\n  metricid = 'AvgFrequencyAcrossCores' AND remoteaddr IN ($remoteAddr)\nGROUP BY 1, time, remoteaddr, contextid\nORDER BY 1",
+                  "refId": "A",
+                  "select": [
+                    [
+                      {
+                        "params": [
+                          "value"
+                        ],
+                        "type": "column"
+                      },
+                      {
+                        "params": [
+                          "avg"
+                        ],
+                        "type": "aggregate"
+                      },
+                      {
+                        "params": [
+                          "value"
+                        ],
+                        "type": "alias"
+                      }
+                    ]
+                  ],
+                  "table": "idrac",
+                  "timeColumn": "\"time\"",
+                  "timeColumnType": "timestamp",
+                  "where": [
+                    {
+                      "name": "$__timeFilter",
+                      "params": [],
+                      "type": "macro"
+                    },
+                    {
+                      "datatype": "text",
+                      "name": "",
+                      "params": [
+                        "metricid",
+                        "=",
+                        "'AvgFrequencyAcrossCores'"
+                      ],
+                      "type": "expression"
+                    }
+                  ]
+                }
+              ],
+              "title": "CPU metrics",
+              "transformations": [],
+              "type": "table"
+            }
+          ],
+          "repeat": "remoteAddr",
+          "title": "$remoteAddr",
+          "type": "row"
+        }
+      ],
+      "refresh": "5m",
+      "schemaVersion": 27,
+      "style": "dark",
+      "tags": [],
+      "templating": {
+        "list": [
+          {
+            "allValue": null,
+            "current": {
+              "isNone": true,
+              "selected": false,
+              "text": "None",
+              "value": ""
+            },
+            "datasource": null,
+            "definition": "SELECT distinct on (racklabel) racklabel FROM idrac  where $__timeFilter(\"time\")\n\n",
+            "description": null,
+            "error": null,
+            "hide": 0,
+            "includeAll": false,
+            "label": null,
+            "multi": true,
+            "name": "Rack",
+            "options": [],
+            "query": "SELECT distinct on (racklabel) racklabel FROM idrac  where $__timeFilter(\"time\")\n\n",
+            "refresh": 2,
+            "regex": "",
+            "skipUrlSync": false,
+            "sort": 1,
+            "tagValuesQuery": "",
+            "tags": [],
+            "tagsQuery": "",
+            "type": "query",
+            "useTags": false
+          },
+          {
+            "allValue": null,
+            "current": {
+              "selected": false,
+              "text": "All",
+              "value": "$__all"
+            },
+            "datasource": null,
+            "definition": "SELECT distinct(remoteaddr)  FROM idrac   WHERE racklabel IN  ($Rack)  AND $__timeFilter(\"time\")\n",
+            "description": null,
+            "error": null,
+            "hide": 0,
+            "includeAll": true,
+            "label": null,
+            "multi": true,
+            "name": "remoteAddr",
+            "options": [],
+            "query": "SELECT distinct(remoteaddr)  FROM idrac   WHERE racklabel IN  ($Rack)  AND $__timeFilter(\"time\")\n",
+            "refresh": 2,
+            "regex": "",
+            "skipUrlSync": false,
+            "sort": 3,
+            "tagValuesQuery": "",
+            "tags": [],
+            "tagsQuery": "",
+            "type": "query",
+            "useTags": false
+          }
+        ]
+      },
+      "time": {
+        "from": "now-30m",
+        "to": "now"
+      },
+      "timepicker": {},
+      "timezone": "",
+      "title": "iDRAC Metrics 1.1.4",
+      "version": 5
+    }

@@ -1,3 +1,23 @@
+# iDRAC Solution
+
+## Introduction
+
+This is a solution developed to run in Streaming data Platform.
+It collects data from iDRAC server using the telemetry feature. This data is then processed in SDP processing engine and finally pushed for visualization in Grafana. 
+
+## iDRAC metrics
+
+ iDRAC (integrated dell remote access controller) has been running on dell servers for quite some time.  iDRAC provides remote access to the server for power management, deployment and recently monitoring with telemetry feature. This feature when enabled, it will push metric reports (like Amps reading, Network traffic etc.) to a configurable destination.
+
+## What's in the helm chart?
+ This helm chart contains the following:
+
+ - Flink clusters - Flink cluster resource for data processing
+ - Flink applications - Flink application resource for Flink jobs
+ - Secure Gateway - A Java HTTP server that simulates an IOT Gateway. Events are sent to this gateway and stored in a Pravega Stream.
+
+## Values file sample
+```
 appParameters:
   # Events are written in a transaction and committed with this period.
   checkpointIntervalMs: "10000"
@@ -55,14 +75,4 @@ logging: {}
   #io.pravega: DEBUG
   #io.pravega.connectors: DEBUG
 #org.apache.flink: DEBUG
-
-ingest-gateway:
-  gateway:
-    # docker image, required
-    image: sdp-registry:31001/desdp/ingest-gateway:1.3-3-3fdaba2
-    # required
-    replicas: 1
-
-  haproxy:
-    image: sdp-registry:31001/desdp/haproxy:2.2.14
-  
+```

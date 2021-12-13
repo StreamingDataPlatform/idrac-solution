@@ -1,0 +1,9 @@
+imageRegistry: sdp-registry:31001/desdp
+image:
+  repository: utility
+  tag: 1.2.1
+# Available method setup,delete
+method: setup
+idracConfig:
+  # IDRAC_IP        IDRAC_USER   IDRAC_PASS       CALLBACK_URL                 RackLAbel
+  - "10.25.20.125    root         calvin           gateway.example.com          examples"
