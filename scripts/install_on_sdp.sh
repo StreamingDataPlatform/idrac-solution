@@ -25,7 +25,7 @@ ${ROOT_DIR}/scripts/publish.sh
 
 # Start a job
 VALUES_FILE=${ROOT_DIR}/values/reportstoflatmetricvalues.yaml
-export RELEASE_NAME=$(basename "${VALUES_FILE}" .yaml | tr '[:upper:]' '[:lower:]')
+export RELEASE_NAME=analytics
 echo ${RELEASE_NAME}
 helm upgrade --install --timeout 600s  --wait \
     ${RELEASE_NAME} \
@@ -55,7 +55,7 @@ SEARCH_ING=$(kubectl get ing -n ${NAMESPACE?"You must export NAMESPACE"} psearch
 ING_IP=$(kubectl get svc   nginx-ingress-controller -n nautilus-system -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
 sudo sed -i "5i$ING_IP $SEARCH_ING" /etc/hosts
 # locate psearch credentials
-REST_ENCODED_AUTH=$(kubectl get  deployment psearch-kibana -n ${NAMESPACE} -o json | jq -c '.spec.template.spec.containers[0].env[] | select(.name | contains("REST_ENCODED_AUTH"))'.value | tr -d '"')
+REST_ENCODED_AUTH=$(kubectl get  deployment psearch-ui -n ${NAMESPACE} -o json | jq -c '.spec.template.spec.containers[0].env[] | select(.name | contains("REST_ENCODED_AUTH"))'.value | tr -d '"')
 
 # Create psearch stream index
 if [[ $(kubectl get ing -n ${NAMESPACE} psearch-resthead-headless -o jsonpath="{.spec.tls}") == "" ]]; then

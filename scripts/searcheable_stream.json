@@ -26,51 +26,7 @@
               }
             }
           },
-          "Oem": {
-            "properties": {
-              "Dell": {
-                "properties": {
-                  "ContextID": {
-                    "type": "text",
-                    "fields": {
-                      "keyword": {
-                        "ignore_above": 256,
-                        "type": "keyword"
-                      }
-                    }
-                  },
-                  "Label": {
-                    "type": "text",
-                    "fields": {
-                      "keyword": {
-                        "ignore_above": 256,
-                        "type": "keyword"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
           "ContextID": {
-            "type": "text",
-            "fields": {
-              "keyword": {
-                "ignore_above": 256,
-                "type": "keyword"
-              }
-            }
-          },
-          "Label": {
-            "type": "text",
-            "fields": {
-              "keyword": {
-                "ignore_above": 256,
-                "type": "keyword"
-              }
-            }
-          },
-          "Id": {
             "type": "text",
             "fields": {
               "keyword": {
