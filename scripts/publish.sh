@@ -28,7 +28,7 @@ else
 fi
 export MAVEN_URL="${MAVEN_URL:-${MAVEN_PROTOCOL}://$(kubectl get ing -n ${NAMESPACE?"You must export NAMESPACE"} repo -o jsonpath='{.spec.rules[0].host}')/maven2}"
 export MAVEN_USERNAME="${MAVEN_USERNAME:-desdp}"
-export MAVEN_PASSWORD="${MAVEN_PASSWORD:-$(kubectl get secret keycloak-${MAVEN_USERNAME} -n nautilus-system -o jsonpath='{.data.password}' | base64 -d)}"
+export MAVEN_PASSWORD="${MAVEN_PASSWORD:-$(kubectl get secret keycloak-${MAVEN_USERNAME}-creds -n nautilus-system -o jsonpath='{.data.password}' | base64 -d)}"
 export APP_ARTIFACT=${ROOT_DIR}/flinkprocessor/build/libs/idracsolution-flinkprocessor-${APP_VERSION}.jar
 export APP_GROUP_ID
 export APP_ARTIFACT_ID

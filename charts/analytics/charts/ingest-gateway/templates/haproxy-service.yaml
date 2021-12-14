@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Release.Name }}
+  name: {{ .Release.Name }}-ingest
   annotations:
     nautilus.dellemc.com/http-ingress: http
     nautilus.dellemc.com/http-ingress-name: {{ .Release.Name }}

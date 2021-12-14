@@ -79,7 +79,6 @@ spec:
         "annotations": {
           "list": [
             {
-              "$$hashKey": "object:13",
               "builtIn": 1,
               "datasource": "-- Grafana --",
               "enable": true,
@@ -93,7 +92,7 @@ spec:
         "editable": true,
         "gnetId": null,
         "graphTooltip": 0,
-        "iteration": 1629938212167,
+        "iteration": 1639500230941,
         "links": [],
         "panels": [
           {
@@ -118,7 +117,6 @@ spec:
                 "custom": {},
                 "mappings": [
                   {
-                    "$$hashKey": "object:529",
                     "id": 0,
                     "op": "=",
                     "text": "N/A",
@@ -126,7 +124,6 @@ spec:
                     "value": "null"
                   }
                 ],
-                "nullValueMode": "connected",
                 "thresholds": {
                   "mode": "absolute",
                   "steps": [
@@ -165,14 +162,14 @@ spec:
                 "values": false
               },
               "showThresholdLabels": false,
-              "showThresholdMarkers": true
+              "showThresholdMarkers": true,
+              "text": {}
             },
-            "pluginVersion": "7.3.4",
+            "pluginVersion": "7.4.5",
             "targets": [
               {
                 "bucketAggs": [
                   {
-                    "$$hashKey": "object:657",
                     "field": "Timestamp",
                     "id": "2",
                     "settings": {
@@ -185,7 +182,6 @@ spec:
                 ],
                 "metrics": [
                   {
-                    "$$hashKey": "object:655",
                     "field": "MetricValue",
                     "id": "1",
                     "meta": {},
@@ -193,7 +189,7 @@ spec:
                     "type": "avg"
                   }
                 ],
-                "query": "(Id: CUPS OR Id: SystemUsage) AND  RackLabel:$Rack AND RemoteAddr:$IdracServer AND MetricId: CPUUsage",
+                "query": "RackLabel:$Rack AND RemoteAddr:$IdracServer AND MetricId: CPUUsage",
                 "refId": "A",
                 "timeField": "Timestamp"
               }
@@ -211,7 +207,6 @@ spec:
                 "custom": {},
                 "mappings": [
                   {
-                    "$$hashKey": "object:325",
                     "id": 0,
                     "op": "=",
                     "text": "N/A",
@@ -219,7 +214,6 @@ spec:
                     "value": "null"
                   }
                 ],
-                "nullValueMode": "connected",
                 "thresholds": {
                   "mode": "absolute",
                   "steps": [
@@ -258,14 +252,14 @@ spec:
                 "values": false
               },
               "showThresholdLabels": false,
-              "showThresholdMarkers": true
+              "showThresholdMarkers": true,
+              "text": {}
             },
-            "pluginVersion": "7.3.4",
+            "pluginVersion": "7.4.5",
             "targets": [
               {
                 "bucketAggs": [
                   {
-                    "$$hashKey": "object:951",
                     "field": "Timestamp",
                     "id": "2",
                     "settings": {
@@ -278,7 +272,6 @@ spec:
                 ],
                 "metrics": [
                   {
-                    "$$hashKey": "object:949",
                     "field": "MetricValue",
                     "id": "1",
                     "meta": {},
@@ -286,7 +279,7 @@ spec:
                     "type": "avg"
                   }
                 ],
-                "query": "(Id: CUPS OR Id: SystemUsage) AND  RackLabel:$Rack AND RemoteAddr:$IdracServer AND MetricId: MemoryUsage",
+                "query": "RackLabel:$Rack AND RemoteAddr:$IdracServer AND MetricId: MemoryUsage",
                 "refId": "A",
                 "timeField": "Timestamp"
               }
@@ -304,7 +297,6 @@ spec:
                 "custom": {},
                 "mappings": [
                   {
-                    "$$hashKey": "object:325",
                     "id": 0,
                     "op": "=",
                     "text": "N/A",
@@ -312,7 +304,6 @@ spec:
                     "value": "null"
                   }
                 ],
-                "nullValueMode": "connected",
                 "thresholds": {
                   "mode": "absolute",
                   "steps": [
@@ -351,14 +342,14 @@ spec:
                 "values": false
               },
               "showThresholdLabels": false,
-              "showThresholdMarkers": true
+              "showThresholdMarkers": true,
+              "text": {}
             },
-            "pluginVersion": "7.3.4",
+            "pluginVersion": "7.4.5",
             "targets": [
               {
                 "bucketAggs": [
                   {
-                    "$$hashKey": "object:951",
                     "field": "Timestamp",
                     "id": "2",
                     "settings": {
@@ -371,7 +362,6 @@ spec:
                 ],
                 "metrics": [
                   {
-                    "$$hashKey": "object:949",
                     "field": "MetricValue",
                     "id": "1",
                     "meta": {},
@@ -379,7 +369,7 @@ spec:
                     "type": "avg"
                   }
                 ],
-                "query": "(Id: CUPS OR Id: SystemUsage) AND  RackLabel:$Rack AND RemoteAddr:$IdracServer AND MetricId: IOUsage",
+                "query": "RackLabel:$Rack AND RemoteAddr:$IdracServer AND MetricId: IOUsage",
                 "refId": "A",
                 "timeField": "Timestamp"
               }
@@ -398,7 +388,6 @@ spec:
                 "decimals": 0,
                 "mappings": [
                   {
-                    "$$hashKey": "object:162",
                     "id": 0,
                     "op": "=",
                     "text": "N/A",
@@ -406,7 +395,6 @@ spec:
                     "value": "null"
                   }
                 ],
-                "nullValueMode": "connected",
                 "thresholds": {
                   "mode": "absolute",
                   "steps": [
@@ -444,14 +432,14 @@ spec:
                 "fields": "",
                 "values": false
               },
+              "text": {},
               "textMode": "auto"
             },
-            "pluginVersion": "7.3.4",
+            "pluginVersion": "7.4.5",
             "targets": [
               {
                 "bucketAggs": [
                   {
-                    "$$hashKey": "object:110",
                     "field": "Timestamp",
                     "id": "2",
                     "settings": {
@@ -464,7 +452,6 @@ spec:
                 ],
                 "metrics": [
                   {
-                    "$$hashKey": "object:108",
                     "field": "RemoteAddr.keyword",
                     "id": "1",
                     "meta": {},
@@ -524,14 +511,14 @@ spec:
                 "fields": "",
                 "values": false
               },
+              "text": {},
               "textMode": "auto"
             },
-            "pluginVersion": "7.3.4",
+            "pluginVersion": "7.4.5",
             "targets": [
               {
                 "bucketAggs": [
                   {
-                    "$$hashKey": "object:55",
                     "field": "Timestamp",
                     "id": "2",
                     "settings": {
@@ -544,7 +531,6 @@ spec:
                 ],
                 "metrics": [
                   {
-                    "$$hashKey": "object:53",
                     "field": "RemoteAddr.keyword",
                     "id": "1",
                     "meta": {},
@@ -601,7 +587,7 @@ spec:
               "alertThreshold": true
             },
             "percentage": false,
-            "pluginVersion": "7.3.4",
+            "pluginVersion": "7.4.5",
             "pointradius": 2,
             "points": false,
             "renderer": "flot",
@@ -614,7 +600,6 @@ spec:
                 "alias": "",
                 "bucketAggs": [
                   {
-                    "$$hashKey": "object:1775",
                     "fake": true,
                     "field": "RemoteAddr.keyword",
                     "id": "4",
@@ -627,7 +612,6 @@ spec:
                     "type": "terms"
                   },
                   {
-                    "$$hashKey": "object:1758",
                     "fake": true,
                     "field": "Timestamp",
                     "id": "3",
@@ -641,7 +625,6 @@ spec:
                 ],
                 "metrics": [
                   {
-                    "$$hashKey": "object:1700",
                     "field": "MetricValue",
                     "id": "1",
                     "meta": {},
@@ -649,7 +632,7 @@ spec:
                     "type": "avg"
                   }
                 ],
-                "query": "(Id: CUPS OR Id: SystemUsage) AND  RackLabel:$Rack AND RemoteAddr:$IdracServer AND MetricId: CPUUsage",
+                "query": "RackLabel:$Rack AND RemoteAddr:$IdracServer AND MetricId: CPUUsage",
                 "refId": "A",
                 "timeField": "Timestamp"
               }
@@ -737,7 +720,7 @@ spec:
               "alertThreshold": true
             },
             "percentage": false,
-            "pluginVersion": "7.3.4",
+            "pluginVersion": "7.4.5",
             "pointradius": 2,
             "points": false,
             "renderer": "flot",
@@ -749,7 +732,6 @@ spec:
               {
                 "bucketAggs": [
                   {
-                    "$$hashKey": "object:228",
                     "fake": true,
                     "field": "RemoteAddr.keyword",
                     "id": "3",
@@ -762,7 +744,6 @@ spec:
                     "type": "terms"
                   },
                   {
-                    "$$hashKey": "object:102",
                     "field": "Timestamp",
                     "id": "2",
                     "settings": {
@@ -775,7 +756,6 @@ spec:
                 ],
                 "metrics": [
                   {
-                    "$$hashKey": "object:100",
                     "field": "MetricValue",
                     "id": "1",
                     "meta": {},
@@ -783,7 +763,7 @@ spec:
                     "type": "avg"
                   }
                 ],
-                "query": "(Id: CUPS OR Id: SystemUsage) AND  RackLabel:$Rack AND RemoteAddr:$IdracServer AND MetricId:MemoryUsage",
+                "query": "RackLabel:$Rack AND RemoteAddr:$IdracServer AND MetricId:MemoryUsage",
                 "refId": "A",
                 "timeField": "Timestamp"
               }
@@ -808,7 +788,6 @@ spec:
             },
             "yaxes": [
               {
-                "$$hashKey": "object:112",
                 "format": "percent",
                 "label": null,
                 "logBase": 1,
@@ -817,7 +796,6 @@ spec:
                 "show": true
               },
               {
-                "$$hashKey": "object:113",
                 "format": "short",
                 "label": null,
                 "logBase": 1,
@@ -871,7 +849,7 @@ spec:
               "alertThreshold": true
             },
             "percentage": false,
-            "pluginVersion": "7.3.4",
+            "pluginVersion": "7.4.5",
             "pointradius": 2,
             "points": false,
             "renderer": "flot",
@@ -883,7 +861,6 @@ spec:
               {
                 "bucketAggs": [
                   {
-                    "$$hashKey": "object:266",
                     "fake": true,
                     "field": "RemoteAddr.keyword",
                     "id": "3",
@@ -896,7 +873,6 @@ spec:
                     "type": "terms"
                   },
                   {
-                    "$$hashKey": "object:250",
                     "field": "Timestamp",
                     "id": "2",
                     "settings": {
@@ -909,7 +885,6 @@ spec:
                 ],
                 "metrics": [
                   {
-                    "$$hashKey": "object:248",
                     "field": "MetricValue",
                     "id": "1",
                     "meta": {},
@@ -917,7 +892,7 @@ spec:
                     "type": "avg"
                   }
                 ],
-                "query": "(Id: CUPS OR Id: SystemUsage) AND  RackLabel:$Rack AND RemoteAddr:$IdracServer AND MetricId:IOUsage",
+                "query": "RackLabel:$Rack AND RemoteAddr:$IdracServer AND MetricId:IOUsage",
                 "refId": "A",
                 "timeField": "Timestamp"
               }
@@ -1003,7 +978,7 @@ spec:
               "alertThreshold": true
             },
             "percentage": false,
-            "pluginVersion": "7.3.4",
+            "pluginVersion": "7.4.5",
             "pointradius": 2,
             "points": false,
             "renderer": "flot",
@@ -1015,7 +990,6 @@ spec:
               {
                 "bucketAggs": [
                   {
-                    "$$hashKey": "object:266",
                     "fake": true,
                     "field": "RemoteAddr.keyword",
                     "id": "3",
@@ -1028,7 +1002,6 @@ spec:
                     "type": "terms"
                   },
                   {
-                    "$$hashKey": "object:250",
                     "field": "Timestamp",
                     "id": "2",
                     "settings": {
@@ -1041,7 +1014,6 @@ spec:
                 ],
                 "metrics": [
                   {
-                    "$$hashKey": "object:248",
                     "field": "MetricValue",
                     "id": "1",
                     "meta": {},
@@ -1074,7 +1046,6 @@ spec:
             },
             "yaxes": [
               {
-                "$$hashKey": "object:118",
                 "format": "watt",
                 "label": null,
                 "logBase": 1,
@@ -1083,7 +1054,6 @@ spec:
                 "show": true
               },
               {
-                "$$hashKey": "object:119",
                 "format": "percent",
                 "label": null,
                 "logBase": 1,
@@ -1098,7 +1068,7 @@ spec:
             }
           },
           {
-            "collapsed": true,
+            "collapsed": false,
             "datasource": null,
             "gridPos": {
               "h": 1,
@@ -1107,1405 +1077,1236 @@ spec:
               "y": 14
             },
             "id": 430,
-            "panels": [
-              {
-                "cacheTimeout": null,
-                "colorBackground": true,
-                "colorPostfix": false,
-                "colorPrefix": false,
-                "colorValue": false,
-                "colors": [
-                  "#37872D",
-                  "rgba(237, 129, 40, 0.89)",
-                  "#d44a3a"
-                ],
-                "datasource": "Elasticsearch-PSearch",
-                "fieldConfig": {
-                  "defaults": {
-                    "custom": {}
-                  },
-                  "overrides": []
-                },
-                "format": "percent",
-                "gauge": {
-                  "maxValue": 100,
-                  "minValue": 0,
-                  "show": false,
-                  "thresholdLabels": false,
-                  "thresholdMarkers": true
-                },
-                "gridPos": {
-                  "h": 6,
-                  "w": 4,
-                  "x": 0,
-                  "y": 15
-                },
-                "id": 483,
-                "interval": null,
-                "links": [],
-                "mappingType": 1,
-                "mappingTypes": [
-                  {
-                    "$$hashKey": "object:526",
-                    "name": "value to text",
-                    "value": 1
-                  },
-                  {
-                    "$$hashKey": "object:527",
-                    "name": "range to text",
-                    "value": 2
-                  }
-                ],
-                "maxDataPoints": 100,
-                "nullPointMode": "connected",
-                "nullText": null,
-                "postfix": "",
-                "postfixFontSize": "50%",
-                "prefix": "",
-                "prefixFontSize": "50%",
-                "rangeMaps": [
-                  {
-                    "from": "null",
-                    "text": "N/A",
-                    "to": "null"
-                  }
-                ],
-                "scopedVars": {
-                  "IdracServer": {
-                    "selected": false,
-                    "text": "10.243.19.186",
-                    "value": "10.243.19.186"
-                  }
-                },
-                "sparkline": {
-                  "fillColor": "rgba(31, 118, 189, 0.18)",
-                  "full": true,
-                  "lineColor": "rgb(31, 120, 193)",
-                  "show": false,
-                  "ymax": null,
-                  "ymin": null
-                },
-                "tableColumn": "",
-                "targets": [
-                  {
-                    "bucketAggs": [
-                      {
-                        "$$hashKey": "object:657",
-                        "field": "Timestamp",
-                        "id": "2",
-                        "settings": {
-                          "interval": "auto",
-                          "min_doc_count": 0,
-                          "trimEdges": 0
-                        },
-                        "type": "date_histogram"
-                      }
-                    ],
-                    "metrics": [
-                      {
-                        "$$hashKey": "object:655",
-                        "field": "MetricValue",
-                        "id": "1",
-                        "meta": {},
-                        "settings": {},
-                        "type": "avg"
-                      }
-                    ],
-                    "query": "(Id: CUPS OR Id: SystemUsage) AND  RackLabel:$Rack AND RemoteAddr:$IdracServer AND MetricId: CPUUsage",
-                    "refId": "A",
-                    "timeField": "Timestamp"
-                  }
-                ],
-                "thresholds": "70",
-                "timeFrom": null,
-                "timeShift": null,
-                "title": "CPU Usage Average",
-                "type": "singlestat",
-                "valueFontSize": "80%",
-                "valueMaps": [
-                  {
-                    "$$hashKey": "object:529",
-                    "op": "=",
-                    "text": "N/A",
-                    "value": "null"
-                  }
-                ],
-                "valueName": "avg"
-              },
-              {
-                "cacheTimeout": null,
-                "colorBackground": true,
-                "colorPostfix": false,
-                "colorPrefix": false,
-                "colorValue": false,
-                "colors": [
-                  "#37872D",
-                  "rgba(237, 129, 40, 0.89)",
-                  "#d44a3a"
-                ],
-                "datasource": "Elasticsearch-PSearch",
-                "fieldConfig": {
-                  "defaults": {
-                    "custom": {}
-                  },
-                  "overrides": []
-                },
-                "format": "percent",
-                "gauge": {
-                  "maxValue": 100,
-                  "minValue": 0,
-                  "show": false,
-                  "thresholdLabels": false,
-                  "thresholdMarkers": true
-                },
-                "gridPos": {
-                  "h": 6,
-                  "w": 4,
-                  "x": 4,
-                  "y": 15
-                },
-                "id": 549,
-                "interval": null,
-                "links": [],
-                "mappingType": 1,
-                "mappingTypes": [
-                  {
-                    "$$hashKey": "object:322",
-                    "name": "value to text",
-                    "value": 1
-                  },
-                  {
-                    "$$hashKey": "object:323",
-                    "name": "range to text",
-                    "value": 2
-                  }
-                ],
-                "maxDataPoints": 100,
-                "nullPointMode": "connected",
-                "nullText": null,
-                "pluginVersion": "6.7.3",
-                "postfix": "",
-                "postfixFontSize": "50%",
-                "prefix": "",
-                "prefixFontSize": "50%",
-                "rangeMaps": [
-                  {
-                    "from": "null",
-                    "text": "N/A",
-                    "to": "null"
-                  }
-                ],
-                "scopedVars": {
-                  "IdracServer": {
-                    "selected": false,
-                    "text": "10.243.19.186",
-                    "value": "10.243.19.186"
-                  }
-                },
-                "sparkline": {
-                  "fillColor": "rgba(31, 118, 189, 0.18)",
-                  "full": false,
-                  "lineColor": "rgb(31, 120, 193)",
-                  "show": false,
-                  "ymax": null,
-                  "ymin": null
-                },
-                "tableColumn": "",
-                "targets": [
-                  {
-                    "bucketAggs": [
-                      {
-                        "$$hashKey": "object:951",
-                        "field": "Timestamp",
-                        "id": "2",
-                        "settings": {
-                          "interval": "auto",
-                          "min_doc_count": 0,
-                          "trimEdges": 0
-                        },
-                        "type": "date_histogram"
-                      }
-                    ],
-                    "metrics": [
-                      {
-                        "$$hashKey": "object:949",
-                        "field": "MetricValue",
-                        "id": "1",
-                        "meta": {},
-                        "settings": {},
-                        "type": "avg"
-                      }
-                    ],
-                    "query": "(Id: CUPS OR Id: SystemUsage) AND  RackLabel:$Rack AND RemoteAddr:$IdracServer AND MetricId: MemoryUsage",
-                    "refId": "A",
-                    "timeField": "Timestamp"
-                  }
-                ],
-                "thresholds": "60",
-                "timeFrom": null,
-                "timeShift": null,
-                "title": "Memory Bandwidth Avg",
-                "type": "singlestat",
-                "valueFontSize": "80%",
-                "valueMaps": [
-                  {
-                    "$$hashKey": "object:325",
-                    "op": "=",
-                    "text": "N/A",
-                    "value": "null"
-                  }
-                ],
-                "valueName": "avg"
-              },
-              {
-                "aliasColors": {},
-                "bars": false,
-                "cacheTimeout": null,
-                "dashLength": 10,
-                "dashes": false,
-                "datasource": "Elasticsearch-PSearch",
-                "fieldConfig": {
-                  "defaults": {
-                    "custom": {},
-                    "mappings": [
-                      {
-                        "$$hashKey": "object:325",
-                        "id": 0,
-                        "op": "=",
-                        "text": "N/A",
-                        "type": 1,
-                        "value": "null"
-                      }
-                    ],
-                    "nullValueMode": "connected",
-                    "thresholds": {
-                      "mode": "absolute",
-                      "steps": [
-                        {
-                          "color": "#37872D",
-                          "value": null
-                        }
-                      ]
-                    },
-                    "unit": "volt"
-                  },
-                  "overrides": []
-                },
-                "fill": 1,
-                "fillGradient": 0,
-                "gridPos": {
-                  "h": 12,
-                  "w": 6,
-                  "x": 8,
-                  "y": 15
-                },
-                "hiddenSeries": false,
-                "id": 1026,
-                "legend": {
-                  "avg": false,
-                  "current": false,
-                  "max": false,
-                  "min": false,
-                  "show": true,
-                  "total": false,
-                  "values": false
-                },
-                "lines": true,
-                "linewidth": 1,
-                "links": [],
-                "nullPointMode": "connected",
-                "options": {
-                  "alertThreshold": true
-                },
-                "percentage": false,
-                "pluginVersion": "7.3.4",
-                "pointradius": 2,
-                "points": false,
-                "renderer": "flot",
-                "scopedVars": {
-                  "IdracServer": {
-                    "selected": false,
-                    "text": "10.243.19.186",
-                    "value": "10.243.19.186"
-                  }
-                },
-                "seriesOverrides": [],
-                "spaceLength": 10,
-                "stack": false,
-                "steppedLine": false,
-                "targets": [
-                  {
-                    "alias": "",
-                    "bucketAggs": [
-                      {
-                        "$$hashKey": "object:516",
-                        "fake": true,
-                        "field": "ContextID.keyword",
-                        "id": "5",
-                        "settings": {
-                          "min_doc_count": 1,
-                          "order": "desc",
-                          "orderBy": "_term",
-                          "size": "10"
-                        },
-                        "type": "terms"
-                      },
-                      {
-                        "$$hashKey": "object:213",
-                        "fake": true,
-                        "field": "Timestamp",
-                        "id": "4",
-                        "settings": {
-                          "interval": "auto",
-                          "min_doc_count": 0,
-                          "trimEdges": 0
-                        },
-                        "type": "date_histogram"
-                      }
-                    ],
-                    "metrics": [
-                      {
-                        "$$hashKey": "object:949",
-                        "field": "MetricValue",
-                        "id": "1",
-                        "meta": {},
-                        "settings": {},
-                        "type": "avg"
-                      }
-                    ],
-                    "query": "Id: Sensor AND  RackLabel:$Rack AND RemoteAddr:$IdracServer AND MetricId: VoltageReading",
-                    "refId": "A",
-                    "timeField": "Timestamp"
-                  }
-                ],
-                "thresholds": [],
-                "timeFrom": null,
-                "timeRegions": [],
-                "timeShift": null,
-                "title": "Board  Voltages",
-                "tooltip": {
-                  "shared": true,
-                  "sort": 0,
-                  "value_type": "individual"
-                },
-                "type": "graph",
-                "xaxis": {
-                  "buckets": null,
-                  "mode": "time",
-                  "name": null,
-                  "show": true,
-                  "values": []
-                },
-                "yaxes": [
-                  {
-                    "$$hashKey": "object:236",
-                    "format": "volt",
-                    "label": null,
-                    "logBase": 1,
-                    "max": null,
-                    "min": null,
-                    "show": true
-                  },
-                  {
-                    "$$hashKey": "object:237",
-                    "format": "short",
-                    "label": null,
-                    "logBase": 1,
-                    "max": null,
-                    "min": null,
-                    "show": true
-                  }
-                ],
-                "yaxis": {
-                  "align": false,
-                  "alignLevel": null
-                }
-              },
-              {
-                "aliasColors": {},
-                "bars": false,
-                "cacheTimeout": null,
-                "dashLength": 10,
-                "dashes": false,
-                "datasource": "Elasticsearch-PSearch",
-                "fieldConfig": {
-                  "defaults": {
-                    "custom": {},
-                    "mappings": [
-                      {
-                        "$$hashKey": "object:325",
-                        "id": 0,
-                        "op": "=",
-                        "text": "N/A",
-                        "type": 1,
-                        "value": "null"
-                      }
-                    ],
-                    "nullValueMode": "connected",
-                    "thresholds": {
-                      "mode": "absolute",
-                      "steps": [
-                        {
-                          "color": "#37872D",
-                          "value": null
-                        },
-                        {
-                          "color": "rgba(237, 129, 40, 0.89)",
-                          "value": 60
-                        },
-                        {
-                          "color": "#d44a3a"
-                        }
-                      ]
-                    },
-                    "unit": "celsius"
-                  },
-                  "overrides": []
-                },
-                "fill": 1,
-                "fillGradient": 0,
-                "gridPos": {
-                  "h": 6,
-                  "w": 6,
-                  "x": 14,
-                  "y": 15
-                },
-                "hiddenSeries": false,
-                "id": 550,
-                "legend": {
-                  "avg": false,
-                  "current": false,
-                  "max": false,
-                  "min": false,
-                  "show": true,
-                  "total": false,
-                  "values": false
-                },
-                "lines": true,
-                "linewidth": 1,
-                "links": [],
-                "nullPointMode": "connected",
-                "options": {
-                  "alertThreshold": true
-                },
-                "percentage": false,
-                "pluginVersion": "7.3.4",
-                "pointradius": 2,
-                "points": false,
-                "renderer": "flot",
-                "scopedVars": {
-                  "IdracServer": {
-                    "selected": false,
-                    "text": "10.243.19.186",
-                    "value": "10.243.19.186"
-                  }
-                },
-                "seriesOverrides": [],
-                "spaceLength": 10,
-                "stack": false,
-                "steppedLine": false,
-                "targets": [
-                  {
-                    "alias": "",
-                    "bucketAggs": [
-                      {
-                        "$$hashKey": "object:516",
-                        "fake": true,
-                        "field": "ContextID.keyword",
-                        "id": "5",
-                        "settings": {
-                          "min_doc_count": 1,
-                          "order": "desc",
-                          "orderBy": "_term",
-                          "size": "10"
-                        },
-                        "type": "terms"
-                      },
-                      {
-                        "$$hashKey": "object:213",
-                        "fake": true,
-                        "field": "Timestamp",
-                        "id": "4",
-                        "settings": {
-                          "interval": "auto",
-                          "min_doc_count": 0,
-                          "trimEdges": 0
-                        },
-                        "type": "date_histogram"
-                      }
-                    ],
-                    "metrics": [
-                      {
-                        "$$hashKey": "object:949",
-                        "field": "MetricValue",
-                        "id": "1",
-                        "meta": {},
-                        "settings": {},
-                        "type": "avg"
-                      }
-                    ],
-                    "query": "Id: Sensor AND  RackLabel:$Rack AND RemoteAddr:$IdracServer AND MetricId: TemperatureReading",
-                    "refId": "A",
-                    "timeField": "Timestamp"
-                  }
-                ],
-                "thresholds": [],
-                "timeFrom": null,
-                "timeRegions": [],
-                "timeShift": null,
-                "title": "Board  Temperature",
-                "tooltip": {
-                  "shared": true,
-                  "sort": 0,
-                  "value_type": "individual"
-                },
-                "type": "graph",
-                "xaxis": {
-                  "buckets": null,
-                  "mode": "time",
-                  "name": null,
-                  "show": true,
-                  "values": []
-                },
-                "yaxes": [
-                  {
-                    "$$hashKey": "object:325",
-                    "format": "celsius",
-                    "label": null,
-                    "logBase": 1,
-                    "max": null,
-                    "min": null,
-                    "show": true
-                  },
-                  {
-                    "$$hashKey": "object:326",
-                    "format": "short",
-                    "label": null,
-                    "logBase": 1,
-                    "max": null,
-                    "min": null,
-                    "show": true
-                  }
-                ],
-                "yaxis": {
-                  "align": false,
-                  "alignLevel": null
-                }
-              },
-              {
-                "cacheTimeout": null,
-                "colorBackground": true,
-                "colorPostfix": false,
-                "colorPrefix": false,
-                "colorValue": false,
-                "colors": [
-                  "#37872D",
-                  "rgba(237, 129, 40, 0.89)",
-                  "#d44a3a"
-                ],
-                "datasource": "Elasticsearch-PSearch",
-                "fieldConfig": {
-                  "defaults": {
-                    "custom": {}
-                  },
-                  "overrides": []
-                },
-                "format": "watt",
-                "gauge": {
-                  "maxValue": 100,
-                  "minValue": 0,
-                  "show": false,
-                  "thresholdLabels": false,
-                  "thresholdMarkers": true
-                },
-                "gridPos": {
-                  "h": 6,
-                  "w": 4,
-                  "x": 20,
-                  "y": 15
-                },
-                "id": 748,
-                "interval": null,
-                "links": [],
-                "mappingType": 1,
-                "mappingTypes": [
-                  {
-                    "$$hashKey": "object:322",
-                    "name": "value to text",
-                    "value": 1
-                  },
-                  {
-                    "$$hashKey": "object:323",
-                    "name": "range to text",
-                    "value": 2
-                  }
-                ],
-                "maxDataPoints": 100,
-                "nullPointMode": "connected",
-                "nullText": null,
-                "pluginVersion": "6.7.3",
-                "postfix": "",
-                "postfixFontSize": "50%",
-                "prefix": "",
-                "prefixFontSize": "50%",
-                "rangeMaps": [
-                  {
-                    "from": "null",
-                    "text": "N/A",
-                    "to": "null"
-                  }
-                ],
-                "scopedVars": {
-                  "IdracServer": {
-                    "selected": false,
-                    "text": "10.243.19.186",
-                    "value": "10.243.19.186"
-                  }
-                },
-                "sparkline": {
-                  "fillColor": "rgba(31, 118, 189, 0.18)",
-                  "full": false,
-                  "lineColor": "rgb(31, 120, 193)",
-                  "show": false,
-                  "ymax": null,
-                  "ymin": null
-                },
-                "tableColumn": "",
-                "targets": [
-                  {
-                    "bucketAggs": [
-                      {
-                        "$$hashKey": "object:951",
-                        "field": "Timestamp",
-                        "id": "2",
-                        "settings": {
-                          "interval": "auto",
-                          "min_doc_count": 0,
-                          "trimEdges": 0
-                        },
-                        "type": "date_histogram"
-                      }
-                    ],
-                    "metrics": [
-                      {
-                        "$$hashKey": "object:949",
-                        "field": "MetricValue",
-                        "id": "1",
-                        "meta": {},
-                        "settings": {},
-                        "type": "max"
-                      }
-                    ],
-                    "query": "Id: Sensor AND  RackLabel:$Rack AND RemoteAddr:$IdracServer AND MetricId: WattsReading",
-                    "refId": "A",
-                    "timeField": "Timestamp"
-                  }
-                ],
-                "thresholds": "400",
-                "timeFrom": null,
-                "timeShift": null,
-                "title": "Power consumption",
-                "type": "singlestat",
-                "valueFontSize": "80%",
-                "valueMaps": [
-                  {
-                    "$$hashKey": "object:325",
-                    "op": "=",
-                    "text": "N/A",
-                    "value": "null"
-                  }
-                ],
-                "valueName": "current"
-              },
-              {
-                "aliasColors": {},
-                "bars": false,
-                "cacheTimeout": null,
-                "dashLength": 10,
-                "dashes": false,
-                "datasource": "Elasticsearch-PSearch",
-                "fieldConfig": {
-                  "defaults": {
-                    "custom": {},
-                    "mappings": [
-                      {
-                        "$$hashKey": "object:325",
-                        "id": 0,
-                        "op": "=",
-                        "text": "N/A",
-                        "type": 1,
-                        "value": "null"
-                      }
-                    ],
-                    "nullValueMode": "connected",
-                    "thresholds": {
-                      "mode": "absolute",
-                      "steps": [
-                        {
-                          "color": "#37872D",
-                          "value": null
-                        },
-                        {
-                          "color": "rgba(237, 129, 40, 0.89)",
-                          "value": 60
-                        },
-                        {
-                          "color": "#d44a3a"
-                        }
-                      ]
-                    },
-                    "unit": "amp"
-                  },
-                  "overrides": []
-                },
-                "fill": 2,
-                "fillGradient": 0,
-                "gridPos": {
-                  "h": 6,
-                  "w": 8,
-                  "x": 0,
-                  "y": 21
-                },
-                "hiddenSeries": false,
-                "id": 879,
-                "legend": {
-                  "avg": false,
-                  "current": false,
-                  "max": false,
-                  "min": false,
-                  "show": true,
-                  "total": false,
-                  "values": false
-                },
-                "lines": true,
-                "linewidth": 1,
-                "links": [],
-                "nullPointMode": "null",
-                "options": {
-                  "alertThreshold": true
-                },
-                "percentage": false,
-                "pluginVersion": "7.3.4",
-                "pointradius": 2,
-                "points": false,
-                "renderer": "flot",
-                "scopedVars": {
-                  "IdracServer": {
-                    "selected": false,
-                    "text": "10.243.19.186",
-                    "value": "10.243.19.186"
-                  }
-                },
-                "seriesOverrides": [],
-                "spaceLength": 10,
-                "stack": false,
-                "steppedLine": false,
-                "targets": [
-                  {
-                    "alias": "",
-                    "bucketAggs": [
-                      {
-                        "$$hashKey": "object:516",
-                        "fake": true,
-                        "field": "ContextID.keyword",
-                        "id": "5",
-                        "settings": {
-                          "min_doc_count": 1,
-                          "order": "desc",
-                          "orderBy": "_term",
-                          "size": "10"
-                        },
-                        "type": "terms"
-                      },
-                      {
-                        "$$hashKey": "object:213",
-                        "fake": true,
-                        "field": "Timestamp",
-                        "id": "4",
-                        "settings": {
-                          "interval": "1m",
-                          "min_doc_count": 0,
-                          "trimEdges": 0
-                        },
-                        "type": "date_histogram"
-                      }
-                    ],
-                    "metrics": [
-                      {
-                        "$$hashKey": "object:949",
-                        "field": "MetricValue",
-                        "id": "1",
-                        "meta": {},
-                        "settings": {},
-                        "type": "avg"
-                      }
-                    ],
-                    "query": "Id:Sensor AND  RackLabel:$Rack AND RemoteAddr:$IdracServer AND MetricId: AmpsReading",
-                    "refId": "A",
-                    "timeField": "Timestamp"
-                  }
-                ],
-                "thresholds": [],
-                "timeFrom": null,
-                "timeRegions": [],
-                "timeShift": null,
-                "title": "Amps",
-                "tooltip": {
-                  "shared": true,
-                  "sort": 0,
-                  "value_type": "individual"
-                },
-                "type": "graph",
-                "xaxis": {
-                  "buckets": null,
-                  "mode": "time",
-                  "name": null,
-                  "show": true,
-                  "values": []
-                },
-                "yaxes": [
-                  {
-                    "$$hashKey": "object:152",
-                    "format": "amp",
-                    "label": null,
-                    "logBase": 1,
-                    "max": null,
-                    "min": null,
-                    "show": true
-                  },
-                  {
-                    "$$hashKey": "object:153",
-                    "format": "short",
-                    "label": null,
-                    "logBase": 1,
-                    "max": null,
-                    "min": null,
-                    "show": true
-                  }
-                ],
-                "yaxis": {
-                  "align": false,
-                  "alignLevel": null
-                }
-              },
-              {
-                "aliasColors": {},
-                "bars": false,
-                "dashLength": 10,
-                "dashes": false,
-                "datasource": "Elasticsearch-PSearch",
-                "fieldConfig": {
-                  "defaults": {
-                    "custom": {},
-                    "links": []
-                  },
-                  "overrides": []
-                },
-                "fill": 0,
-                "fillGradient": 0,
-                "gridPos": {
-                  "h": 6,
-                  "w": 10,
-                  "x": 14,
-                  "y": 21
-                },
-                "hiddenSeries": false,
-                "id": 880,
-                "interval": "",
-                "legend": {
-                  "alignAsTable": true,
-                  "avg": true,
-                  "current": true,
-                  "max": true,
-                  "min": false,
-                  "rightSide": true,
-                  "show": true,
-                  "sort": "max",
-                  "sortDesc": true,
-                  "total": false,
-                  "values": true
-                },
-                "lines": true,
-                "linewidth": 1,
-                "maxPerRow": 2,
-                "nullPointMode": "null",
-                "options": {
-                  "alertThreshold": true
-                },
-                "percentage": false,
-                "pluginVersion": "7.3.4",
-                "pointradius": 2,
-                "points": false,
-                "renderer": "flot",
-                "repeatDirection": "h",
-                "scopedVars": {
-                  "IdracServer": {
-                    "selected": false,
-                    "text": "10.243.19.186",
-                    "value": "10.243.19.186"
-                  }
-                },
-                "seriesOverrides": [],
-                "spaceLength": 10,
-                "stack": false,
-                "steppedLine": false,
-                "targets": [
-                  {
-                    "alias": "TX-{{ContextID.keyword}}",
-                    "bucketAggs": [
-                      {
-                        "$$hashKey": "object:148",
-                        "fake": true,
-                        "field": "ContextID.keyword",
-                        "id": "4",
-                        "settings": {
-                          "min_doc_count": 1,
-                          "order": "desc",
-                          "orderBy": "_term",
-                          "size": "0"
-                        },
-                        "type": "terms"
-                      },
-                      {
-                        "$$hashKey": "object:67",
-                        "field": "Timestamp",
-                        "id": "2",
-                        "settings": {
-                          "interval": "5m",
-                          "min_doc_count": 0,
-                          "trimEdges": 0
-                        },
-                        "type": "date_histogram"
-                      }
-                    ],
-                    "metrics": [
-                      {
-                        "$$hashKey": "object:65",
-                        "field": "MetricValue",
-                        "hide": true,
-                        "id": "1",
-                        "inlineScript": null,
-                        "meta": {},
-                        "pipelineAgg": "select metric",
-                        "settings": {},
-                        "type": "avg"
-                      },
-                      {
-                        "$$hashKey": "object:168",
-                        "field": "1",
-                        "id": "5",
-                        "meta": {},
-                        "pipelineAgg": "1",
-                        "settings": {
-                          "unit": "1s"
-                        },
-                        "type": "derivative"
-                      }
-                    ],
-                    "query": "Id: NICStatistics AND MetricId: TxBytes AND RackLabel:$Rack AND RemoteAddr:$IdracServer",
-                    "refId": "A",
-                    "timeField": "Timestamp"
-                  },
-                  {
-                    "alias": "RX-{{ContextID.keyword}}",
-                    "bucketAggs": [
-                      {
-                        "$$hashKey": "object:148",
-                        "fake": true,
-                        "field": "ContextID.keyword",
-                        "id": "4",
-                        "settings": {
-                          "min_doc_count": 1,
-                          "order": "desc",
-                          "orderBy": "_term",
-                          "size": "0"
-                        },
-                        "type": "terms"
-                      },
-                      {
-                        "$$hashKey": "object:67",
-                        "field": "Timestamp",
-                        "id": "2",
-                        "settings": {
-                          "interval": "5m",
-                          "min_doc_count": 0,
-                          "trimEdges": 0
-                        },
-                        "type": "date_histogram"
-                      }
-                    ],
-                    "hide": false,
-                    "metrics": [
-                      {
-                        "$$hashKey": "object:65",
-                        "field": "MetricValue",
-                        "hide": true,
-                        "id": "1",
-                        "inlineScript": null,
-                        "meta": {},
-                        "pipelineAgg": "select metric",
-                        "settings": {},
-                        "type": "avg"
-                      },
-                      {
-                        "$$hashKey": "object:168",
-                        "field": "1",
-                        "id": "5",
-                        "meta": {},
-                        "pipelineAgg": "1",
-                        "settings": {
-                          "unit": "1s"
-                        },
-                        "type": "derivative"
-                      }
-                    ],
-                    "query": "Id: NICStatistics AND MetricId: RxBytes AND RackLabel:$Rack AND RemoteAddr:$IdracServer",
-                    "refId": "B",
-                    "timeField": "Timestamp"
-                  }
-                ],
-                "thresholds": [],
-                "timeFrom": null,
-                "timeRegions": [],
-                "timeShift": null,
-                "title": "Network  $IdracServer",
-                "tooltip": {
-                  "shared": true,
-                  "sort": 0,
-                  "value_type": "individual"
-                },
-                "type": "graph",
-                "xaxis": {
-                  "buckets": null,
-                  "mode": "time",
-                  "name": null,
-                  "show": true,
-                  "values": []
-                },
-                "yaxes": [
-                  {
-                    "$$hashKey": "object:134",
-                    "format": "Bps",
-                    "label": null,
-                    "logBase": 1,
-                    "max": null,
-                    "min": null,
-                    "show": true
-                  },
-                  {
-                    "$$hashKey": "object:135",
-                    "format": "short",
-                    "label": null,
-                    "logBase": 1,
-                    "max": null,
-                    "min": null,
-                    "show": true
-                  }
-                ],
-                "yaxis": {
-                  "align": false,
-                  "alignLevel": null
-                }
-              },
-              {
-                "datasource": null,
-                "fieldConfig": {
-                  "defaults": {
-                    "color": {
-                      "mode": "continuous-GrYlRd"
-                    },
-                    "custom": {
-                      "align": "center",
-                      "filterable": true
-                    },
-                    "mappings": [
-                      {
-                        "from": "",
-                        "id": 1,
-                        "text": "",
-                        "to": "",
-                        "type": 1
-                      }
-                    ],
-                    "thresholds": {
-                      "mode": "absolute",
-                      "steps": [
-                        {
-                          "color": "green",
-                          "value": null
-                        }
-                      ]
-                    }
-                  },
-                  "overrides": [
-                    {
-                      "matcher": {
-                        "id": "byName",
-                        "options": "Label.keyword"
-                      },
-                      "properties": [
-                        {
-                          "id": "custom.width",
-                          "value": 290
-                        }
-                      ]
-                    },
-                    {
-                      "matcher": {
-                        "id": "byName",
-                        "options": "Count"
-                      },
-                      "properties": [
-                        {
-                          "id": "custom.width",
-                          "value": 70
-                        }
-                      ]
-                    },
-                    {
-                      "matcher": {
-                        "id": "byName",
-                        "options": "RemoteAddr.keyword"
-                      },
-                      "properties": [
-                        {
-                          "id": "custom.width",
-                          "value": 202
-                        }
-                      ]
-                    },
-                    {
-                      "matcher": {
-                        "id": "byName",
-                        "options": "NonNumericValue.keyword"
-                      },
-                      "properties": [
-                        {
-                          "id": "custom.width",
-                          "value": 201
-                        }
-                      ]
-                    },
-                    {
-                      "matcher": {
-                        "id": "byName",
-                        "options": "Unique Count"
-                      },
-                      "properties": [
-                        {
-                          "id": "custom.width",
-                          "value": 117
-                        }
-                      ]
-                    },
-                    {
-                      "matcher": {
-                        "id": "byName",
-                        "options": "MetricId"
-                      },
-                      "properties": [
-                        {
-                          "id": "custom.width",
-                          "value": null
-                        }
-                      ]
-                    },
-                    {
-                      "matcher": {
-                        "id": "byName",
-                        "options": "Name"
-                      },
-                      "properties": [
-                        {
-                          "id": "custom.width",
-                          "value": 400
-                        }
-                      ]
-                    }
-                  ]
-                },
-                "gridPos": {
-                  "h": 7,
-                  "w": 12,
-                  "x": 0,
-                  "y": 27
-                },
-                "id": 1251,
-                "options": {
-                  "showHeader": true,
-                  "sortBy": []
-                },
-                "pluginVersion": "7.3.4",
-                "scopedVars": {
-                  "IdracServer": {
-                    "selected": false,
-                    "text": "10.243.19.186",
-                    "value": "10.243.19.186"
-                  }
-                },
-                "targets": [
-                  {
-                    "bucketAggs": [
-                      {
-                        "$$hashKey": "object:92",
-                        "field": "Timestamp",
-                        "id": "2",
-                        "settings": {
-                          "interval": "1m",
-                          "min_doc_count": 0,
-                          "trimEdges": 0
-                        },
-                        "type": "date_histogram"
-                      }
-                    ],
-                    "metrics": [
-                      {
-                        "$$hashKey": "object:90",
-                        "field": "select field",
-                        "id": "1",
-                        "meta": {},
-                        "settings": {},
-                        "type": "logs"
-                      }
-                    ],
-                    "query": "RackLabel:$Rack AND RemoteAddr:$IdracServer AND MetricId: LinkStatus",
-                    "refId": "A",
-                    "timeField": "Timestamp"
-                  }
-                ],
-                "timeFrom": "1m",
-                "timeShift": null,
-                "title": "NIC LinkStatus",
-                "transformations": [
-                  {
-                    "id": "organize",
-                    "options": {
-                      "excludeByName": {
-                        "ContextID": true,
-                        "Id": true,
-                        "MetricValue": true,
-                        "Name": true,
-                        "Oem.Dell.ContextID": true,
-                        "Oem.Dell.Label": true,
-                        "RackLabel": true,
-                        "RemoteAddr": true,
-                        "Timestamp": true,
-                        "_id": true,
-                        "_index": true,
-                        "_source": true,
-                        "_type": true
-                      },
-                      "indexByName": {},
-                      "renameByName": {}
-                    }
-                  }
-                ],
-                "transparent": true,
-                "type": "table"
-              },
-              {
-                "datasource": "Elasticsearch-PSearch",
-                "fieldConfig": {
-                  "defaults": {
-                    "custom": {
-                      "align": null,
-                      "filterable": false
-                    },
-                    "mappings": [],
-                    "thresholds": {
-                      "mode": "absolute",
-                      "steps": [
-                        {
-                          "color": "green",
-                          "value": null
-                        }
-                      ]
-                    },
-                    "unit": "none"
-                  },
-                  "overrides": []
-                },
-                "gridPos": {
-                  "h": 7,
-                  "w": 12,
-                  "x": 12,
-                  "y": 27
-                },
-                "id": 1368,
-                "options": {
-                  "showHeader": true,
-                  "sortBy": [
-                    {
-                      "desc": true,
-                      "displayName": "MetricValue"
-                    }
-                  ]
-                },
-                "pluginVersion": "7.3.4",
-                "scopedVars": {
-                  "IdracServer": {
-                    "selected": false,
-                    "text": "10.243.19.186",
-                    "value": "10.243.19.186"
-                  }
-                },
-                "targets": [
-                  {
-                    "bucketAggs": [],
-                    "metrics": [
-                      {
-                        "$$hashKey": "object:152",
-                        "field": "MetricValue",
-                        "id": "1",
-                        "meta": {},
-                        "settings": {
-                          "size": 15
-                        },
-                        "type": "raw_data"
-                      }
-                    ],
-                    "query": "Id: FanSensor AND  RackLabel:$Rack AND RemoteAddr:$IdracServer  AND MetricId: RPMReading",
-                    "refId": "A",
-                    "timeField": "Timestamp"
-                  }
-                ],
-                "timeFrom": null,
-                "timeShift": null,
-                "title": "Fan Speed",
-                "transformations": [
-                  {
-                    "id": "filterFieldsByName",
-                    "options": {
-                      "include": {
-                        "names": [
-                          "ContextID",
-                          "MetricId",
-                          "MetricValue"
-                        ]
-                      }
-                    }
-                  },
-                  {
-                    "id": "organize",
-                    "options": {
-                      "excludeByName": {},
-                      "indexByName": {},
-                      "renameByName": {
-                        "MetricValue": "Fan Speed(RPM)"
-                      }
-                    }
-                  }
-                ],
-                "type": "table"
-              }
-            ],
+            "panels": [],
             "repeat": "IdracServer",
             "title": "Server Overview $IdracServer",
             "type": "row"
+          },
+          {
+            "cacheTimeout": null,
+            "colorBackground": true,
+            "colorPostfix": false,
+            "colorPrefix": false,
+            "colorValue": false,
+            "colors": [
+              "#37872D",
+              "rgba(237, 129, 40, 0.89)",
+              "#d44a3a"
+            ],
+            "datasource": "Elasticsearch-PSearch",
+            "fieldConfig": {
+              "defaults": {
+                "custom": {}
+              },
+              "overrides": []
+            },
+            "format": "percent",
+            "gauge": {
+              "maxValue": 100,
+              "minValue": 0,
+              "show": false,
+              "thresholdLabels": false,
+              "thresholdMarkers": true
+            },
+            "gridPos": {
+              "h": 6,
+              "w": 4,
+              "x": 0,
+              "y": 15
+            },
+            "id": 483,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+              {
+                "name": "value to text",
+                "value": 1
+              },
+              {
+                "name": "range to text",
+                "value": 2
+              }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+              {
+                "from": "null",
+                "text": "N/A",
+                "to": "null"
+              }
+            ],
+            "sparkline": {
+              "fillColor": "rgba(31, 118, 189, 0.18)",
+              "full": true,
+              "lineColor": "rgb(31, 120, 193)",
+              "show": false,
+              "ymax": null,
+              "ymin": null
+            },
+            "tableColumn": "",
+            "targets": [
+              {
+                "bucketAggs": [
+                  {
+                    "field": "Timestamp",
+                    "id": "2",
+                    "settings": {
+                      "interval": "auto",
+                      "min_doc_count": 0,
+                      "trimEdges": 0
+                    },
+                    "type": "date_histogram"
+                  }
+                ],
+                "metrics": [
+                  {
+                    "field": "MetricValue",
+                    "id": "1",
+                    "meta": {},
+                    "settings": {},
+                    "type": "avg"
+                  }
+                ],
+                "query": "RackLabel:$Rack AND RemoteAddr:$IdracServer AND MetricId: CPUUsage",
+                "refId": "A",
+                "timeField": "Timestamp"
+              }
+            ],
+            "thresholds": "70",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "CPU Usage Average",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+              {
+                "op": "=",
+                "text": "N/A",
+                "value": "null"
+              }
+            ],
+            "valueName": "avg"
+          },
+          {
+            "cacheTimeout": null,
+            "colorBackground": true,
+            "colorPostfix": false,
+            "colorPrefix": false,
+            "colorValue": false,
+            "colors": [
+              "#37872D",
+              "rgba(237, 129, 40, 0.89)",
+              "#d44a3a"
+            ],
+            "datasource": "Elasticsearch-PSearch",
+            "fieldConfig": {
+              "defaults": {
+                "custom": {}
+              },
+              "overrides": []
+            },
+            "format": "percent",
+            "gauge": {
+              "maxValue": 100,
+              "minValue": 0,
+              "show": false,
+              "thresholdLabels": false,
+              "thresholdMarkers": true
+            },
+            "gridPos": {
+              "h": 6,
+              "w": 4,
+              "x": 4,
+              "y": 15
+            },
+            "id": 549,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+              {
+                "name": "value to text",
+                "value": 1
+              },
+              {
+                "name": "range to text",
+                "value": 2
+              }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "pluginVersion": "6.7.3",
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+              {
+                "from": "null",
+                "text": "N/A",
+                "to": "null"
+              }
+            ],
+            "sparkline": {
+              "fillColor": "rgba(31, 118, 189, 0.18)",
+              "full": false,
+              "lineColor": "rgb(31, 120, 193)",
+              "show": false,
+              "ymax": null,
+              "ymin": null
+            },
+            "tableColumn": "",
+            "targets": [
+              {
+                "bucketAggs": [
+                  {
+                    "field": "Timestamp",
+                    "id": "2",
+                    "settings": {
+                      "interval": "auto",
+                      "min_doc_count": 0,
+                      "trimEdges": 0
+                    },
+                    "type": "date_histogram"
+                  }
+                ],
+                "metrics": [
+                  {
+                    "field": "MetricValue",
+                    "id": "1",
+                    "meta": {},
+                    "settings": {},
+                    "type": "avg"
+                  }
+                ],
+                "query": "RackLabel:$Rack AND RemoteAddr:$IdracServer AND MetricId: MemoryUsage",
+                "refId": "A",
+                "timeField": "Timestamp"
+              }
+            ],
+            "thresholds": "60",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Memory Bandwidth Avg",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+              {
+                "op": "=",
+                "text": "N/A",
+                "value": "null"
+              }
+            ],
+            "valueName": "avg"
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "cacheTimeout": null,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "Elasticsearch-PSearch",
+            "fieldConfig": {
+              "defaults": {
+                "custom": {},
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": []
+                },
+                "unit": "volt"
+              },
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 12,
+              "w": 6,
+              "x": 8,
+              "y": 15
+            },
+            "hiddenSeries": false,
+            "id": 1026,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "connected",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.4.5",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "",
+                "bucketAggs": [
+                  {
+                    "fake": true,
+                    "field": "ContextID.keyword",
+                    "id": "5",
+                    "settings": {
+                      "min_doc_count": 1,
+                      "order": "desc",
+                      "orderBy": "_term",
+                      "size": "10"
+                    },
+                    "type": "terms"
+                  },
+                  {
+                    "fake": true,
+                    "field": "Timestamp",
+                    "id": "4",
+                    "settings": {
+                      "interval": "auto",
+                      "min_doc_count": 0,
+                      "trimEdges": 0
+                    },
+                    "type": "date_histogram"
+                  }
+                ],
+                "metrics": [
+                  {
+                    "field": "MetricValue",
+                    "id": "1",
+                    "meta": {},
+                    "settings": {},
+                    "type": "avg"
+                  }
+                ],
+                "query": "RackLabel:$Rack AND RemoteAddr:$IdracServer AND MetricId: VoltageReading",
+                "refId": "A",
+                "timeField": "Timestamp"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Board  Voltages",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "volt",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "cacheTimeout": null,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "Elasticsearch-PSearch",
+            "fieldConfig": {
+              "defaults": {
+                "custom": {},
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": []
+                },
+                "unit": "celsius"
+              },
+              "overrides": []
+            },
+            "fill": 1,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 6,
+              "w": 6,
+              "x": 14,
+              "y": 15
+            },
+            "hiddenSeries": false,
+            "id": 550,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "connected",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.4.5",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "",
+                "bucketAggs": [
+                  {
+                    "fake": true,
+                    "field": "ContextID.keyword",
+                    "id": "5",
+                    "settings": {
+                      "min_doc_count": 1,
+                      "order": "desc",
+                      "orderBy": "_term",
+                      "size": "10"
+                    },
+                    "type": "terms"
+                  },
+                  {
+                    "fake": true,
+                    "field": "Timestamp",
+                    "id": "4",
+                    "settings": {
+                      "interval": "auto",
+                      "min_doc_count": 0,
+                      "trimEdges": 0
+                    },
+                    "type": "date_histogram"
+                  }
+                ],
+                "metrics": [
+                  {
+                    "field": "MetricValue",
+                    "id": "1",
+                    "meta": {},
+                    "settings": {},
+                    "type": "avg"
+                  }
+                ],
+                "query": "RackLabel:$Rack AND RemoteAddr:$IdracServer AND MetricId: TemperatureReading",
+                "refId": "A",
+                "timeField": "Timestamp"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Board  Temperature",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "celsius",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "cacheTimeout": null,
+            "colorBackground": true,
+            "colorPostfix": false,
+            "colorPrefix": false,
+            "colorValue": false,
+            "colors": [
+              "#37872D",
+              "rgba(237, 129, 40, 0.89)",
+              "#d44a3a"
+            ],
+            "datasource": "Elasticsearch-PSearch",
+            "fieldConfig": {
+              "defaults": {
+                "custom": {}
+              },
+              "overrides": []
+            },
+            "format": "watt",
+            "gauge": {
+              "maxValue": 100,
+              "minValue": 0,
+              "show": false,
+              "thresholdLabels": false,
+              "thresholdMarkers": true
+            },
+            "gridPos": {
+              "h": 6,
+              "w": 4,
+              "x": 20,
+              "y": 15
+            },
+            "id": 748,
+            "interval": null,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+              {
+                "name": "value to text",
+                "value": 1
+              },
+              {
+                "name": "range to text",
+                "value": 2
+              }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "pluginVersion": "6.7.3",
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+              {
+                "from": "null",
+                "text": "N/A",
+                "to": "null"
+              }
+            ],
+            "sparkline": {
+              "fillColor": "rgba(31, 118, 189, 0.18)",
+              "full": false,
+              "lineColor": "rgb(31, 120, 193)",
+              "show": false,
+              "ymax": null,
+              "ymin": null
+            },
+            "tableColumn": "",
+            "targets": [
+              {
+                "bucketAggs": [
+                  {
+                    "field": "Timestamp",
+                    "id": "2",
+                    "settings": {
+                      "interval": "auto",
+                      "min_doc_count": 0,
+                      "trimEdges": 0
+                    },
+                    "type": "date_histogram"
+                  }
+                ],
+                "metrics": [
+                  {
+                    "field": "MetricValue",
+                    "id": "1",
+                    "meta": {},
+                    "settings": {},
+                    "type": "max"
+                  }
+                ],
+                "query": "RackLabel:$Rack AND RemoteAddr:$IdracServer AND MetricId: WattsReading",
+                "refId": "A",
+                "timeField": "Timestamp"
+              }
+            ],
+            "thresholds": "400",
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Power consumption",
+            "type": "singlestat",
+            "valueFontSize": "80%",
+            "valueMaps": [
+              {
+                "op": "=",
+                "text": "N/A",
+                "value": "null"
+              }
+            ],
+            "valueName": "current"
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "cacheTimeout": null,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "Elasticsearch-PSearch",
+            "fieldConfig": {
+              "defaults": {
+                "custom": {},
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": []
+                },
+                "unit": "amp"
+              },
+              "overrides": []
+            },
+            "fill": 2,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 6,
+              "w": 8,
+              "x": 0,
+              "y": 21
+            },
+            "hiddenSeries": false,
+            "id": 879,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.4.5",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "",
+                "bucketAggs": [
+                  {
+                    "fake": true,
+                    "field": "ContextID.keyword",
+                    "id": "5",
+                    "settings": {
+                      "min_doc_count": 1,
+                      "order": "desc",
+                      "orderBy": "_term",
+                      "size": "10"
+                    },
+                    "type": "terms"
+                  },
+                  {
+                    "fake": true,
+                    "field": "Timestamp",
+                    "id": "4",
+                    "settings": {
+                      "interval": "1m",
+                      "min_doc_count": 0,
+                      "trimEdges": 0
+                    },
+                    "type": "date_histogram"
+                  }
+                ],
+                "metrics": [
+                  {
+                    "field": "MetricValue",
+                    "id": "1",
+                    "meta": {},
+                    "settings": {},
+                    "type": "avg"
+                  }
+                ],
+                "query": "RackLabel:$Rack AND RemoteAddr:$IdracServer AND MetricId: AmpsReading",
+                "refId": "A",
+                "timeField": "Timestamp"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Amps",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "amp",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "Elasticsearch-PSearch",
+            "fieldConfig": {
+              "defaults": {
+                "custom": {},
+                "links": []
+              },
+              "overrides": []
+            },
+            "fill": 0,
+            "fillGradient": 0,
+            "gridPos": {
+              "h": 6,
+              "w": 10,
+              "x": 14,
+              "y": 21
+            },
+            "hiddenSeries": false,
+            "id": 880,
+            "interval": "",
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "max": true,
+              "min": false,
+              "rightSide": true,
+              "show": true,
+              "sort": "max",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "maxPerRow": 2,
+            "nullPointMode": "null",
+            "options": {
+              "alertThreshold": true
+            },
+            "percentage": false,
+            "pluginVersion": "7.4.5",
+            "pointradius": 2,
+            "points": false,
+            "renderer": "flot",
+            "repeatDirection": "h",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "TX-{{ContextID.keyword}}",
+                "bucketAggs": [
+                  {
+                    "fake": true,
+                    "field": "ContextID.keyword",
+                    "id": "4",
+                    "settings": {
+                      "min_doc_count": 1,
+                      "order": "desc",
+                      "orderBy": "_term",
+                      "size": "0"
+                    },
+                    "type": "terms"
+                  },
+                  {
+                    "field": "Timestamp",
+                    "id": "2",
+                    "settings": {
+                      "interval": "5m",
+                      "min_doc_count": 0,
+                      "trimEdges": 0
+                    },
+                    "type": "date_histogram"
+                  }
+                ],
+                "metrics": [
+                  {
+                    "field": "MetricValue",
+                    "hide": true,
+                    "id": "1",
+                    "inlineScript": null,
+                    "meta": {},
+                    "pipelineAgg": "select metric",
+                    "settings": {},
+                    "type": "avg"
+                  },
+                  {
+                    "field": "1",
+                    "id": "5",
+                    "meta": {},
+                    "pipelineAgg": "1",
+                    "settings": {
+                      "unit": "1s"
+                    },
+                    "type": "derivative"
+                  }
+                ],
+                "query": "MetricId: TxBytes AND RackLabel:$Rack AND RemoteAddr:$IdracServer",
+                "refId": "A",
+                "timeField": "Timestamp"
+              },
+              {
+                "alias": "RX-{{ContextID.keyword}}",
+                "bucketAggs": [
+                  {
+                    "fake": true,
+                    "field": "ContextID.keyword",
+                    "id": "4",
+                    "settings": {
+                      "min_doc_count": 1,
+                      "order": "desc",
+                      "orderBy": "_term",
+                      "size": "0"
+                    },
+                    "type": "terms"
+                  },
+                  {
+                    "field": "Timestamp",
+                    "id": "2",
+                    "settings": {
+                      "interval": "5m",
+                      "min_doc_count": 0,
+                      "trimEdges": 0
+                    },
+                    "type": "date_histogram"
+                  }
+                ],
+                "hide": false,
+                "metrics": [
+                  {
+                    "field": "MetricValue",
+                    "hide": true,
+                    "id": "1",
+                    "inlineScript": null,
+                    "meta": {},
+                    "pipelineAgg": "select metric",
+                    "settings": {},
+                    "type": "avg"
+                  },
+                  {
+                    "field": "1",
+                    "id": "5",
+                    "meta": {},
+                    "pipelineAgg": "1",
+                    "settings": {
+                      "unit": "1s"
+                    },
+                    "type": "derivative"
+                  }
+                ],
+                "query": "Id: NICStatistics AND MetricId: RxBytes AND RackLabel:$Rack AND RemoteAddr:$IdracServer",
+                "refId": "B",
+                "timeField": "Timestamp"
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeRegions": [],
+            "timeShift": null,
+            "title": "Network  $IdracServer",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "Bps",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "datasource": null,
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "continuous-GrYlRd"
+                },
+                "custom": {
+                  "align": "center",
+                  "filterable": true
+                },
+                "mappings": [
+                  {
+                    "from": "",
+                    "id": 1,
+                    "text": "",
+                    "to": "",
+                    "type": 1
+                  }
+                ],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    }
+                  ]
+                }
+              },
+              "overrides": [
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Label.keyword"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 290
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Count"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 70
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "RemoteAddr.keyword"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 202
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "NonNumericValue.keyword"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 201
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Unique Count"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 117
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "MetricId"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": null
+                    }
+                  ]
+                },
+                {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Name"
+                  },
+                  "properties": [
+                    {
+                      "id": "custom.width",
+                      "value": 400
+                    }
+                  ]
+                }
+              ]
+            },
+            "gridPos": {
+              "h": 7,
+              "w": 12,
+              "x": 0,
+              "y": 27
+            },
+            "id": 1251,
+            "options": {
+              "showHeader": true,
+              "sortBy": []
+            },
+            "pluginVersion": "7.4.5",
+            "targets": [
+              {
+                "bucketAggs": [
+                  {
+                    "field": "Timestamp",
+                    "id": "2",
+                    "settings": {
+                      "interval": "1m",
+                      "min_doc_count": 0,
+                      "trimEdges": 0
+                    },
+                    "type": "date_histogram"
+                  }
+                ],
+                "metrics": [
+                  {
+                    "field": "select field",
+                    "id": "1",
+                    "meta": {},
+                    "settings": {},
+                    "type": "logs"
+                  }
+                ],
+                "query": "RackLabel:$Rack AND RemoteAddr:$IdracServer AND MetricId: LinkStatus",
+                "refId": "A",
+                "timeField": "Timestamp"
+              }
+            ],
+            "timeFrom": "1m",
+            "timeShift": null,
+            "title": "NIC LinkStatus",
+            "transformations": [
+              {
+                "id": "organize",
+                "options": {
+                  "excludeByName": {
+                    "ContextID": true,
+                    "Id": true,
+                    "MetricValue": true,
+                    "Name": true,
+                    "Oem.Dell.ContextID": true,
+                    "Oem.Dell.Label": true,
+                    "RackLabel": true,
+                    "RemoteAddr": true,
+                    "Timestamp": true,
+                    "_id": true,
+                    "_index": true,
+                    "_source": true,
+                    "_type": true
+                  },
+                  "indexByName": {},
+                  "renameByName": {}
+                }
+              }
+            ],
+            "transparent": true,
+            "type": "table"
+          },
+          {
+            "datasource": "Elasticsearch-PSearch",
+            "fieldConfig": {
+              "defaults": {
+                "custom": {
+                  "align": null,
+                  "filterable": false
+                },
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    }
+                  ]
+                },
+                "unit": "none"
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 7,
+              "w": 12,
+              "x": 12,
+              "y": 27
+            },
+            "id": 1368,
+            "options": {
+              "showHeader": true,
+              "sortBy": [
+                {
+                  "desc": true,
+                  "displayName": "MetricValue"
+                }
+              ]
+            },
+            "pluginVersion": "7.4.5",
+            "targets": [
+              {
+                "bucketAggs": [],
+                "metrics": [
+                  {
+                    "field": "MetricValue",
+                    "id": "1",
+                    "meta": {},
+                    "settings": {
+                      "size": 15
+                    },
+                    "type": "raw_data"
+                  }
+                ],
+                "query": "RackLabel:$Rack AND RemoteAddr:$IdracServer  AND MetricId: RPMReading",
+                "refId": "A",
+                "timeField": "Timestamp"
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Fan Speed",
+            "transformations": [
+              {
+                "id": "filterFieldsByName",
+                "options": {
+                  "include": {
+                    "names": [
+                      "ContextID",
+                      "MetricId",
+                      "MetricValue"
+                    ]
+                  }
+                }
+              },
+              {
+                "id": "organize",
+                "options": {
+                  "excludeByName": {},
+                  "indexByName": {},
+                  "renameByName": {
+                    "MetricValue": "Fan Speed(RPM)"
+                  }
+                }
+              }
+            ],
+            "type": "table"
           }
         ],
         "refresh": "5m",
-        "schemaVersion": 26,
+        "schemaVersion": 27,
         "style": "dark",
         "tags": [],
         "templating": {
@@ -2520,6 +2321,7 @@ spec:
               },
               "datasource": "Elasticsearch-PSearch",
               "definition": "{\"find\": \"terms\", \"field\": \"RackLabel.keyword\"}",
+              "description": null,
               "error": null,
               "hide": 0,
               "includeAll": false,
@@ -2551,6 +2353,7 @@ spec:
               },
               "datasource": "Elasticsearch-PSearch",
               "definition": "{\"find\": \"terms\", \"field\": \"RemoteAddr.keyword\",  \"query\": \"RackLabel.keyword: $Rack\" }",
+              "description": null,
               "error": null,
               "hide": 0,
               "includeAll": true,
@@ -2572,7 +2375,7 @@ spec:
           ]
         },
         "time": {
-          "from": "now-6h",
+          "from": "now-30m",
           "to": "now"
         },
         "timepicker": {
@@ -2591,5 +2394,5 @@ spec:
         },
         "timezone": "",
         "title": "IDRAC Overview",
-        "version": 26
+        "version": 4
       }
