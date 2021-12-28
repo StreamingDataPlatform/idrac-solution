@@ -1,6 +1,18 @@
 # Dell EMC iDRAC Streaming Data Platform Solution
 
-  
+### Create a Self-Signed certificate for HA-Proxy
+
+- Create a Private Key and Certificate signing Request file
+  ```
+  openssl genrsa -out private.key
+  openssl req -new -key private.key -out request.csr
+  ```
+- Create a .CRT File
+  ```
+  openssl x509 -req -days 365 -in request.csr -signkey private.key -out certificate.crt
+  ```
+- copy the content of the .crt file and the .key file to `idrac-demo/charts/analytics/charts/ingest-gateway/templates/haproxy-cert.yaml`
+
 ### Build deployment
 
 ```
