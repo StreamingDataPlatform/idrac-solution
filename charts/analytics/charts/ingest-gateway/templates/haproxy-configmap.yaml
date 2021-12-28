@@ -23,6 +23,7 @@ data:
       log global
     frontend www
       bind *:80
+      bind *:443 ssl crt /etc/ssl/certs/cert.pem
       {{- if .Values.haproxy.enableStats }}
       stats enable
       stats uri /haproxy-stats
