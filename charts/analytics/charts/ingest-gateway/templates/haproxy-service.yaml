@@ -1,16 +1,20 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Release.Name }}-ingest
+  name: {{ .Release.Name }}-haproxy
   annotations:
     nautilus.dellemc.com/http-ingress: http
-    nautilus.dellemc.com/http-ingress-name: {{ .Release.Name }}
+    nautilus.dellemc.com/http-ingress-name: {{ .Release.Name }}-haproxy
 spec:
   ports:
   - name: http
     protocol: TCP
     port: 80
     targetPort: 80
+  - name: https
+    port: 443
+    protocol: TCP
+    targetPort: 443
   selector:
     release: {{ .Release.Name }}-haproxy
-  type: ClusterIP
+  type: LoadBalancer

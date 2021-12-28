@@ -21,10 +21,20 @@ spec:
         ports:
         - containerPort: 80
           name: http
+          protocol: TCP
+        - containerPort: 443
+          name: https
+          protocol: TCP
         volumeMounts:
         - name: haproxy-config-volume
           mountPath: /usr/local/etc/haproxy/haproxy.cfg
+        - mountPath: /etc/ssl/certs/cert.pem
+          name: mycert
       volumes:
+      - configMap:
+          defaultMode: 420
+          name: mycert
+        name: mycert
       - name: haproxy-config-volume
         configMap:
           name: {{ .Release.Name }}
